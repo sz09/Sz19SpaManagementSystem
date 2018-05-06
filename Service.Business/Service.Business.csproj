@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0749CD74-A167-495D-945B-8934EFA482A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Service.Business</RootNamespace>
+    <AssemblyName>Service.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IServices\IAccountServices.cs" />
+    <Compile Include="IServices\IBedServices.cs" />
+    <Compile Include="IServices\IBookingServices.cs" />
+    <Compile Include="IServices\IContactInformationServices.cs" />
+    <Compile Include="IServices\INotificationServices.cs" />
+    <Compile Include="IServices\IReferenceServices.cs" />
+    <Compile Include="IServices\ISalaryServices.cs" />
+    <Compile Include="IServices\IServiceServices.cs" />
+    <Compile Include="IServices\IStaffServices.cs" />
+    <Compile Include="IServices\IStockServices.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AccountServices.cs" />
+    <Compile Include="Services\BedServices.cs" />
+    <Compile Include="Services\BookingServices.cs" />
+    <Compile Include="Services\ContactInformationServices.cs" />
+    <Compile Include="Services\NotificationServices.cs" />
+    <Compile Include="Services\ReferenceServices.cs" />
+    <Compile Include="Services\SalaryServices.cs" />
+    <Compile Include="Services\ServiceServices.cs" />
+    <Compile Include="Services\StaffServices.cs" />
+    <Compile Include="Services\StockServices.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.ObjectServices\Core.ObjectServices.csproj">
+      <Project>{927ebd4e-880d-410f-824a-dcccf1e2e0af}</Project>
+      <Name>Core.ObjectServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Infrastructure.Logging\Infrastructure.Logging.csproj">
+      <Project>{f239ced0-9a7f-4e11-823e-969f23d4ce66}</Project>
+      <Name>Infrastructure.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPMS.ObjectModel\Core.ObjectModels.csproj">
+      <Project>{f721a69e-a373-46c7-8cfe-25c42397e652}</Project>
+      <Name>Core.ObjectModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

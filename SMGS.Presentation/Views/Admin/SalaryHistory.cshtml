@@ -1,0 +1,100 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_EmpSalaryPaying
+@{
+    ViewBag.Title = "SalaryHistory";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Employee</h4>
+                <p class="category">This table is showing all employees</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    @{
+                        if (Model.ListEmpPaying.Count() > 0)
+                        {
+                            <thead class="text-primary">
+                                <th>Month</th>
+                                <th>Time paid</th>
+                                <th>Sum day in month</th>
+                                <th>Total paid</th>
+                                <th class="col-md-2">Paid</th>
+                                <th>Description</th>
+                            </thead>
+                        }
+                    }
+                    <tbody>
+                        @for (int i = 0; i < Model.ListEmpPaying.Count; i++)
+                        {
+                            <tr onclick="GoToEmp(@Model.ListEmpPaying[i].Id)" class="emp-row-in-list">
+                                <td class="text-primary">@Html.DisplayFor(_ => _.ListEmpPaying[i].Time)</td>
+                                <td>@Html.DisplayFor(_ => _.ListEmpPaying[i].TimePay)</td>
+                                <td>@Html.DisplayFor(_ => _.ListEmpPaying[i].SumDays)</td>
+                                <td>@Html.DisplayFor(_ => _.ListEmpPaying[i].TotalSalary)</td>
+                                <td>@Html.DisplayFor(_ => _.ListEmpPaying[i].IsPaid)</td>
+                                <td>@Html.DisplayFor(_ => _.ListEmpPaying[i].Description)</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                @*<div class="col-md-3"></div><!--Using for fit space-->
+                <div class="col-md-6">
+                    <div class="align-middle row">
+                        <ul class="list-inline align-middle">
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">first_page</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_before</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <!--Page marking-->
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                if (i == Model.ThisPage)
+                                {
+                                    <li class="active">
+                                        <div>
+                                            <a><sub>@i</sub></a>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="item">
+                                            <a href="#">@i</a>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            <!--End page marking-->
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_next</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <i class="small material-icons">last_page</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3"></div> <!--Using for fit space-->*@
+            </div>
+        </div>
+        <button id="btn-go-to-create-profile" type="reset" class="btn btn-primary pull-right">Create Profile</button>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_SalariesInMonth
+@{
+    ViewBag.Title = "SALARIES";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+<div class="card-header">
+    <div class="container">
+        <div id="dropdown-choose-year" class="dropdown pull-right">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                All
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" data-background-color="green">
+                <li><a id="all-year" class="text-center">All</a></li>
+                @foreach (var item in Model.MonthSalaries.Select(_ => _.Time.Year).Distinct())
+                {
+                    string id = "'" + item.ToString() + "'";
+                    <li><a id="@id" class="text-center">@item.ToString()</a></li>
+                }
+            </ul>
+        </div>
+        <div id="dropdown-month" class="dropdown pull-right">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                All
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" data-background-color="green">
+                <li><a onclick="ShowingSalariesJustMonthChoose('all')" class="text-center">All</a></li>
+                @foreach (var item in Model.MonthSalaries)
+                {
+                string id = "'" + item.Time.ToString("MMMyyyy") + "'";
+                <li>
+                    <a id="@id" onclick="ShowingSalariesJustMonthChoose(@id)" class="text-center">
+                        @item.Time.ToString("MMM yyyy")
+                    </a>
+                </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+@foreach (var month in Model.MonthSalaries)
+{
+<div id="@month.Time.ToString("MMMyyyy")" class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Salaries in @month.Time.ToString("MMM yyyy")</h4>
+                <p class="category">This table is showing all salaries paid in @month.Time.ToString("MMM yyyy")</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    @if (month.Salaries.Count > 0)
+                    {
+                    <thead class="text-primary">
+                        <th class="col-md-3">Name</th>
+                        <th>Total salary</th>
+                        <th>Time paid</th>
+                        <th class="col-md-5">Description</th>
+                    </thead>
+                    }
+                    <tbody>
+                    @foreach (var item in month.Salaries)
+                    {
+                        <tr>
+                            <td>@item.FullName</td>
+                            <td>@item.Salary.ToString("N") @item.CurrencyCode</td>
+                            <td>@item.TimePaid.ToShortDateString()</td>
+                            <td>@item.Description</td>
+                        </tr>
+                     }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+}

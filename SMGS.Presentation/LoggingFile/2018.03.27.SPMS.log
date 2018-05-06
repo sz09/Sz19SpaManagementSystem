@@ -1,0 +1,2 @@
+2018-03-27 20:13:28,815 [8] ERROR SMGS.Presentation.App_Start.Customize - Error: [Access to the path 'C:\Windows\Globalization\sz-VN.nlp' is denied.]
+2018-03-27 20:58:53,430 [9] ERROR SMGS.Presentation.App_Start.Customize - Error: [Access to the path 'C:\Windows\Globalization\sz-VN.nlp' is denied.]

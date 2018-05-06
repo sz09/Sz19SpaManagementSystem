@@ -1,0 +1,16 @@
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\bin\Debug\Infrastructure.Logging.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\bin\Debug\Infrastructure.Logging.pdb
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\bin\Debug\log4net.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\bin\Debug\log4net.xml
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.pdb
+J:\C#\New\Web\MVC\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.csprojResolveAssemblyReference.cache
+E:\SpaManagementSystem\Infrastructure.Logging\bin\Debug\Infrastructure.Logging.dll
+E:\SpaManagementSystem\Infrastructure.Logging\bin\Debug\Infrastructure.Logging.pdb
+E:\SpaManagementSystem\Infrastructure.Logging\bin\Debug\log4net.dll
+E:\SpaManagementSystem\Infrastructure.Logging\bin\Debug\log4net.xml
+E:\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.csprojResolveAssemblyReference.cache
+E:\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.csproj.CoreCompileInputs.cache
+E:\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.csproj.CopyComplete
+E:\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.dll
+E:\SpaManagementSystem\Infrastructure.Logging\obj\Debug\Infrastructure.Logging.pdb

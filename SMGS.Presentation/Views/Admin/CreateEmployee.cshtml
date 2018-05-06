@@ -1,0 +1,115 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_StaffInformation
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+<div id="alert-create-emp" class="row hidden">
+    <div class="col-md-8"></div>
+    <div id="main-alert" class="col-md-4 alert">
+        <div class="alert-inverse pull-right">
+            <a id="description" class="pull-right"></a> <br />
+            <a id="change-url" class="pull-right"></a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Edit Profile</h4>
+                <p class="category">Complete profile</p>
+            </div>
+            <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Code</label>
+                                @Html.TextBoxFor(_ => _.StaffCode, new { type = "text", @class = "form-control", disabled = "disabled" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Last &amp; Middle Name</label> <!--Mistake in database design-->
+                                @Html.TextBoxFor(_ => _.LastMiddle, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group label-floating">
+                                <label class="control-label">First Name</label> <!--Mistake in database design-->
+                                @Html.TextBoxFor(_ => _.FirstName, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Idenifier Number</label>
+                                @Html.TextBoxFor(_ => _.IdentifierNumber, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Adress</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.Address.AddressNumberNoAndStreet, new { type = "text", @class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">District</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.Address.District.DistrictName, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">City</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.Address.District.Province.ProvinceName, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Country</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.Address.District.Province.Country.CountryName, new { type = "text", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Phone</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.EAddress.NumberPhone, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Email address</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.EAddress.Email, new { type = "email", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Website</label>
+                                @Html.TextBoxFor(_ => _.ContactInformation.EAddress.Website, new { type = "website", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>About</label>
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(_ => _.Summary, new { @class = "control-label" })
+                                    @Html.TextAreaFor(_ => _.Summary, new { @class = "form-control", rows = "5" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="create-profile-main-action" class="btn btn-primary pull-right">Create Profile</button>
+                    <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+﻿@model SMGS.Presentation.ViewModel.VM.VM_Search
+@{
+    ViewBag.Title = "Search Result";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+<div class="container search-page">
+    <ul class="nav nav-tabs" data-background-color="green">
+        <li class="active"><a id="address" onclick="SwitchTo(this)">Address</a></li>
+        <li><a id="bed" onclick="SwitchTo(this)">Beds</a></li>
+        <li><a id="customer" onclick="SwitchTo(this)">Customers</a></li>
+        <li><a id="service" onclick="SwitchTo(this)">Services</a></li>
+        <li><a id="stock" onclick="SwitchTo(this)">Stocks</a></li>
+        <li><a id="employee" onclick="SwitchTo(this)">Employees</a></li>
+    </ul>
+    <br>
+    @if (Model.ListAddress != null)
+    {
+        if (Model.ListAddress.Count > 0)
+        {
+        <div id="address-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+
+                                    @foreach (var item in Model.ListAddress)
+                                    {
+                                        <tr>
+                                            <td>@item.AddressNumberNoAndStreet</td>
+                                            <td>@item.District.DistrictName</td>
+                                            <td>@item.District.Province.ProvinceName</td>
+                                            <td>@item.District.Province.Country.CountryName</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    @if (Model.ListBed != null)
+    {
+        if (Model.ListBed.Count > 0)
+        {
+        <div id="bed-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    @foreach (var item in Model.ListBed)
+                                    {
+                                        <tr>
+                                            <td class="hidden">@item.Id</td>
+                                            <td>@item.BedCode</td>
+                                            <td>@item.Name</td>
+                                        </tr>
+                                        }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        } 
+    }
+
+    @if (Model.ListCustomer != null)
+    {
+        if (Model.ListCustomer.Count > 0)
+        {
+        <div id="customer-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    @foreach (var item in Model.ListCustomer)
+                                    {
+                                        <tr>
+                                            <td class="hidden">@item.Id</td>
+                                            <td>@item.CustomerCode</td>
+                                            <td>@item.FullName</td>
+                                            <td>@item.Summary</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    @if (Model.ListService != null)
+    {
+        if (Model.ListService.Count > 0)
+        {
+        <div id="service-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    @foreach (var item in Model.ListService)
+                                    {
+                                        <tr>
+                                            <td class="hidden">@item.Id</td>
+                                            <td>@item.ServiceCode</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.TimeCost.Hour:@item.TimeCost.minute m</td>
+                                            <td>@item.Cost</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+
+    @if (Model.ListStock != null)
+    {
+        if (Model.ListStock.Count > 0)
+        {
+        <div id="stock-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    @foreach (var item in Model.ListStock)
+                                    {
+                                        <tr>
+                                            <td class="hidden">@item.Id</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Cost</td>
+                                            <td>@item.Unit</td>
+                                        </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    @if (Model.ListEmployee != null)
+    {
+        if (Model.ListEmployee.Count > 0)
+        {
+        <div id="employee-show" class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row result-page">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    @foreach (var item in Model.ListEmployee)
+                                    {
+                                    <tr onclick="GoToEmp(@item.Id)">
+                                        <td class="hidden">@item.Id</td>
+                                        <td>@item.StaffCode</td>
+                                        <td>@item.FullName</td>
+                                        <td>@item.Salary</td>
+                                    </tr>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    }
+    </div>

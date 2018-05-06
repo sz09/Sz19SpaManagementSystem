@@ -1,0 +1,621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SpaManagementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="SpaManagementModelStoreContainer">
+    <EntitySet Name="Address" EntityType="SpaManagementModel.Store.Address" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Attendances" EntityType="SpaManagementModel.Store.Attendances" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bed" EntityType="SpaManagementModel.Store.Bed" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BedName" EntityType="SpaManagementModel.Store.BedName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bills" EntityType="SpaManagementModel.Store.Bills" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactFor" EntityType="SpaManagementModel.Store.ContactFor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactInformation" EntityType="SpaManagementModel.Store.ContactInformation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ContactType" EntityType="SpaManagementModel.Store.ContactType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Country" EntityType="SpaManagementModel.Store.Country" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Customer" EntityType="SpaManagementModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Description" EntityType="SpaManagementModel.Store.Description" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DescriptionFor" EntityType="SpaManagementModel.Store.DescriptionFor" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DetailsBill" EntityType="SpaManagementModel.Store.DetailsBill" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="District" EntityType="SpaManagementModel.Store.District" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EAddress" EntityType="SpaManagementModel.Store.EAddress" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Language" EntityType="SpaManagementModel.Store.Language" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PackageOfStock" EntityType="SpaManagementModel.Store.PackageOfStock" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Province" EntityType="SpaManagementModel.Store.Province" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Salary" EntityType="SpaManagementModel.Store.Salary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServiceName" EntityType="SpaManagementModel.Store.ServiceName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Services" EntityType="SpaManagementModel.Store.Services" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Staff" EntityType="SpaManagementModel.Store.Staff" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Stock" EntityType="SpaManagementModel.Store.Stock" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="StockName" EntityType="SpaManagementModel.Store.StockName" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="SpaManagementModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Unit" EntityType="SpaManagementModel.Store.Unit" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Address_District" Association="SpaManagementModel.Store.FK_Address_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Address" EntitySet="Address" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Attendances_Staff" Association="SpaManagementModel.Store.FK_Attendances_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Attendances" EntitySet="Attendances" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BedName_Bed" Association="SpaManagementModel.Store.FK_BedName_Bed">
+      <End Role="Bed" EntitySet="Bed" />
+      <End Role="BedName" EntitySet="BedName" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bills_Bed" Association="SpaManagementModel.Store.FK_Bills_Bed">
+      <End Role="Bed" EntitySet="Bed" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Bills_Customer" Association="SpaManagementModel.Store.FK_Bills_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Bills" EntitySet="Bills" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInformation_Address" Association="SpaManagementModel.Store.FK_ContactInformation_Address">
+      <End Role="Address" EntitySet="Address" />
+      <End Role="ContactInformation" EntitySet="ContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInformation_ContactFor" Association="SpaManagementModel.Store.FK_ContactInformation_ContactFor">
+      <End Role="ContactFor" EntitySet="ContactFor" />
+      <End Role="ContactInformation" EntitySet="ContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInformation_ContactType" Association="SpaManagementModel.Store.FK_ContactInformation_ContactType">
+      <End Role="ContactType" EntitySet="ContactType" />
+      <End Role="ContactInformation" EntitySet="ContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContactInformation_EAddress" Association="SpaManagementModel.Store.FK_ContactInformation_EAddress">
+      <End Role="EAddress" EntitySet="EAddress" />
+      <End Role="ContactInformation" EntitySet="ContactInformation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Description_DescriptionFor" Association="SpaManagementModel.Store.FK_Description_DescriptionFor">
+      <End Role="DescriptionFor" EntitySet="DescriptionFor" />
+      <End Role="Description" EntitySet="Description" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Description_Language" Association="SpaManagementModel.Store.FK_Description_Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="Description" EntitySet="Description" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsBill_Bills" Association="SpaManagementModel.Store.FK_DetailsBill_Bills">
+      <End Role="Bills" EntitySet="Bills" />
+      <End Role="DetailsBill" EntitySet="DetailsBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsBill_Services" Association="SpaManagementModel.Store.FK_DetailsBill_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="DetailsBill" EntitySet="DetailsBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetailsBill_Staff" Association="SpaManagementModel.Store.FK_DetailsBill_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="DetailsBill" EntitySet="DetailsBill" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_Province" Association="SpaManagementModel.Store.FK_District_Province">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PackageOfStock_Stock" Association="SpaManagementModel.Store.FK_PackageOfStock_Stock">
+      <End Role="Stock" EntitySet="Stock" />
+      <End Role="PackageOfStock" EntitySet="PackageOfStock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Province_Country" Association="SpaManagementModel.Store.FK_Province_Country">
+      <End Role="Country" EntitySet="Country" />
+      <End Role="Province" EntitySet="Province" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_Staff" Association="SpaManagementModel.Store.FK_Salary_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Salary" EntitySet="Salary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceName_Language" Association="SpaManagementModel.Store.FK_ServiceName_Language">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="ServiceName" EntitySet="ServiceName" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceName_Services" Association="SpaManagementModel.Store.FK_ServiceName_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="ServiceName" EntitySet="ServiceName" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Stock_Unit" Association="SpaManagementModel.Store.FK_Stock_Unit">
+      <End Role="Unit" EntitySet="Unit" />
+      <End Role="Stock" EntitySet="Stock" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StockName_Stock" Association="SpaManagementModel.Store.FK_StockName_Stock">
+      <End Role="Stock" EntitySet="Stock" />
+      <End Role="StockName" EntitySet="StockName" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Address">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="AddressNumberNoAndStreet" Type="nvarchar" Nullable="false" MaxLength="400" />
+  </EntityType>
+  <EntityType Name="Attendances">
+    <Key>
+      <PropertyRef Name="StaffId" />
+      <PropertyRef Name="Time" />
+    </Key>
+    <Property Name="StaffId" Type="bigint" Nullable="false" />
+    <Property Name="Time" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bed">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BedCode" Type="nchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="BedName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BedId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bills">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Time" Type="datetime" />
+    <Property Name="TotalCost" Type="money" Nullable="false" />
+    <Property Name="StaffId" Type="bigint" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="BedId" Type="int" Nullable="false" />
+    <Property Name="PeriodFrom" Type="datetime" />
+    <Property Name="PeriodTo" Type="datetime" />
+    <Property Name="TimePaid" Type="datetime" />
+    <Property Name="CustomerId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactFor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StaffOrCustomer" Type="nchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ContactInformation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="AddressId" Type="int" Nullable="false" />
+    <Property Name="EAdressId" Type="int" Nullable="false" />
+    <Property Name="ContactForId" Type="int" Nullable="false" />
+    <Property Name="ContactTypeId" Type="int" Nullable="false" />
+    <Property Name="PersonId" Type="bigint" Nullable="false" />
+    <Property Name="IsInUse" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContactType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ContactTypeName" Type="nvarchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CountryName" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerCode" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastMiddle" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Summary" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Description">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="KindToDescription" Type="int" Nullable="false" />
+    <Property Name="Description" Type="ntext" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="DescriptionFor" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DescriptionFor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DescriptionForName" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DetailsBill">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="BillId" Type="bigint" Nullable="false" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="StaffId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProvinceId" Type="int" Nullable="false" />
+    <Property Name="DistrictName" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="EAddress">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StaffId" Type="bigint" Nullable="false" />
+    <Property Name="Email" Type="nchar" Nullable="false" MaxLength="100" />
+    <Property Name="NumberPhone" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="Website" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PackageOfStock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" />
+    <Property Name="StockId" Type="bigint" Nullable="false" />
+    <Property Name="Number" Type="int" Nullable="false" />
+    <Property Name="DateAdd" Type="date" Nullable="false" />
+    <Property Name="ExpirationDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="CountryId" Type="int" Nullable="false" />
+    <Property Name="ProvinceName" Type="nvarchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StaffId" Type="bigint" Nullable="false" />
+    <Property Name="Time" Type="date" Nullable="false" />
+    <Property Name="TimePay" Type="date" Nullable="false" />
+    <Property Name="TotalSalary" Type="money" Nullable="false" />
+    <Property Name="IsPaid" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServiceName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ServiceCode" Type="nchar" Nullable="false" MaxLength="10" />
+    <Property Name="Cost" Type="money" Nullable="false" />
+    <Property Name="TimeCost" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StaffCode" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="LastMiddle" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="IdentifierNumber" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="Salary" Type="money" Nullable="false" />
+    <Property Name="IsInUse" Type="bit" Nullable="false" />
+    <Property Name="Summary" Type="ntext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Stock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Cost" Type="money" Nullable="false" />
+    <Property Name="Unit" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockName">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="StockId" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Unit">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Address_District">
+    <End Role="District" Type="SpaManagementModel.Store.District" Multiplicity="1" />
+    <End Role="Address" Type="SpaManagementModel.Store.Address" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Address">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Attendances_Staff">
+    <End Role="Staff" Type="SpaManagementModel.Store.Staff" Multiplicity="1" />
+    <End Role="Attendances" Type="SpaManagementModel.Store.Attendances" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Attendances">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BedName_Bed">
+    <End Role="Bed" Type="SpaManagementModel.Store.Bed" Multiplicity="1" />
+    <End Role="BedName" Type="SpaManagementModel.Store.BedName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bed">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BedName">
+        <PropertyRef Name="BedId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bills_Bed">
+    <End Role="Bed" Type="SpaManagementModel.Store.Bed" Multiplicity="1" />
+    <End Role="Bills" Type="SpaManagementModel.Store.Bills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bed">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="BedId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Bills_Customer">
+    <End Role="Customer" Type="SpaManagementModel.Store.Customer" Multiplicity="1" />
+    <End Role="Bills" Type="SpaManagementModel.Store.Bills" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bills">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInformation_Address">
+    <End Role="Address" Type="SpaManagementModel.Store.Address" Multiplicity="1" />
+    <End Role="ContactInformation" Type="SpaManagementModel.Store.ContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Address">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactInformation">
+        <PropertyRef Name="AddressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInformation_ContactFor">
+    <End Role="ContactFor" Type="SpaManagementModel.Store.ContactFor" Multiplicity="1" />
+    <End Role="ContactInformation" Type="SpaManagementModel.Store.ContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactFor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactInformation">
+        <PropertyRef Name="ContactForId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInformation_ContactType">
+    <End Role="ContactType" Type="SpaManagementModel.Store.ContactType" Multiplicity="1" />
+    <End Role="ContactInformation" Type="SpaManagementModel.Store.ContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactInformation">
+        <PropertyRef Name="ContactTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContactInformation_EAddress">
+    <End Role="EAddress" Type="SpaManagementModel.Store.EAddress" Multiplicity="1" />
+    <End Role="ContactInformation" Type="SpaManagementModel.Store.ContactInformation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EAddress">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ContactInformation">
+        <PropertyRef Name="EAdressId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Description_DescriptionFor">
+    <End Role="DescriptionFor" Type="SpaManagementModel.Store.DescriptionFor" Multiplicity="1" />
+    <End Role="Description" Type="SpaManagementModel.Store.Description" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DescriptionFor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Description">
+        <PropertyRef Name="DescriptionFor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Description_Language">
+    <End Role="Language" Type="SpaManagementModel.Store.Language" Multiplicity="1" />
+    <End Role="Description" Type="SpaManagementModel.Store.Description" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Description">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsBill_Bills">
+    <End Role="Bills" Type="SpaManagementModel.Store.Bills" Multiplicity="1" />
+    <End Role="DetailsBill" Type="SpaManagementModel.Store.DetailsBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bills">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsBill">
+        <PropertyRef Name="BillId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsBill_Services">
+    <End Role="Services" Type="SpaManagementModel.Store.Services" Multiplicity="1" />
+    <End Role="DetailsBill" Type="SpaManagementModel.Store.DetailsBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsBill">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetailsBill_Staff">
+    <End Role="Staff" Type="SpaManagementModel.Store.Staff" Multiplicity="1" />
+    <End Role="DetailsBill" Type="SpaManagementModel.Store.DetailsBill" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DetailsBill">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_Province">
+    <End Role="Province" Type="SpaManagementModel.Store.Province" Multiplicity="1" />
+    <End Role="District" Type="SpaManagementModel.Store.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="ProvinceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PackageOfStock_Stock">
+    <End Role="Stock" Type="SpaManagementModel.Store.Stock" Multiplicity="1" />
+    <End Role="PackageOfStock" Type="SpaManagementModel.Store.PackageOfStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stock">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PackageOfStock">
+        <PropertyRef Name="StockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Province_Country">
+    <End Role="Country" Type="SpaManagementModel.Store.Country" Multiplicity="1" />
+    <End Role="Province" Type="SpaManagementModel.Store.Province" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Province">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_Staff">
+    <End Role="Staff" Type="SpaManagementModel.Store.Staff" Multiplicity="1" />
+    <End Role="Salary" Type="SpaManagementModel.Store.Salary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Salary">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceName_Language">
+    <End Role="Language" Type="SpaManagementModel.Store.Language" Multiplicity="1" />
+    <End Role="ServiceName" Type="SpaManagementModel.Store.ServiceName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceName">
+        <PropertyRef Name="LanguageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceName_Services">
+    <End Role="Services" Type="SpaManagementModel.Store.Services" Multiplicity="1" />
+    <End Role="ServiceName" Type="SpaManagementModel.Store.ServiceName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ServiceName">
+        <PropertyRef Name="ServiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Stock_Unit">
+    <End Role="Unit" Type="SpaManagementModel.Store.Unit" Multiplicity="1" />
+    <End Role="Stock" Type="SpaManagementModel.Store.Stock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Unit">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Stock">
+        <PropertyRef Name="Unit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StockName_Stock">
+    <End Role="Stock" Type="SpaManagementModel.Store.Stock" Multiplicity="1" />
+    <End Role="StockName" Type="SpaManagementModel.Store.StockName" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Stock">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StockName">
+        <PropertyRef Name="StockId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

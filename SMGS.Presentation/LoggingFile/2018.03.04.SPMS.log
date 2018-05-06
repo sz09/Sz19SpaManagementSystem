@@ -1,0 +1,275 @@
+2018-03-04 08:19:55,037 [5] ERROR SMGS.Presentation.App_Start.Customize - Error: [The 'Register' method failed because the custom culture 'sz-VN' already exists.]
+2018-03-04 10:02:13,908 [1] ERROR SMGS.Presentation.App_Start.Customize - Error: [The 'Register' method failed because the custom culture 'sz-VN' already exists.]
+2018-03-04 10:03:03,499 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:03:03,508 [5] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:03:03,517 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:03:03,527 [5] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:03:03,535 [5] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:03:03,541 [5] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:03:03,549 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:03:03,554 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:03:04,539 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [Index]
+2018-03-04 10:03:04,557 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [Index]
+2018-03-04 10:03:17,250 [6] DEBUG Infrastructure.Data.Repositories.StaffRepository - Enter method [.ctor]
+2018-03-04 10:03:17,257 [6] INFO  Infrastructure.Data.Repositories.StaffRepository - Success setting value to empPerPage attribute value: [20]
+2018-03-04 10:03:17,265 [6] DEBUG Infrastructure.Data.Repositories.StaffRepository - Leave method [.ctor]
+2018-03-04 10:03:17,273 [6] DEBUG Service.Business.Services.StaffServices - Enter method [.ctor]
+2018-03-04 10:03:17,280 [6] INFO  Service.Business.Services.StaffServices - Success setting values for attributes
+2018-03-04 10:03:17,286 [6] DEBUG Service.Business.Services.StaffServices - Leave method [.ctor]
+2018-03-04 10:03:17,315 [6] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Enter method [.ctor]
+2018-03-04 10:03:17,321 [6] INFO  Infrastructure.Data.Repositories.ContactInformationRepository - Success setting values for attributes
+2018-03-04 10:03:17,327 [6] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Leave method [.ctor]
+2018-03-04 10:03:17,337 [6] DEBUG Service.Business.Services.ContactInformationServices - Enter method [.ctor]
+2018-03-04 10:03:17,345 [6] DEBUG Service.Business.Services.ContactInformationServices - Leave method [.ctor]
+2018-03-04 10:03:17,364 [6] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Enter method [.ctor]
+2018-03-04 10:03:17,373 [6] INFO  Infrastructure.Data.Repositories.ServiceRepository - Success setting value to servicesPerPage attribute value: [20]
+2018-03-04 10:03:17,380 [6] INFO  Infrastructure.Data.Repositories.ServiceRepository - Setting value for attributes
+2018-03-04 10:03:17,427 [6] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Leave method [.ctor]
+2018-03-04 10:03:17,433 [6] DEBUG Service.Business.Services.ServiceServices - Enter method [.ctor]
+2018-03-04 10:03:17,440 [6] INFO  Service.Business.Services.ServiceServices - Success setting values for attributes
+2018-03-04 10:03:17,446 [6] DEBUG Service.Business.Services.ServiceServices - Leave method [.ctor]
+2018-03-04 10:03:17,467 [6] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Enter method [.ctor]
+2018-03-04 10:03:17,597 [6] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success setting value to servicesPerPage attribute value: [3]
+2018-03-04 10:03:17,603 [6] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success set value for attributes
+2018-03-04 10:03:17,610 [6] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Leave method [.ctor]
+2018-03-04 10:03:17,627 [6] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Enter method [.ctor]
+2018-03-04 10:03:17,644 [6] INFO  Infrastructure.Data.Repositories.ReferenceRepository - Success set values for attributes
+2018-03-04 10:03:17,667 [6] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Leave method [.ctor]
+2018-03-04 10:03:17,681 [6] DEBUG Service.Business.Services.ReferenceServices - Enter method [.ctor]
+2018-03-04 10:03:17,711 [6] INFO  Service.Business.Services.ReferenceServices - Success set value for attributes
+2018-03-04 10:03:17,722 [6] DEBUG Service.Business.Services.ReferenceServices - Leave method [.ctor]
+2018-03-04 10:03:17,740 [6] DEBUG Service.Business.Services.NotificationServices - Enter method [.ctor]
+2018-03-04 10:03:17,751 [6] DEBUG Service.Business.Services.NotificationServices - Leave method [.ctor]
+2018-03-04 10:03:17,766 [6] DEBUG SMGS.Presentation.Controllers.adminController - Enter method [.ctor]
+2018-03-04 10:03:17,782 [6] INFO  SMGS.Presentation.Controllers.adminController - Success set value to attributes
+2018-03-04 10:03:17,796 [6] DEBUG SMGS.Presentation.Controllers.adminController - Leave method [.ctor]
+2018-03-04 10:03:32,005 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:03:32,011 [5] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:03:32,018 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:03:32,027 [5] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:03:32,034 [5] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:03:32,041 [5] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:03:32,047 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:03:32,055 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:03:33,835 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:03:33,993 [5] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:03:34,001 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:03:48,268 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:03:48,278 [9] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:03:48,289 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:03:48,297 [9] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:03:48,309 [9] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:03:48,316 [9] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:03:48,330 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:03:48,341 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:03:48,352 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:03:48,430 [9] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:03:48,440 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:04:14,514 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:04:14,523 [9] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:04:14,541 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:04:14,556 [9] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:04:14,567 [9] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:04:14,579 [9] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:04:14,586 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:04:14,594 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:04:14,602 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:04:14,695 [9] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:04:14,702 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:05:27,748 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:05:27,758 [5] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:05:27,769 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:05:27,777 [5] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:05:27,788 [5] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:05:27,801 [5] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:05:27,815 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:05:27,826 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:05:27,836 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:05:27,900 [5] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:05:27,909 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:06:05,062 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:06:05,073 [9] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:06:05,084 [9] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:06:05,092 [9] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:06:05,099 [9] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:06:05,109 [9] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:06:05,117 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:06:05,127 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:06:05,138 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:06:05,209 [9] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:06:05,216 [9] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:09:02,518 [1] ERROR SMGS.Presentation.App_Start.Customize - Error: [The 'Register' method failed because the custom culture 'sz-VN' already exists.]
+2018-03-04 10:09:07,743 [6] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:09:07,756 [6] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:09:07,771 [6] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:09:08,004 [6] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:09:08,014 [6] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:09:08,025 [6] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:09:08,037 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:09:08,048 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:09:08,164 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [Index]
+2018-03-04 10:09:08,181 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [Index]
+2018-03-04 10:09:12,062 [7] DEBUG Infrastructure.Data.Repositories.StaffRepository - Enter method [.ctor]
+2018-03-04 10:09:12,072 [7] INFO  Infrastructure.Data.Repositories.StaffRepository - Success setting value to empPerPage attribute value: [20]
+2018-03-04 10:09:12,084 [7] DEBUG Infrastructure.Data.Repositories.StaffRepository - Leave method [.ctor]
+2018-03-04 10:09:12,098 [7] DEBUG Service.Business.Services.StaffServices - Enter method [.ctor]
+2018-03-04 10:09:12,117 [7] INFO  Service.Business.Services.StaffServices - Success setting values for attributes
+2018-03-04 10:09:12,125 [7] DEBUG Service.Business.Services.StaffServices - Leave method [.ctor]
+2018-03-04 10:09:12,168 [7] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Enter method [.ctor]
+2018-03-04 10:09:12,177 [7] INFO  Infrastructure.Data.Repositories.ContactInformationRepository - Success setting values for attributes
+2018-03-04 10:09:12,188 [7] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Leave method [.ctor]
+2018-03-04 10:09:12,200 [7] DEBUG Service.Business.Services.ContactInformationServices - Enter method [.ctor]
+2018-03-04 10:09:12,210 [7] DEBUG Service.Business.Services.ContactInformationServices - Leave method [.ctor]
+2018-03-04 10:09:12,232 [7] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Enter method [.ctor]
+2018-03-04 10:09:12,242 [7] INFO  Infrastructure.Data.Repositories.ServiceRepository - Success setting value to servicesPerPage attribute value: [20]
+2018-03-04 10:09:12,253 [7] INFO  Infrastructure.Data.Repositories.ServiceRepository - Setting value for attributes
+2018-03-04 10:09:12,263 [7] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Leave method [.ctor]
+2018-03-04 10:09:12,275 [7] DEBUG Service.Business.Services.ServiceServices - Enter method [.ctor]
+2018-03-04 10:09:12,312 [7] INFO  Service.Business.Services.ServiceServices - Success setting values for attributes
+2018-03-04 10:09:12,364 [7] DEBUG Service.Business.Services.ServiceServices - Leave method [.ctor]
+2018-03-04 10:09:12,392 [7] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Enter method [.ctor]
+2018-03-04 10:09:12,405 [7] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success setting value to servicesPerPage attribute value: [3]
+2018-03-04 10:09:12,417 [7] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success set value for attributes
+2018-03-04 10:09:12,427 [7] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Leave method [.ctor]
+2018-03-04 10:09:12,448 [7] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Enter method [.ctor]
+2018-03-04 10:09:12,456 [7] INFO  Infrastructure.Data.Repositories.ReferenceRepository - Success set values for attributes
+2018-03-04 10:09:12,465 [7] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Leave method [.ctor]
+2018-03-04 10:09:12,472 [7] DEBUG Service.Business.Services.ReferenceServices - Enter method [.ctor]
+2018-03-04 10:09:12,472 [7] INFO  Service.Business.Services.ReferenceServices - Success set value for attributes
+2018-03-04 10:09:12,495 [7] DEBUG Service.Business.Services.ReferenceServices - Leave method [.ctor]
+2018-03-04 10:09:12,511 [7] DEBUG Service.Business.Services.NotificationServices - Enter method [.ctor]
+2018-03-04 10:09:12,520 [7] DEBUG Service.Business.Services.NotificationServices - Leave method [.ctor]
+2018-03-04 10:09:12,522 [7] DEBUG SMGS.Presentation.Controllers.adminController - Enter method [.ctor]
+2018-03-04 10:09:12,522 [7] INFO  SMGS.Presentation.Controllers.adminController - Success set value to attributes
+2018-03-04 10:09:12,538 [7] DEBUG SMGS.Presentation.Controllers.adminController - Leave method [.ctor]
+2018-03-04 10:09:31,130 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:09:31,138 [5] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:09:31,148 [5] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:09:31,160 [5] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:09:31,171 [5] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:09:31,182 [5] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:09:31,191 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:09:31,204 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:09:34,233 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:11:56,125 [5] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:11:56,140 [5] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:14:27,821 [6] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:14:27,828 [6] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:14:27,843 [6] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:14:27,862 [6] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:14:27,875 [6] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:14:27,888 [6] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:14:27,898 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:14:27,907 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:14:27,916 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:14:27,990 [6] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:14:27,998 [6] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:15:43,909 [7] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:15:43,918 [7] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:15:43,930 [7] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:15:43,939 [7] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:15:43,948 [7] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:15:43,956 [7] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:15:43,965 [7] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:15:43,975 [7] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:15:44,002 [7] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:16:03,172 [7] ERROR SMGS.Presentation.Controllers.LogInController - Error: [Object reference not set to an instance of an object.]
+2018-03-04 10:16:03,180 [7] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:26:38,647 [37] ERROR SMGS.Presentation.App_Start.Customize - Error: [The 'Register' method failed because the custom culture 'sz-VN' already exists.]
+2018-03-04 10:27:01,321 [15] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:27:01,445 [15] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:27:01,459 [15] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:27:01,467 [15] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:27:01,476 [15] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:27:01,487 [15] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:27:01,496 [15] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:27:01,513 [15] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:27:01,638 [15] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [Index]
+2018-03-04 10:27:01,656 [15] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [Index]
+2018-03-04 10:27:04,614 [21] DEBUG Infrastructure.Data.Repositories.StaffRepository - Enter method [.ctor]
+2018-03-04 10:27:04,628 [21] INFO  Infrastructure.Data.Repositories.StaffRepository - Success setting value to empPerPage attribute value: [20]
+2018-03-04 10:27:04,643 [21] DEBUG Infrastructure.Data.Repositories.StaffRepository - Leave method [.ctor]
+2018-03-04 10:27:04,658 [21] DEBUG Service.Business.Services.StaffServices - Enter method [.ctor]
+2018-03-04 10:27:04,675 [21] INFO  Service.Business.Services.StaffServices - Success setting values for attributes
+2018-03-04 10:27:04,686 [21] DEBUG Service.Business.Services.StaffServices - Leave method [.ctor]
+2018-03-04 10:27:04,758 [21] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Enter method [.ctor]
+2018-03-04 10:27:04,775 [21] INFO  Infrastructure.Data.Repositories.ContactInformationRepository - Success setting values for attributes
+2018-03-04 10:27:04,814 [21] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Leave method [.ctor]
+2018-03-04 10:27:04,831 [21] DEBUG Service.Business.Services.ContactInformationServices - Enter method [.ctor]
+2018-03-04 10:27:04,847 [21] DEBUG Service.Business.Services.ContactInformationServices - Leave method [.ctor]
+2018-03-04 10:27:04,880 [21] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Enter method [.ctor]
+2018-03-04 10:27:04,902 [21] INFO  Infrastructure.Data.Repositories.ServiceRepository - Success setting value to servicesPerPage attribute value: [20]
+2018-03-04 10:27:04,913 [21] INFO  Infrastructure.Data.Repositories.ServiceRepository - Setting value for attributes
+2018-03-04 10:27:04,921 [21] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Leave method [.ctor]
+2018-03-04 10:27:04,937 [21] DEBUG Service.Business.Services.ServiceServices - Enter method [.ctor]
+2018-03-04 10:27:04,952 [21] INFO  Service.Business.Services.ServiceServices - Success setting values for attributes
+2018-03-04 10:27:04,952 [21] DEBUG Service.Business.Services.ServiceServices - Leave method [.ctor]
+2018-03-04 10:27:04,984 [21] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Enter method [.ctor]
+2018-03-04 10:27:04,999 [21] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success setting value to servicesPerPage attribute value: [3]
+2018-03-04 10:27:05,019 [21] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success set value for attributes
+2018-03-04 10:27:05,031 [21] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Leave method [.ctor]
+2018-03-04 10:27:05,066 [21] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Enter method [.ctor]
+2018-03-04 10:27:05,082 [21] INFO  Infrastructure.Data.Repositories.ReferenceRepository - Success set values for attributes
+2018-03-04 10:27:05,097 [21] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Leave method [.ctor]
+2018-03-04 10:27:05,097 [21] DEBUG Service.Business.Services.ReferenceServices - Enter method [.ctor]
+2018-03-04 10:27:05,113 [21] INFO  Service.Business.Services.ReferenceServices - Success set value for attributes
+2018-03-04 10:27:05,129 [21] DEBUG Service.Business.Services.ReferenceServices - Leave method [.ctor]
+2018-03-04 10:27:05,144 [21] DEBUG Service.Business.Services.NotificationServices - Enter method [.ctor]
+2018-03-04 10:27:05,144 [21] DEBUG Service.Business.Services.NotificationServices - Leave method [.ctor]
+2018-03-04 10:27:05,160 [21] DEBUG SMGS.Presentation.Controllers.adminController - Enter method [.ctor]
+2018-03-04 10:27:05,176 [21] INFO  SMGS.Presentation.Controllers.adminController - Success set value to attributes
+2018-03-04 10:27:05,176 [21] DEBUG SMGS.Presentation.Controllers.adminController - Leave method [.ctor]
+2018-03-04 10:27:14,814 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [.ctor]
+2018-03-04 10:27:14,823 [21] INFO  Infrastructure.Data.Repositories.AccountRepository - Success setting values for attributes
+2018-03-04 10:27:14,830 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [.ctor]
+2018-03-04 10:27:14,839 [21] DEBUG Service.Business.Services.AccountServices - Enter method [.ctor]
+2018-03-04 10:27:14,848 [21] INFO  Service.Business.Services.AccountServices - Success setting value to attributes
+2018-03-04 10:27:14,857 [21] DEBUG Service.Business.Services.AccountServices - Leave method [.ctor]
+2018-03-04 10:27:14,866 [21] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [.ctor]
+2018-03-04 10:27:14,874 [21] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [.ctor]
+2018-03-04 10:27:14,982 [21] DEBUG SMGS.Presentation.Controllers.LogInController - Enter method [CheckSignIn]
+2018-03-04 10:27:14,995 [21] DEBUG Service.Business.Services.AccountServices - Enter method [CheckSignIn]
+2018-03-04 10:27:15,029 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [CheckSignIn]
+2018-03-04 10:27:23,654 [21] INFO  Infrastructure.Data.Repositories.AccountRepository - Found account match username and password with username: [jeido3]
+2018-03-04 10:27:23,662 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [CheckSignIn]
+2018-03-04 10:27:23,674 [21] DEBUG Service.Business.Services.AccountServices - Leave method [CheckSignIn]
+2018-03-04 10:27:23,683 [21] DEBUG Service.Business.Services.AccountServices - Enter method [GetAccountByUsername]
+2018-03-04 10:27:23,693 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Enter method [GetAccountByUsername]
+2018-03-04 10:27:23,729 [21] INFO  Infrastructure.Data.Repositories.AccountRepository - Found account, username: [jeido3                                            ]
+2018-03-04 10:27:23,737 [21] DEBUG Infrastructure.Data.Repositories.AccountRepository - Leave method [GetAccountByUsername]
+2018-03-04 10:27:23,746 [21] DEBUG Service.Business.Services.AccountServices - Leave method [GetAccountByUsername]
+2018-03-04 10:27:24,076 [21] INFO  SMGS.Presentation.Controllers.LogInController - Check sign in: [True] with username: [jeido3] with type: [admin]
+2018-03-04 10:27:24,245 [21] DEBUG SMGS.Presentation.Controllers.LogInController - Leave method [CheckSignIn]
+2018-03-04 10:27:26,059 [38] DEBUG Infrastructure.Data.Repositories.StaffRepository - Enter method [.ctor]
+2018-03-04 10:27:26,076 [38] INFO  Infrastructure.Data.Repositories.StaffRepository - Success setting value to empPerPage attribute value: [20]
+2018-03-04 10:27:26,086 [38] DEBUG Infrastructure.Data.Repositories.StaffRepository - Leave method [.ctor]
+2018-03-04 10:27:26,097 [38] DEBUG Service.Business.Services.StaffServices - Enter method [.ctor]
+2018-03-04 10:27:26,109 [38] INFO  Service.Business.Services.StaffServices - Success setting values for attributes
+2018-03-04 10:27:26,121 [38] DEBUG Service.Business.Services.StaffServices - Leave method [.ctor]
+2018-03-04 10:27:26,135 [38] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Enter method [.ctor]
+2018-03-04 10:27:26,193 [38] INFO  Infrastructure.Data.Repositories.ContactInformationRepository - Success setting values for attributes
+2018-03-04 10:27:26,208 [38] DEBUG Infrastructure.Data.Repositories.ContactInformationRepository - Leave method [.ctor]
+2018-03-04 10:27:26,222 [38] DEBUG Service.Business.Services.ContactInformationServices - Enter method [.ctor]
+2018-03-04 10:27:26,237 [38] DEBUG Service.Business.Services.ContactInformationServices - Leave method [.ctor]
+2018-03-04 10:27:26,252 [38] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Enter method [.ctor]
+2018-03-04 10:27:26,267 [38] INFO  Infrastructure.Data.Repositories.ServiceRepository - Success setting value to servicesPerPage attribute value: [20]
+2018-03-04 10:27:26,281 [38] INFO  Infrastructure.Data.Repositories.ServiceRepository - Setting value for attributes
+2018-03-04 10:27:26,296 [38] DEBUG Infrastructure.Data.Repositories.ServiceRepository - Leave method [.ctor]
+2018-03-04 10:27:26,326 [38] DEBUG Service.Business.Services.ServiceServices - Enter method [.ctor]
+2018-03-04 10:27:26,344 [38] INFO  Service.Business.Services.ServiceServices - Success setting values for attributes
+2018-03-04 10:27:26,362 [38] DEBUG Service.Business.Services.ServiceServices - Leave method [.ctor]
+2018-03-04 10:27:26,377 [38] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Enter method [.ctor]
+2018-03-04 10:27:26,392 [38] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success setting value to servicesPerPage attribute value: [3]
+2018-03-04 10:27:26,405 [38] INFO  Infrastructure.Data.Repositories.SalaryRepository - Success set value for attributes
+2018-03-04 10:27:26,420 [38] DEBUG Infrastructure.Data.Repositories.SalaryRepository - Leave method [.ctor]
+2018-03-04 10:27:26,436 [38] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Enter method [.ctor]
+2018-03-04 10:27:26,455 [38] INFO  Infrastructure.Data.Repositories.ReferenceRepository - Success set values for attributes
+2018-03-04 10:27:26,470 [38] DEBUG Infrastructure.Data.Repositories.ReferenceRepository - Leave method [.ctor]
+2018-03-04 10:27:26,508 [38] DEBUG Service.Business.Services.ReferenceServices - Enter method [.ctor]
+2018-03-04 10:27:26,527 [38] INFO  Service.Business.Services.ReferenceServices - Success set value for attributes
+2018-03-04 10:27:26,539 [38] DEBUG Service.Business.Services.ReferenceServices - Leave method [.ctor]
+2018-03-04 10:27:26,553 [38] DEBUG Service.Business.Services.NotificationServices - Enter method [.ctor]
+2018-03-04 10:27:26,570 [38] DEBUG Service.Business.Services.NotificationServices - Leave method [.ctor]
+2018-03-04 10:27:26,586 [38] DEBUG SMGS.Presentation.Controllers.adminController - Enter method [.ctor]
+2018-03-04 10:27:26,606 [38] INFO  SMGS.Presentation.Controllers.adminController - Success set value to attributes
+2018-03-04 10:27:26,620 [38] DEBUG SMGS.Presentation.Controllers.adminController - Leave method [.ctor]

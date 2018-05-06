@@ -1,0 +1,97 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_ListStock
+@{
+    ViewBag.Title = "Stocks";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Stocks</h4>
+                <p class="category">This table is showing all stocks</p>
+            </div>
+            <div class="table-responsive">
+
+                @if (Model.Stocks.Count > 0)
+                {
+                <table class="table">
+                    <thead class="text-primary">
+                    <th class="col-md-5">Name</th>
+                    <th class="col-md-1">Unit</th>
+                    </thead>
+                    <tbody>
+                    @for (int i = 0; i < Model.Stocks.Count(); i++)
+                    {
+                        <tr onclick="" class="emp-row-in-list">
+                            <td class="text-primary">@Html.DisplayFor(_ => _.Stocks.ToList()[i].Name)</td>
+                            <td>@Html.DisplayFor(_ => _.Stocks.ToList()[i].Unit)</td>
+                        </tr>
+                    }
+                    </tbody>
+                    </table>
+                }
+                <div class="col-md-3"></div><!--Using for fit space-->
+                @if (Model.TotalPages > 0)
+                {
+                <div class="col-md-6">
+                    <div class="align-middle row">
+                        <ul class="list-inline align-middle">
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">first_page</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_before</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <!--Page marking-->
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                if (i == Model.ThisPage)
+                                {
+                                <li class="active">
+                                    <div>
+                                        <a><sub>@i</sub></a>
+                                    </div>
+                                </li>
+                                }
+                                else
+                                {
+                                <li>
+                                    <div class="item">
+                                        <a href="#">@i</a>
+                                    </div>
+                                </li>
+                                }
+                            }
+                            <!--End page marking-->
+                            <li>
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_next</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item">
+                                    <i class="small material-icons">last_page</i>
+                                    <a href="#"></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                }
+                else
+                {
+                    <p>Nothing stock here</p>
+                }
+                <div class="col-md-3"></div> <!--Using for fit space-->
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Create Service</button>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+J:\C#\New\Web\MVC\SpaManagementSystem\Core.AppServices\bin\Debug\Core.AppServices.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\Core.AppServices\bin\Debug\Core.AppServices.pdb
+J:\C#\New\Web\MVC\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.csprojResolveAssemblyReference.cache
+J:\C#\New\Web\MVC\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.pdb
+E:\SpaManagementSystem\Core.AppServices\bin\Debug\Core.AppServices.dll
+E:\SpaManagementSystem\Core.AppServices\bin\Debug\Core.AppServices.pdb
+E:\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.csprojResolveAssemblyReference.cache
+E:\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.csproj.CoreCompileInputs.cache
+E:\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.dll
+E:\SpaManagementSystem\Core.AppServices\obj\Debug\Core.AppServices.pdb

@@ -1,0 +1,167 @@
+﻿@model SMGS.Presentation.ViewModel.VM.VM_AnEmpSalaries
+@{
+    string empName = "";
+    if (Model != null)
+    {
+        empName = " for " + Model.Emp_Salary.FullName;
+    }
+    ViewBag.Title = "Salary" + empName;
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+@if (Model == null) { 
+<div id="alert-create-emp" class="row">
+    <div class="col-md-8"></div>
+    <div id="main-alert" class="col-md-4 alert-danger">
+        <div class="alert-inverse">
+            <a class="pull-right">Can't show any information</a>
+            <br/>
+            <a class="pull-right">Information can't receive</a>
+        </div>
+    </div>
+</div>
+}
+<div class="row"><!--Edit salary for person-->
+    @Html.HiddenFor(_ => _.Emp_Salary.Id, new { id="id-emp"});
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Update salary</h4>
+                <p class="category">Update salary for employee  </p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Code</label>
+                            @Html.TextBoxFor(_ => _.Emp_Salary.EmpCode, new { type = "text", @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Salary</label>
+                            @Html.TextBoxFor(_ => _.Emp_Salary.Salary, "{0:C0}", new { type = "text", @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="update-salary-for-employee" class="btn btn-primary pull-right">Update</button>
+                    </div>
+                </div>
+            </div> 
+        </div><!--End edit salary for person-->
+@if (Model.History > 0)
+{
+    <div class="row"> <!--Show person salaries in past-->
+        <div class="titcol-md-12">
+            <div class="card">
+                <div class="card-header" data-background-color="green">
+                    <h4 class="title">History</h4>
+                    <p class="category">
+                        @{
+                            var url = Request.Url.AbsoluteUri;
+                            if (url.Contains("month") && url.Contains("year"))
+                            {
+                                var month = url.Substring(url.IndexOf("month=") + 6, 2);
+                                switch (month)
+                                {
+                                    case "01":
+                                        month = "Jan";
+                                        break;
+                                    case "02":
+                                        month = "Feb";
+                                        break;
+                                    case "03":
+                                        month = "Mar";
+                                        break;
+                                    case "04":
+                                        month = "Apr";
+                                        break;
+                                    case "05":
+                                        month = "May";
+                                        break;
+                                    case "06":
+                                        month = "Jun";
+                                        break;
+                                    case "07":
+                                        month = "Jul";
+                                        break;
+                                    case "08":
+                                        month = "Aug";
+                                        break;
+                                    case "09":
+                                        month = "Sep";
+                                        break;
+                                    case "10":
+                                        month = "Oct";
+                                        break;
+                                    case "11":
+                                        month = "Nov";
+                                        break;
+                                    case "12":
+                                        month = "Dec";
+                                        break;
+
+                                }
+                                var year = url.Substring(url.IndexOf("year=") + 5);
+                                <span>This table is showing all salaries paid in @month - @year </span>
+                            }
+                            else
+                            {
+                                <span>This table is showing all salaries paid</span>
+                            }
+                        }
+                    </p>
+                </div>
+                <div class="table-responsive">
+                    <table id="table-salary-for-emp" class="table">
+                    @{
+                        if (Model.SalaryPaying.ListEmpPaying.Count > 0)
+                        {
+                            <thead>
+                                <th class="col-md-1">Paid</th>
+                                <th>Time</th>
+                                <th>Money</th>
+                                <th class="col-md-6">Discription</th>
+                            </thead>
+                            var listForPaid = new List<SelectListItem>();
+                            var paid = new SelectListItem()
+                            {
+                                Text = "Paid",
+                                Value = "true"
+                            };
+                        
+                            var unpaid = new SelectListItem()
+                            {
+                                Text = "Un-paid",
+                                Value = "false"
+                            };
+                            listForPaid.Add(paid);
+                            listForPaid.Add(unpaid);
+                            for (int i = 0; i < Model.SalaryPaying.ListEmpPaying.Count; i++)
+                            {
+                                paid.Selected = Model.SalaryPaying.ListEmpPaying[i].IsPaid;
+                                unpaid.Selected = !Model.SalaryPaying.ListEmpPaying[i].IsPaid;
+                                <tr>    
+                                    <td>@Html.DropDownListFor(_ => _.SalaryPaying.ListEmpPaying[i].IsPaid, listForPaid, new { @class = "input-sm disabled" })</td>
+                                    <td>@Html.DisplayFor(_=>_.SalaryPaying.ListEmpPaying[i].Time)</td>
+                                    <td>@Html.DisplayFor(_=>_.SalaryPaying.ListEmpPaying[i].TotalSalary)</td>
+                                    <td>@Html.DisplayFor(_ => _.SalaryPaying.ListEmpPaying[i].Description)</td>
+                                </tr>
+                            }
+                            if (Model.History > Model.SalaryPaying.ListEmpPaying.Count)
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td><a id="salary-page-all-salaries" class="more-history"><b>More history</b></a></td>
+                                    <td></td>
+                                </tr>
+                            }
+                        }
+                    }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> <!--End show person salaries in past-->
+  }

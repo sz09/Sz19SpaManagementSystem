@@ -1,0 +1,33 @@
+﻿@using SMGS.Presentation.ViewModel.VM;
+@model  SMGS.Presentation.ViewModel.VM.VM_ListBooking
+
+@{
+    ViewBag.Title = "Booking";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+
+@if (Model != null)
+{
+    int count = 1;
+    foreach (var item in Model.Beds)
+    {
+    <div class="bed">
+    @{
+        <div class="col-md-3">
+            @if (item.CheckDateTimeInPeriod(DateTime.Now))
+            {
+            <img src="~/Contents/img/bed/bed-in-use.png" id="@item.Id" onclick="GoToBooking()"/>
+            }
+            else
+            { 
+            <img src="~/Contents/img/bed/bed-free.png" id="@item.Id" />
+            }
+            <div class="booking-information">
+                <a class="bed-name">@item.Name</a>
+            </div>
+        </div>
+        }
+    </div>
+
+    }
+}

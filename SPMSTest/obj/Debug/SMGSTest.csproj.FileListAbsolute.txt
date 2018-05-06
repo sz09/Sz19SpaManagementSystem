@@ -1,0 +1,14 @@
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\SPMSTest.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\SPMSTest.pdb
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.dll
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.xml
+E:\SpaManagementSystem\SPMSTest\bin\Debug\Microsoft.VisualStudio.TestPlatform.TestFramework.Extensions.xml
+E:\SpaManagementSystem\SPMSTest\obj\Debug\SMGSTest.csprojResolveAssemblyReference.cache
+E:\SpaManagementSystem\SPMSTest\obj\Debug\SMGSTest.csproj.CoreCompileInputs.cache
+E:\SpaManagementSystem\SPMSTest\obj\Debug\SMGSTest.csproj.CopyComplete
+E:\SpaManagementSystem\SPMSTest\obj\Debug\SPMSTest.dll
+E:\SpaManagementSystem\SPMSTest\obj\Debug\SPMSTest.pdb

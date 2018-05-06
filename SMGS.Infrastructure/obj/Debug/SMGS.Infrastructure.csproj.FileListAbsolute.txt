@@ -1,0 +1,5 @@
+J:\C#\New\Web\MVC\SpaManagementSystem\SMGS.Infrastructure\bin\Debug\SMGS.Infrastructure.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\SMGS.Infrastructure\bin\Debug\SMGS.Infrastructure.pdb
+J:\C#\New\Web\MVC\SpaManagementSystem\SMGS.Infrastructure\obj\Debug\SMGS.Infrastructure.csprojResolveAssemblyReference.cache
+J:\C#\New\Web\MVC\SpaManagementSystem\SMGS.Infrastructure\obj\Debug\SMGS.Infrastructure.dll
+J:\C#\New\Web\MVC\SpaManagementSystem\SMGS.Infrastructure\obj\Debug\SMGS.Infrastructure.pdb

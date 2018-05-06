@@ -1,0 +1,113 @@
+﻿<!--
+    This page is table for show list staff by table 
+    -->
+@model SMGS.Presentation.ViewModel.VM.VM_ListStaff
+@{
+    ViewBag.Title = "EMPLOYEE";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Employee</h4>
+                <p class="category">This table is showing all employees</p>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    @{
+                        if (Model.AllStaff.Count() > 0)
+                        {
+                        <thead class="text-primary">
+                            <th>Name</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>District</th>
+                            <th class="col-md-2">Address</th>
+                            <th>Phone</th>
+                            <th>Salary</th>
+                        </thead>
+                        }
+                    }
+                    <tbody>
+                    @for (int i = 0; i < Model.AllStaff.Count; i++)
+                    {
+                        <tr onclick="GoToEmp(@Model.AllStaff[i].Id)" class="emp-row-in-list">
+                            <td class="text-primary">@Html.DisplayFor(_ => _.AllStaff[i].FullName)</td>
+                            <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.Province.Country.CountryName)</td>
+                            <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.Province.ProvinceName)</td>
+                            <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.DistrictName)</td>
+                            <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.AddressNumberNoAndStreet)</td>
+                            <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.EAddress.NumberPhone)</td>
+                            <td class="text-primary">@Html.DisplayFor(_ => _.AllStaff[i].Salary)</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                <div class="col-md-3"></div><!--Using for fit space-->
+                <div class="col-md-6">
+                    <div class="align-middle row">
+                        <ul id="paging-employees" class="list-inline align-middle">
+                            <li onclick="GoToEmployeePage(1)">
+                                <div class="item">
+                                    <i class="tiny material-icons">first_page</i>
+                                    <a></a>
+                                </div>
+                            </li>
+                            <li onclick="BackEmployeePage()">
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_before</i>
+                                    <a></a>
+                                </div>
+                            </li>
+                            <!--Page marking-->
+                            @for (int i = 1; i <= Model.TotalPages; i++)
+                            {
+                                if (i == Model.ThisPage)
+                                {
+                                    <li class="active">
+                                        <div>
+                                            <a><sub>@i</sub></a>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="item">
+                                            <a onclick="GoToEmployeePage(@i)">@i</a>
+                                        </div>
+                                    </li>
+                                }
+                            }
+                            <!--End page marking-->
+                            <li onclick="NextEmployeePage(@Model.TotalPages)">
+                                <div class="item">
+                                    <i class="tiny material-icons">navigate_next</i>
+                                    <a></a>
+                                </div>
+                            </li>
+                            <li onclick="GoToEmployeePage(@Model.TotalPages)">
+                                <div class="item">
+                                    <i class="small material-icons">last_page</i>
+                                    <a></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3"></div> <!--Using for fit space--> 
+            </div>
+        </div>
+        <button id="btn-go-to-create-profile" type="reset" class="btn btn-primary pull-right">Create Profile</button>
+    </div>
+</div>
+
+<fieldset id="menu-custom" class="custom-right-click">
+    <legend></legend>
+    <ul>
+        <li><a href="#">Update employee</a></li>
+        <li><a href="#">Update salary</a></li>
+    </ul>
+</fieldset>
