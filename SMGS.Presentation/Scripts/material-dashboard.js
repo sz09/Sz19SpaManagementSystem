@@ -268,7 +268,7 @@ $(document).ready(function () {
     let currentURL = window.location.href.toLowerCase();
     $(".nav-left>.in-nav-left>.sidebar>.sidebar-wrapper>.nav>.active").removeClass("active");
     if (currentURL.includes("admin")) {
-        var lengthTemp = (currentURL.substring(0, currentURL.lastIndexOf("admin") + 5).length);
+        let lengthTemp = (currentURL.substring(0, currentURL.lastIndexOf("admin") + 5).length);
         if (currentURL.length == lengthTemp + 1)
             $("#li-for-dashboard").addClass("active");
         else if (currentURL.includes("/employee") || currentURL.includes("/createemployee"))
@@ -281,6 +281,12 @@ $(document).ready(function () {
             $("#li-for-notifications").addClass("active");
         else if (currentURL.includes("/salaries"))
             $("#li-for-salary").addClass("active");
+        else if (currentURL.includes("book"))
+            $("#li-for-booking").addClass("active");
+         else if (currentURL.includes("bed"))
+            $("#li-for-bed").addClass("active");
+        
+
     }
 });
 
@@ -596,6 +602,31 @@ function NextEmployeePage(totalPages) {
     if (current < totalPages)
         GoToEmployeePage(totalPages);
 }
+/* Services */
+function GoToServicePage(index) {
+    window.location.href = './servicesadmin?page=' + index;
+}
+function BackServicePage() {
+    let current = $('#paging-services>.active').children().find('sub').first().html();
+    current -= 1;
+    if (current == 0)
+        current = 1;
+    if (current > 1)
+        GoToServicePage(1);
+}
+function NextServicePage(totalPages) {
+    let current = $('#paging-services>.active').children().find('sub').first().html();
+    current *= 1;
+    current += 1;
+    if (current >= totalPages)
+        current = totalPages;
+    if (current < totalPages)
+        GoToServicePage(totalPages);
+}
+$('#choose-services').on('click', function () {
+
+});
+/* End Services */
 
 $('#salary-page-all-salaries').on('click', function () {
     $('#table-salary-for-emp tr:not(:first)').remove();
@@ -638,3 +669,142 @@ $('select').on('change', function () {
     var payId = $(this);
     console.log(payId);
 });
+
+let idServicesChoosen = "";
+$("input[name*='Services'][type='checkbox']").on('click', function () {
+    let id = $(this).siblings('.hidden').val();
+    let comma = ',';
+    let check = id + comma;
+    if (!(idServicesChoosen.indexOf(check) >= 0)) 
+        idServicesChoosen += id + ',';
+    else
+        idServicesChoosen = idServicesChoosen.replace((id + ','), '');
+});
+
+$('#book-ok-services').on('click', function () {
+    // Handle showing serivices
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            ids: idServicesChoosen
+        },
+        url: '/admin/GetCodeForService',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            $('#choose-services').val(value);
+        }
+    });
+    // Handle showing time period
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            ids: idServicesChoosen
+        },
+        url: '/admin/GetTimeForService',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            if ($('#time-period').val(value) != "" || $('#time-period').val() != null)
+                $('#time-period').closest('div').addClass('is-focused');
+        }
+    });
+
+});
+
+// Handle create new bed, if success, showing add name for bed in language
+$('#create-bed-main-action').on('click', function () {
+    let code = $('#BedCode').val();
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            code: code
+        },
+        url: '/admin/PerformCreateBed',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            if (value > 0) $('#bed-created-id').html(value);
+            if ($('#div-add-name-in-language').hasClass('hidden'))
+                $('#div-add-name-in-language').removeClass('hidden');
+        }
+    });
+});
+
+// Handle add name for bed in language
+$('#btn-add-name').on('click', function () {
+    var div = $(this).closest('div .row');
+    let bedId = $('#bed-created-id').html();
+    let value = $(this);
+    let languageId = div.children()[0];
+    PrepareRowAddNameInLanguage();
+    console.log(languageId);
+    //$.ajax({
+    //    type: 'post',
+    //    //dataType: 'json',
+    //    async: false,
+    //    data: {
+    //        bedId: bedId,
+    //        value: value,
+    //        languageId: languageId
+    //    },
+    //    url: '/admin/PerformAddBedNameInLanguage',
+    //    complete: function (xhr) {
+    //    },
+    //    success: function (value) {
+    //        if (value > 0) $('#bed-created-id').html(value);
+    //        if ($('#div-add-name-in-language').hasClass('hidden'))
+    //            $('#div-add-name-in-language').removeClass('hidden');
+    //    }
+    //});
+});
+
+
+function PrepareRowAddNameInLanguage() {
+
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        url: '/admin/GetAllLanguages',
+        complete: function (xhr) {
+            console.log(xhr);
+        },
+        success: function (value) {
+            console.log(value);
+        }
+    });
+
+    let html =  '<div class="row">' + 
+                    '<div class="col-md-3">' + 
+                        '<div class="form-group label-floating">' + 
+                            '<label class="control-label">Language</label>' +
+                            '<select class="dropdown form-control" id="Languages" name="Languages">' +
+                                '<option value="1">English</option>' +
+        '<option value="2">Vietnamese</option>' + 
+
+
+                            '</select>' + 
+                            '<span class="material-input"></span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="col-md-7">' + 
+                        '<div class="form-group label-floating is-empty">' +
+                            '<label class="control-label">Value</label>' + 
+                            '<input type="text" class="form-control" id="txt-name-for">' + 
+                                '<span class="material-input"></span>' + 
+                        '</div>' + 
+                    '</div>' + 
+                    '<div class="col-md-2">' + 
+                        '<div class="form-group">' + 
+                            '<input type="button" class="btn btn-primary pull-right" id="btn-add-name" value="Add">' + 
+                        '</div>' +
+                    '</div>' +
+                '</div>';
+}

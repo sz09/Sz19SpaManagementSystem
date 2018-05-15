@@ -173,6 +173,7 @@ namespace SMGS.Presentation.Controllers
             try
             {
                 newEmp.StaffCode = this._iStaffServices.CreateNewCode();
+                return View(newEmp);
             }
             catch (Exception e)
             {
@@ -183,7 +184,6 @@ namespace SMGS.Presentation.Controllers
             {
                 logger.LeaveMethod();
             }
-            return View(newEmp);
         }
 
         /// <summary>
@@ -228,6 +228,7 @@ namespace SMGS.Presentation.Controllers
                 logger.LeaveMethod();
             }
         }
+        
 
         /// <summary>
         /// Submit add employee to database
@@ -552,6 +553,11 @@ namespace SMGS.Presentation.Controllers
             }
         }
 
+        /// <summary>
+        /// Get history paid salary for an employee
+        /// </summary>
+        /// <param name="empId"></param>
+        /// <returns></returns>
         public ActionResult SalaryHistory(long empId)
         {
             logger.EnterMethod();
@@ -600,6 +606,10 @@ namespace SMGS.Presentation.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all bookings 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Bookings()
         {
             logger.EnterMethod();
@@ -619,12 +629,123 @@ namespace SMGS.Presentation.Controllers
             catch (Exception e)
             {
                 logger.Error("Error: [" + e.Message + "]");
-                return null;
+                return View("ErrorAdminPage");
             }
             finally
             {
                 logger.LeaveMethod();
             }
+        }
+
+        public ActionResult Beds()
+        {
+            return View();
+        }
+
+        public ActionResult CreateBed()
+        {
+            VM_CreateBed vM_CreateBed = new VM_CreateBed();
+            vM_CreateBed.BedCode = this._iBedServices.CreateNewCode();
+            var languges = this._iReferenceServices.GetAllLanguage();
+            vM_CreateBed.Languages = ConvertVM.Language_To_VMLanguage(languges);
+            return View(vM_CreateBed);
+        }
+
+        [WebMethod]
+        public ActionResult PerformCreateBed(string code)
+        {
+            VM_Bed bed = new VM_Bed
+            {
+                BedCode = code
+            };
+            var id = this._iBedServices.CreateNewBedReturnId(ConvertVM.VMBed_To_Bed(bed));
+
+            return Json(id);
+        }
+        [WebMethod]
+        public ActionResult PerformAddBedNameInLanguage(int bedId, string value, int languageId)
+        {
+            VM_BedName bedName = new VM_BedName
+            {
+                Name = value,
+                LanguageId = languageId,
+                BedId = bedId
+            };
+            var id = this._iBedServices.AddNameForBed(ConvertVM.VMBedName_To_BedName(bedName));
+
+            return Json(id);
+        }
+        [WebMethod]
+        public ActionResult GetAllLanguages()
+        {
+            var languages = this._iReferenceServices.GetAllLanguage();
+            var rtJSon = "{";
+            foreach (var language in languages)
+            {
+                rtJSon += "id: " + language.Id + ", value: " + language.Value;
+            }
+            rtJSon += "}";
+            return Json(rtJSon);
+        }
+
+        public ActionResult BookNew(int bedId, string language = "en")
+        {
+            logger.EnterMethod();
+            try
+            {
+                language = WebConfigurationManager.AppSettings[language];
+                var newBooking = new VM_NewBooking();
+                var services = ConvertVM.Service_To_VMService(this._iServiceServices.GetAll());
+                foreach (var item in services)
+                {
+                    item.Name = this._iServiceServices.GetServiceNameByLanguage(item.Id, language);
+                }
+                newBooking.Services = services;
+                newBooking.BedId = bedId;
+                newBooking.BedName = this._iBedServices.GetBedName(bedId, language);
+                return View(newBooking);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return View("ErrorAdminPage");
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        
+        [WebMethod]
+        public JsonResult GetCodeForService(string ids)
+        {
+            var codes = "";
+            var listIds = ids.Split(',').ToList<string>();
+            foreach (var id in listIds)
+            {
+                int idSer;
+                if (int.TryParse(id, out idSer))
+                    codes += "[" + this._iServiceServices.GetServiceCodeById(idSer).Trim() + "]";
+            }
+            return Json(codes);
+        }
+        [WebMethod]
+        public JsonResult GetTimeForService(string ids)
+        {
+            var time = "";
+            var timeCost = 0;
+            var listIds = ids.Split(',').ToList<string>();
+            foreach (var id in listIds)
+            {
+                int idSer;
+                if (int.TryParse(id, out idSer))
+                    timeCost += this._iServiceServices.GetTotalTimeUseServices(idSer);
+            }
+            int hours = 0, minutes = 0;
+            hours = timeCost / 60;
+            minutes = timeCost % 60;
+            time = hours + "h " + minutes + "m";
+            return Json(time);
         }
 
         public  ActionResult CreateNewBooking(int bedId)

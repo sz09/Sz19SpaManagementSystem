@@ -21,6 +21,7 @@ namespace Infrastructure.Data.Repositories
         private readonly IUnitOfWork _iUnitOfWork;
         private int bedPerPage;
         private int defaultCountBedPerPage = 20;
+        private int codeBedLength = 8;
         private static readonly ILog logger = LogManager.GetLogger(typeof(BedRepository));
         #endregion
 
@@ -251,6 +252,118 @@ namespace Infrastructure.Data.Repositories
             {
                 logger.Error("Error: [" + e.Message + "]");
                 return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        /// <summary>
+        /// Create new Code for Bed
+        ///     Random capitalization char 
+        ///         With constant length of characters
+        /// </summary>
+        /// <returns>Code for Employee with length is constant variabble codeEmpLength</returns>
+        public string CreateNewCode()
+        {
+            string code = "";
+            Random rdm = new Random();
+            do
+            {
+                for (int i = 0; i < codeBedLength; i++)
+                {
+                    code += (char)rdm.Next(65, 90);
+                }
+                // Check if coincident
+            } while (CheckCoincidentCode(code));
+            return code;
+        }
+
+        private bool CheckCoincidentCode(string bedCode)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var findEmpByExistingCode = this._iBedRepositories.Find(_ => _.BedCode == bedCode).FirstOrDefault();
+                if (findEmpByExistingCode != null)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int CreateNewBedReturnId(Bed bed)
+        {
+
+            logger.EnterMethod();
+            try
+            {
+                if (bed != null)
+                {
+                    using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                    {
+                        this._iBedRepositories.Add(bed);
+                        transactionScope.Complete();
+                    }
+                    this._iUnitOfWork.Save();
+                    logger.Info("Success add new bed and save all changes");
+                    return bed.Id;
+                }
+                else
+                {
+                    logger.Info("Null bed can't not be insert");
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public bool AddNameForBed(BedName bedName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var existBedName = this._iBedNameRepositories.Get(_ => (
+                                                                _.BedId == bedName.BedId &&
+                                                                _.LanguageId == bedName.LanguageId
+                                                                ));
+                if (existBedName != null)
+                {
+                    logger.Info("Exist bed with Id: [" + bedName.BedId + "] and LanguageId: [" + bedName.LanguageId  + "]");
+                    return false;
+                }
+                using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    this._iBedNameRepositories.Add(bedName);
+                    transactionScope.Complete();
+                    this._iUnitOfWork.Save();
+                    logger.Info("Insert new bed name for bed with Id: [" + bedName.BedId + "], name value: [" + bedName.Name + "] in language with Id: [" + bedName.LanguageId + "]");
+                    return true;
+                }
+                logger.Info("Can't save bed name");
+                return false;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
             }
             finally
             {

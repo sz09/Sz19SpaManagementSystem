@@ -2,7 +2,7 @@
 @model  SMGS.Presentation.ViewModel.VM.VM_ListBooking
 
 @{
-    ViewBag.Title = "Booking";
+    ViewBag.Title = "BOOKING";
     Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
 }
 
@@ -16,11 +16,11 @@
         <div class="col-md-3">
             @if (item.CheckDateTimeInPeriod(DateTime.Now))
             {
-            <img src="~/Contents/img/bed/bed-in-use.png" id="@item.Id" onclick="GoToBooking()"/>
+            <img src="~/Contents/img/bed/bed-in-use.png" id="@item.Id" onclick="GoToBooking(@item.Id)"/>
             }
             else
             { 
-            <img src="~/Contents/img/bed/bed-free.png" id="@item.Id" />
+            <img src="~/Contents/img/bed/bed-free.png" id="@item.Id" onclick="Booking(@item.Id)"/>
             }
             <div class="booking-information">
                 <a class="bed-name">@item.Name</a>

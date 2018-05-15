@@ -32,6 +32,7 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
         #endregion
         #region Operations
         public Tuple<List<Address>, List<Bed>, List<Customer>, List<SPMS.ObjectModel.Entities.Service>, List<Staff>, List<Stock>, int> Search(string key)
@@ -40,6 +41,59 @@ namespace Service.Business.Services
             try
             {
                 return this._iReferenceRepositories.Search(key);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        public List<Language> GetAllLanguage()
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iReferenceRepositories.GetAllLanguage();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public Language GetLanguageById(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this.GetLanguageById(id);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public Language GetLanguageByName(string value)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iReferenceRepositories.GetLanguageByName(value);
             }
             catch (Exception e)
             {

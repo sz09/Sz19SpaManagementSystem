@@ -2837,7 +2837,7 @@ fieldset[disabled] .form-group .form-control {
 
 .form-group.is-focused .form-control {
     outline: none;
-    background-image: linear-gradient(#9c27b0, #9c27b0), linear-gradient(#D2D2D2, #D2D2D2);
+    background-image: linear-gradient(#4CAF50, #4CAF50), linear-gradient(#4CAF50, #4CAF50);
     background-size: 100% 2px, 100% 1px;
     box-shadow: none;
     transition-duration: 0.3s;
@@ -7224,11 +7224,19 @@ input[type=checkbox]{
 .bed-name {
     text-align: center;
 }
+.service-item-popup {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.d-inline{
+    display: inline;
+}
+.service-item-popup > .checkbox {
+    display: inline;
+}
 /*End booking*/
-
-
 /*Search page*/
-.result-page{
+.result-page {
     /*height: 500px;*/
 }
 .nav-tabs {
@@ -7274,4 +7282,9 @@ input[type=checkbox]{
 }
 /*End Salary*/
 /*Employee*/
+
 /*EndEmployee*/
+
+/*Create Bed*/
+
+/*End Create Bed*/
