@@ -15,6 +15,7 @@ namespace SMGS.Presentation.ViewModel.VM
         public bool IsPaid { get; set; }
 
         public int BedId { get; set; }
+        public string BedName { get; set; }
 
         public DateTime? PeriodFrom { get; set; }
 

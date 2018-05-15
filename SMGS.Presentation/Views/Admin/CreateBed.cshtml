@@ -1,0 +1,74 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_CreateBed
+@{
+    ViewBag.Title = "Create Bed And Set Up Name";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+<style>
+    .padding-bottom{
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Create Bed</h4>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Code</label>
+                            @Html.TextBoxFor(_ => _.BedCode, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+                <button type="button" id="create-bed-main-action" class="btn btn-primary pull-right">Create Bed</button>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<a id="bed-created-id" class="hidden"></a>
+<div class="row hidden" id="div-add-name-in-language">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Add name in language</h4>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Language</label>
+                            @{
+                                List<SelectListItem> languages = new List<SelectListItem>();
+                                foreach (var item in Model.Languages)
+                                {
+                                    languages.Add(new SelectListItem
+                                    {
+                                        Text = item.Value,
+                                        Value = item.Id.ToString()
+                                    });
+                                }
+                            }
+                            @Html.DropDownListFor(_ => _.Languages, languages, new { @class = "dropdown form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Value</label>
+                            <input type="text" class="form-control" id="txt-name-for" /> <!--Code auto generate-->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary pull-right" id="btn-add-name" value="Add" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

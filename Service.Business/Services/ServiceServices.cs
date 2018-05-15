@@ -112,9 +112,42 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
+        public string GetServiceCodeById(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.GetServiceCodeById(id);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int GetTotalTimeUseServices(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.GetTotalTimeUseServices(id);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return 0;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
-
-
-
     }
 }

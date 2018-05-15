@@ -1106,6 +1106,71 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                 logger.LeaveMethod();
             }
         }
+        internal static Bed VMBed_To_Bed(VM_Bed vM_Bed)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return new Bed()
+                {
+                    BedCode = vM_Bed.BedCode,
+                    Id = vM_Bed.Id
+                };
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        internal static BedName VMBedName_To_BedName(VM_BedName vM_BedName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return new BedName()
+                {
+                    Name = vM_BedName.Name,
+                    LanguageId = vM_BedName.LanguageId,
+                    BedId = vM_BedName.BedId
+                };
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        internal static VM_BedName BedName_To_VMBedName(BedName bedName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return new VM_BedName()
+                {
+                    Name = bedName.Name,
+                    LanguageId = bedName.LanguageId,
+                    BedId = bedName.BedId
+                };
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
 
         internal static List<VM_Bed> Bed_To_VMBed(IEnumerable<Bed> beds)
         {
@@ -1216,6 +1281,27 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                 ListStock = Stock_To_VMStock(searchResult.Item6),
                 SearchResultsInSearch = searchResult.Item7
             };
+        }
+        internal static VM_Language Language_To_VMLanguage(Language language)
+        {
+            return new VM_Language
+            {
+                Id = language.Id,
+                Value = language.Value
+            };
+        }
+        internal static List<VM_Language> Language_To_VMLanguage(List<Language> languages)
+        {
+            List<VM_Language> vM_Languages = new List<VM_Language>();
+            foreach (var language in languages)
+            {
+                vM_Languages.Add(new VM_Language
+                {
+                    Id = language.Id,
+                    Value = language.Value
+                });
+            }
+            return vM_Languages;
         }
     }
 }

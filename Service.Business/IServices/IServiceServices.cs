@@ -40,5 +40,17 @@ namespace Service.Business.IServices
         /// </summary>
         /// <returns>Total pages</returns>
         int CountTotalPages();
+        /// <summary>
+        /// Get service code by id 
+        /// </summary>
+        /// <param name="id">Id of service</param>
+        /// <returns></returns>
+        string GetServiceCodeById(int id);
+        /// <summary>
+        /// Get time using service by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int GetTotalTimeUseServices(int id);
     }
 }
