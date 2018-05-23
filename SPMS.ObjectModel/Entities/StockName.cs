@@ -19,6 +19,8 @@ namespace SPMS.ObjectModel.Entities
 
         public int LanguageId { get; set; }
 
+        public virtual Language Language { get; set; }
+
         public virtual Stock Stock { get; set; }
     }
 }

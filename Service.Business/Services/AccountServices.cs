@@ -270,6 +270,24 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
+        public string GetHighestRole(string userName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iAccountRepositories.GetHighestRole(userName);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

@@ -20,7 +20,9 @@ namespace SPMS.ObjectModel.Entities
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
+        public virtual DbSet<AccountAutoLogin> AccountAutoLogins { get; set; }
         public virtual DbSet<AccountFor> AccountFors { get; set; }
+        public virtual DbSet<AccountMappingRole> AccountMappingRoles { get; set; }
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Attendance> Attendances { get; set; }
         public virtual DbSet<Bed> Beds { get; set; }
@@ -50,7 +52,6 @@ namespace SPMS.ObjectModel.Entities
         public virtual DbSet<StockName> StockNames { get; set; }
         public virtual DbSet<StockPackage> StockPackages { get; set; }
         public virtual DbSet<StockPackageDetail> StockPackageDetails { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Unit> Units { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -68,15 +69,30 @@ namespace SPMS.ObjectModel.Entities
                 .IsFixedLength();
 
             modelBuilder.Entity<Account>()
+                .HasMany(e => e.AccountMappingRoles)
+                .WithRequired(e => e.Account)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Account>()
                 .HasMany(e => e.Notifications)
                 .WithRequired(e => e.Account)
+                .HasForeignKey(e => e.From)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Account>()
+                .HasMany(e => e.Notifications1)
+                .WithRequired(e => e.Account1)
                 .HasForeignKey(e => e.ForAccountId)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<AccountAutoLogin>()
+                .Property(e => e.Username)
+                .IsFixedLength();
+
             modelBuilder.Entity<AccountFor>()
-                .HasMany(e => e.Accounts)
+                .HasMany(e => e.AccountMappingRoles)
                 .WithRequired(e => e.AccountFor)
-                .HasForeignKey(e => e.TypeId)
+                .HasForeignKey(e => e.RoleId)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Address>()
@@ -176,6 +192,11 @@ namespace SPMS.ObjectModel.Entities
 
             modelBuilder.Entity<Language>()
                 .HasMany(e => e.ServiceNames)
+                .WithRequired(e => e.Language)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Language>()
+                .HasMany(e => e.StockNames)
                 .WithRequired(e => e.Language)
                 .WillCascadeOnDelete(false);
 

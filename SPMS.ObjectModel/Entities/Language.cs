@@ -14,6 +14,7 @@ namespace SPMS.ObjectModel.Entities
         {
             Descriptions = new HashSet<Description>();
             ServiceNames = new HashSet<ServiceName>();
+            StockNames = new HashSet<StockName>();
         }
 
         public int Id { get; set; }
@@ -27,5 +28,8 @@ namespace SPMS.ObjectModel.Entities
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceName> ServiceNames { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StockName> StockNames { get; set; }
     }
 }

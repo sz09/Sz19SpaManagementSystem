@@ -10,6 +10,7 @@ namespace Core.ObjectServices.Repositories
     {
         bool InsertStaff(Staff staff);
         bool UpdateStaff(Staff staff);
+        bool UpdateSalaryForStaff(long empId, decimal salary);
         bool DeleteStaff(int staffId);
         bool DeleteStaff(params object[] keyValues);
         bool Delete(IEnumerable<Staff> listStaff);
@@ -44,6 +45,6 @@ namespace Core.ObjectServices.Repositories
         /// <returns>Total pages</returns>
         int CountTotalPages();
 
-
+        
     }
 }

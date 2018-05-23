@@ -77,6 +77,13 @@ namespace Service.Business.IServices
         /// </returns>
         bool UpdateEmployee(Staff emp);
         /// <summary>
+        /// Update salary for an employee find by Id 
+        /// </summary>
+        /// <param name="empId"></param>
+        /// <param name="salary"></param>
+        /// <returns></returns>
+        bool UpdateSalaryForStaff(long empId, decimal salary);
+        /// <summary>
         /// Delete employee
         ///     Save all changes
         /// </summary>

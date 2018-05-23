@@ -4,26 +4,14 @@
 }
 @if (Model != null)
 {
-    int count = 1;
-    foreach (var item in Model.Beds)
-    {
-        <div class="bed">
-            @{
-                <div class="col-md-3">
-                    @if (item.CheckDateTimeInPeriod(DateTime.Now))
-                    {
-                        <img src="~/Contents/img/bed/bed-in-use.png" id="@item.Id" onclick="GoToBooking()" />
-                    }
-                    else
-                    {
-                        <img src="~/Contents/img/bed/bed-free.png" id="@item.Id" />
-                    }
-                    <div class="booking-information">
-                        <a class="bed-name">@item.Name</a>
-                    </div>
-                </div>
-            }
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Employee</h4>
+                <p class="category">This table is showing all employees</p>
+            </div>
         </div>
-
-    }
+    </div>
+</div>
 }

@@ -12,7 +12,7 @@ namespace SPMS.ObjectModel.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AccountFor()
         {
-            Accounts = new HashSet<Account>();
+            AccountMappingRoles = new HashSet<AccountMappingRole>();
         }
 
         public int Id { get; set; }
@@ -22,6 +22,6 @@ namespace SPMS.ObjectModel.Entities
         public string ForType { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<AccountMappingRole> AccountMappingRoles { get; set; }
     }
 }
