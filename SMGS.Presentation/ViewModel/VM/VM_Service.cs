@@ -8,6 +8,7 @@
         public VM_Time TimeCost { get; set; }
         public string Name { get; set; }
         public bool IsInUse { get; set; }
+        public bool Selected { get; set; }
     }
 
     public class VM_Time

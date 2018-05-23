@@ -80,6 +80,24 @@ namespace Service.Business.Services
             }
         }
 
+        public string CreateNewCode()
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iBedRepositories.CreateNewCode();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
         public IEnumerable<Bed> GetAll()
         {
             logger.EnterMethod();
@@ -177,6 +195,42 @@ namespace Service.Business.Services
             try
             {
                 return this._iBedRepositories.UpdateBed(bed);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int CreateNewBedReturnId(Bed bed)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iBedRepositories.CreateNewBedReturnId(bed);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public bool AddNameForBed(BedName bedName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iBedRepositories.AddNameForBed(bedName);
             }
             catch (Exception e)
             {

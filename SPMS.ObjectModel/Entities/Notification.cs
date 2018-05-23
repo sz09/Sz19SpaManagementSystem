@@ -16,6 +16,8 @@ namespace SPMS.ObjectModel.Entities
 
         public long Id { get; set; }
 
+        public long From { get; set; }
+
         public long ForAccountId { get; set; }
 
         public DateTime Time { get; set; }
@@ -31,6 +33,8 @@ namespace SPMS.ObjectModel.Entities
         public bool IsRead { get; set; }
 
         public virtual Account Account { get; set; }
+
+        public virtual Account Account1 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotificationDetail> NotificationDetails { get; set; }

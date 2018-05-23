@@ -36,7 +36,7 @@
                 <div class="col-md-3"></div><!--Using for fit space-->
                 <div class="col-md-6">
                     <div class="align-middle row">
-                        <ul class="list-inline align-middle">
+                        <ul id="paging-services" class="list-inline align-middle">
                             <li>
                                 <div class="item">
                                     <i class="tiny material-icons">first_page</i>
@@ -64,7 +64,7 @@
                                 {
                                     <li>
                                         <div class="item">
-                                            <a href="#">@i</a>
+                                            <a onclick="GoToServicePage(@i)">@i</a>
                                         </div>
                                     </li>
                                 }
@@ -88,6 +88,6 @@
                 <div class="col-md-3"></div> <!--Using for fit space-->
             </div>
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Create Service</button>
+        <button id="create-serivce-link-to" type="submit" class="btn btn-primary pull-right">Create Service</button>
     </div>
 </div>

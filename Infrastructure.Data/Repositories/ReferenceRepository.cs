@@ -23,6 +23,7 @@ namespace Infrastructure.Data.Repositories
         private readonly IRepository<District> _districtRepositories;
         private readonly IRepository<Province> _proviceRepositories;
         private readonly IRepository<Country> _countryRepositories;
+        private readonly IRepository<Language> _languageRepositories;
 
         private readonly int searchResult = 10;
         private readonly ILog logger = LogManager.GetLogger(typeof(ReferenceRepository));
@@ -39,7 +40,8 @@ namespace Infrastructure.Data.Repositories
             IRepository<StockName> stockNameRepositories,
             IRepository<District> districtRepositories,
             IRepository<Province> proviceRepositories,
-            IRepository<Country> countryRepositories
+            IRepository<Country> countryRepositories,
+            IRepository<Language> languageRepositories
             )
         {
             logger.EnterMethod();
@@ -57,6 +59,7 @@ namespace Infrastructure.Data.Repositories
                 this._districtRepositories = districtRepositories;
                 this._proviceRepositories = proviceRepositories;
                 this._countryRepositories = countryRepositories;
+                this._languageRepositories = languageRepositories;
                 logger.Info("Success set values for attributes");
             }
             catch (Exception e)
@@ -135,6 +138,90 @@ namespace Infrastructure.Data.Repositories
                 addressSearch = addressSearch.OrderBy(_ => _.Id).Take(searchResult).ToList();
                
                 return Tuple.Create(addressSearch, bedSearch, customerSearch, serviceSearch, staffSearch, stockSearch, searchResult);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public List<Language> GetAllLanguage()
+        {
+            logger.EnterMethod();
+            try
+            {
+                var languages = this._languageRepositories.GetAll().ToList(); ;
+                if (languages != null)
+                {
+                    logger.Info("Found all [" + languages.Count + "] languages supported");
+                    return languages;
+                }
+                else
+                {
+                    logger.Info("Can't find any langue");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public Language GetLanguageById(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var language = this._languageRepositories.Get(_=>_.Id == id);
+                if (language != null)
+                {
+                    logger.Info("Found language with Id: [" + id + "]");
+                    return language;
+                }
+                else
+                {
+                    logger.Info("Can't find any language with Id: [" + id + "]");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public Language GetLanguageByName(string value)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var language = this._languageRepositories.Get(_ => _.Value == value);
+                if (language != null)
+                {
+                    logger.Info("Found language with value: [" +  value + "]");
+                    return language;
+                }
+                else
+                {
+                    logger.Info("Can't find any language with value: [" + value + "]");
+                    return null;
+                }
             }
             catch (Exception e)
             {

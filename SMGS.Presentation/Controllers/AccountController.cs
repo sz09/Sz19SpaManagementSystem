@@ -71,14 +71,11 @@ namespace SMGS.Presentation.Controllers
                 }
                 if (this._iAccountServices.CheckSignIn(username, password))
                 {
-                    var forType = ""; //this._iAccountServices.GetAccountByUsername(username).AccountMappingRoles.ForType;
+                    var forType = this._iAccountServices.GetHighestRole(username);
                     string jsonString = "";
-                    if (forType == "admin")
-                        jsonString = @"{'check':true, 'role':'admin'}";
-                    else if (forType == "customer")
-                        jsonString = @"{'check':true, 'role':'customer'}";
-                    else
-                        jsonString = @"{'check':true, 'role':'otheruser'}";
+                    if (!string.IsNullOrEmpty(forType))
+                        jsonString = @"{'check':true, 'role':'" + forType.ToLower() + "'}";
+                    
                     logger.Info("Check sign in: [True] with username: [" + username + "] with type: [" + forType + "]");
                     return Json(JsonConvert.SerializeObject(JObject.Parse(jsonString)));
                 }

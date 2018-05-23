@@ -55,5 +55,9 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
         {
             vM_Bed.TimePeriod = vM_TimePeriods;
         }
+        internal static void VMBooking_Add_Name(VM_Booking vM_Booking, string name)
+        {
+            vM_Booking.BedName = name;
+        }
     }
 }

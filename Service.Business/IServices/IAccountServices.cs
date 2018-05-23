@@ -115,5 +115,11 @@ namespace Service.Business.IServices
         /// <param name="roleName"></param>
         /// <returns></returns>
         bool RoleExists(string roleName);
+        /// <summary>
+        /// Get highest role for username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        string GetHighestRole(string userName);
     }
 }

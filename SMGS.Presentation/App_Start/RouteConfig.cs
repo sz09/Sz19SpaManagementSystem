@@ -16,7 +16,7 @@ namespace SMGS.Presentation
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "home", action = "index", id = UrlParameter.Optional }
+                defaults: new { controller = "webuser", action = "index", id = UrlParameter.Optional }
             );
         }
     }

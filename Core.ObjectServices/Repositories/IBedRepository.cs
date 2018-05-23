@@ -17,8 +17,11 @@ namespace Core.ObjectServices.Repositories
         int CountAllBed();
         IQueryable<Bed> GetBedByPage(int index, string language = "English");
         bool CreateNewBed(Bed bed);
+        int CreateNewBedReturnId(Bed bed);
         bool UpdateBed(Bed bed);
         bool DeleteBed(int id);
         List<TimePeriod> GetTimePeriodsForBed(int bedId);
+        string CreateNewCode();
+        bool AddNameForBed(BedName bedName);
     }
 }

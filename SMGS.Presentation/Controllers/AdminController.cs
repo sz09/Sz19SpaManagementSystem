@@ -4,7 +4,6 @@ using SMGS.Presentation.ViewModel.VM_Convert;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using log4net;
 using System.Web.Configuration;
@@ -13,10 +12,13 @@ using Newtonsoft.Json;
 using Infrastructure.Logging;
 using System.Web.Services;
 using System.Globalization;
+using SMGS.Presentation.Classes;
+using SMGS.Presentation.CustomAttribute;
 
 namespace SMGS.Presentation.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [AllowAnonymous]
+    [AuthorizeRoles(nameof(Enums.Account.Admin)), AuthorizeRoles(nameof(Enums.Account.SupperAdmin))]
     public class AdminController : Controller
     {
         #region Attributes
@@ -34,11 +36,11 @@ namespace SMGS.Presentation.Controllers
         #endregion
 
         #region Constructors
-        public AdminController(IStaffServices iStaffServices, 
-            IContactInformationServices iContactInformationServices, 
-            IServiceServices iServiceServices, 
-            ISalaryServices iSalaryServices, 
-            IReferenceServices iReferenceServices, 
+        public AdminController(IStaffServices iStaffServices,
+            IContactInformationServices iContactInformationServices,
+            IServiceServices iServiceServices,
+            ISalaryServices iSalaryServices,
+            IReferenceServices iReferenceServices,
             INotificationServices iNotificationServices,
             IBookingServices iBookingServices,
             IBedServices iBedServices,
@@ -56,21 +58,6 @@ namespace SMGS.Presentation.Controllers
             this._iStockServices = iStockServices;
             logger.Info("Success set value to attributes");
 
-
-            //VM_Booking vM_Booking = new VM_Booking
-            //{
-            //    BedId = 1,
-            //    CustomerId = 1,
-            //    IsPaid = false,
-            //    PeriodFrom = new DateTime(),
-            //    PeriodTo = new DateTime(),
-            //    StaffId = 1,
-            //    Time = new DateTime(),
-            //    TimePaid = null,
-            //    TotalCost = 1000
-            //};
-            //bool a = this._iBookingServices.Booking(ConvertVM.VMBooking_To_Bill(vM_Booking));
-
             logger.LeaveMethod();
         }
         #endregion
@@ -86,7 +73,7 @@ namespace SMGS.Presentation.Controllers
             logger.EnterMethod();
             try
             {
-
+                return View();
             }
             catch (Exception e)
             {
@@ -97,7 +84,6 @@ namespace SMGS.Presentation.Controllers
             {
                 logger.LeaveMethod();
             }
-            return View();
         }
 
         /// <summary>
@@ -105,7 +91,7 @@ namespace SMGS.Presentation.Controllers
         /// </summary>
         /// <returns>View</returns>
         [HttpGet]
-        public ActionResult Employee(int id = 1) 
+        public ActionResult Employee(int id = 1)
         {
             logger.EnterMethod();
             try
@@ -152,8 +138,8 @@ namespace SMGS.Presentation.Controllers
             }
             catch (Exception e)
             {
-                logger.Error("Error: [" + e.Message + "]");                
-                return View("ErrorAdminPage");  
+                logger.Error("Error: [" + e.Message + "]");
+                return View("ErrorAdminPage");
             }
             finally
             {
@@ -173,6 +159,7 @@ namespace SMGS.Presentation.Controllers
             try
             {
                 newEmp.StaffCode = this._iStaffServices.CreateNewCode();
+                return View(newEmp);
             }
             catch (Exception e)
             {
@@ -183,7 +170,6 @@ namespace SMGS.Presentation.Controllers
             {
                 logger.LeaveMethod();
             }
-            return View(newEmp);
         }
 
         /// <summary>
@@ -210,9 +196,9 @@ namespace SMGS.Presentation.Controllers
                 var allServices = this._iServiceServices.GetServiceByPage(page).ToList();
                 var nameOfServices = new List<string>();
                 foreach (var item in allServices)
-	            {
+                {
                     nameOfServices.Add(this._iServiceServices.GetServiceNameByLanguage(item.Id, lang));
-	            }
+                }
                 logger.Info("Found [" + nameOfServices.Count() + "] names for [" + allServices.Count() + "] services");
                 var listServices = SelfConvertVM.VM_ServiceAddName(ConvertVM.Service_To_VMService(allServices), nameOfServices);
                 var ttPage = this._iServiceServices.CountTotalPages();
@@ -228,6 +214,12 @@ namespace SMGS.Presentation.Controllers
                 logger.LeaveMethod();
             }
         }
+
+        public ActionResult CreateService()
+        {
+            return View();
+        }
+        
 
         /// <summary>
         /// Submit add employee to database
@@ -252,7 +244,7 @@ namespace SMGS.Presentation.Controllers
             logger.EnterMethod();
             try
             {
-                var emp = new VM_StaffInformation(){
+                var emp = new VM_StaffInformation() {
                     StaffCode = empCode,
                     FirstName = empFirstName,
                     LastMiddle = empLastMiddle,
@@ -264,10 +256,10 @@ namespace SMGS.Presentation.Controllers
                 };
                 var insertSuccess = this._iStaffServices.InsertEmployee(ConvertVM.VMStaffInformation_To_Staff(emp));
 
-                if(insertSuccess) // Insert new employee success
+                if (insertSuccess) // Insert new employee success
                 {
-                    var contactForId = this._iContactInformationServices.GetContactForId("Staff");
-                    var contactTypeId = this._iContactInformationServices.GetContactTypeId("Address");
+                    var contactForId = this._iContactInformationServices.GetContactForId(Enums.ContactFor.Staff.ToString());
+                    var contactTypeId = this._iContactInformationServices.GetContactTypeId(Enums.ContactType.Address.ToString());
                     var empId = this._iStaffServices.GetLast();
                     var contactInformation = new VM_ContactInformation()
                     {
@@ -300,7 +292,7 @@ namespace SMGS.Presentation.Controllers
                         PersonId = empId.Id
                     };
                     var updateContactInformation = this._iContactInformationServices.CheckContactInformationExistingAndUpdateForPerson(ConvertVM.VMContactInformation_To_ContactInformation(contactInformation));
-                    if(updateContactInformation)
+                    if (updateContactInformation)
                         return Json(JsonConvert.SerializeObject(JObject.Parse(@"{insertEmp: true, updateContactInformation: true, personid: '" + empId.Id + "'}")));
                     else
                     {
@@ -421,7 +413,7 @@ namespace SMGS.Presentation.Controllers
 
         public ActionResult Salaries()
         {
-            
+
             var vM_SalariesInMonth = new VM_SalariesInMonth();
             var months = this._iSalaryServices.GetCollectionMonthPaid();
             foreach (var item in months)
@@ -491,6 +483,20 @@ namespace SMGS.Presentation.Controllers
         }
 
         /// <summary>
+        /// This fucntion call by Javascript to update salary for an employee
+        /// </summary>
+        /// <param name="empId"></param>
+        /// <param name="salary"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public ActionResult UpdateSalaryForEmployee(long empId, decimal salary)
+        {
+            var isOk = this._iStaffServices.UpdateSalaryForStaff(empId, salary);
+            return Json(isOk);
+        }
+
+
+        /// <summary>
         /// Get all information salary for employee
         /// </summary>
         /// <param name="empId">Employee Id</param>
@@ -505,15 +511,15 @@ namespace SMGS.Presentation.Controllers
                 var rsl = "";
                 if (month < 0 || month > 12 || year < 0)
                 {
-                    var allSalaries = ConvertVM.Salary_To_VMEmpSalaryPaying( this._iSalaryServices.GetSalariesForEmployee(empId).ToList());
-                    
+                    var allSalaries = ConvertVM.Salary_To_VMEmpSalaryPaying(this._iSalaryServices.GetSalariesForEmployee(empId).ToList());
+
                     foreach (var salary in allSalaries.ListEmpPaying)
                     {
                         var isPaid = salary.IsPaid;
                         rsl += "<tr>" +
                                     "<td>" +
                                         "<select class='input-sm disabled' data-val='true' data-val-required='The IsPaid field is required.' id='SalaryPaying_ListEmpPaying_0__IsPaid' name='SalaryPaying.ListEmpPaying[0].IsPaid'>" +
-                                            "<option " + (isPaid ? "selected = 'selected'": "" ) + "  value='true'>Paid</option>" +
+                                            "<option " + (isPaid ? "selected = 'selected'" : "") + "  value='true'>Paid</option>" +
                                             "<option " + (!isPaid ? "selected = 'selected'" : "") + "  value='false'>Un-paid</option>" +
                                         "</select>" +
                                     "</td>" +
@@ -552,6 +558,11 @@ namespace SMGS.Presentation.Controllers
             }
         }
 
+        /// <summary>
+        /// Get history paid salary for an employee
+        /// </summary>
+        /// <param name="empId"></param>
+        /// <returns></returns>
         public ActionResult SalaryHistory(long empId)
         {
             logger.EnterMethod();
@@ -600,12 +611,16 @@ namespace SMGS.Presentation.Controllers
             }
         }
 
+        /// <summary>
+        /// Get all bookings 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Bookings()
         {
             logger.EnterMethod();
             try
             {
-                VM_ListBooking vM_ListBooking = new VM_ListBooking();  
+                VM_ListBooking vM_ListBooking = new VM_ListBooking();
                 List<VM_Booking> vM_Bookings = new List<VM_Booking>();
                 List<VM_Bed> vM_Beds = ConvertVM.Bed_To_VMBed(this._iBedServices.GetAll());
                 foreach (var item in vM_Beds)
@@ -619,12 +634,154 @@ namespace SMGS.Presentation.Controllers
             catch (Exception e)
             {
                 logger.Error("Error: [" + e.Message + "]");
-                return null;
+                return View("ErrorAdminPage");
             }
             finally
             {
                 logger.LeaveMethod();
             }
+        }
+
+        public ActionResult Booking(int bedId)
+        {
+            return View();
+        }
+
+        public ActionResult Beds()
+        {
+            return View();
+        }
+        public ActionResult CreateBed()
+        {
+            VM_CreateBed vM_CreateBed = new VM_CreateBed();
+            vM_CreateBed.BedCode = this._iBedServices.CreateNewCode();
+            var languges = this._iReferenceServices.GetAllLanguage();
+            vM_CreateBed.Languages = ConvertVM.Language_To_VMLanguage(languges);
+            return View(vM_CreateBed);
+        }
+        [WebMethod]
+        public ActionResult PerformCreateBed(string code)
+        {
+            VM_Bed bed = new VM_Bed
+            {
+                BedCode = code
+            };
+            var id = this._iBedServices.CreateNewBedReturnId(ConvertVM.VMBed_To_Bed(bed));
+
+            return Json(id);
+        }
+        [WebMethod]
+        public ActionResult PerformAddBedNameInLanguage(int bedId, string value, int languageId)
+        {
+            VM_BedName bedName = new VM_BedName
+            {
+                Name = value,
+                LanguageId = languageId,
+                BedId = bedId
+            };
+            var id = this._iBedServices.AddNameForBed(ConvertVM.VMBedName_To_BedName(bedName));
+
+            return Json(id);
+        }
+        [WebMethod]
+        public ActionResult GetAllLanguages()
+        {
+            var languages = this._iReferenceServices.GetAllLanguage();
+            var rtJSon = "[";
+            foreach (var language in languages)
+            {
+                rtJSon += "{\"id\": " + language.Id + ",\"value\": \"" + language.Value + "\"}";
+                if (language != languages[languages.Count - 1])
+                    rtJSon += ",";
+            }
+
+            rtJSon += "]";
+    
+            return Json(rtJSon);
+        }
+        [WebMethod]
+        public ActionResult GetOthersLanguages(int[] ids)
+        {
+            var languages = this._iReferenceServices.GetAllLanguage();
+            if (ids != null)
+            {
+                foreach (var id in ids)
+                {
+                    var language = languages.Where(_ => _.Id == id).FirstOrDefault();
+                    if (language != null)
+                        languages.Remove(language);
+                }
+            }
+
+            var rtJSon = "[";
+            foreach (var language in languages)
+            {
+                rtJSon += "{\"id\": " + language.Id + ",\"value\": \"" + language.Value + "\"}";
+                if (language != languages[languages.Count - 1])
+                    rtJSon += ",";
+            }
+
+            rtJSon += "]";
+    
+            return Json(rtJSon);
+        }
+        public ActionResult BookNew(int bedId, string language = "en")
+        {
+            logger.EnterMethod();
+            try
+            {
+                language = WebConfigurationManager.AppSettings[language];
+                var newBooking = new VM_NewBooking();
+                var services = ConvertVM.Service_To_VMService(this._iServiceServices.GetAll());
+                foreach (var item in services)
+                {
+                    item.Name = this._iServiceServices.GetServiceNameByLanguage(item.Id, language);
+                }
+                newBooking.Services = services;
+                newBooking.BedId = bedId;
+                newBooking.BedName = this._iBedServices.GetBedName(bedId, language);
+                return View(newBooking);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return View("ErrorAdminPage");
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        [WebMethod]
+        public JsonResult GetCodeForService(string ids)
+        {
+            var codes = "";
+            var listIds = ids.Split(',').ToList<string>();
+            foreach (var id in listIds)
+            {
+                int idSer;
+                if (int.TryParse(id, out idSer))
+                    codes += "[" + this._iServiceServices.GetServiceCodeById(idSer).Trim() + "]";
+            }
+            return Json(codes);
+        }
+        [WebMethod]
+        public JsonResult GetTimeForService(string ids)
+        {
+            var time = "";
+            var timeCost = 0;
+            var listIds = ids.Split(',').ToList<string>();
+            foreach (var id in listIds)
+            {
+                int idSer;
+                if (int.TryParse(id, out idSer))
+                    timeCost += this._iServiceServices.GetTotalTimeUseServices(idSer);
+            }
+            int hours = 0, minutes = 0;
+            hours = timeCost / 60;
+            minutes = timeCost % 60;
+            time = hours + "h " + minutes + "m";
+            return Json(time);
         }
 
         public  ActionResult CreateNewBooking(int bedId)

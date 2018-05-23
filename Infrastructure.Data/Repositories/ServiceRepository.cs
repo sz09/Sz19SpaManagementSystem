@@ -52,17 +52,17 @@ namespace Infrastructure.Data.Repositories
             logger.EnterMethod();
             try
             {
-
+                return this._iServiceRepositories.GetAll();
             }
             catch (Exception e)
             {
                 logger.Error("Error: [" + e.Message + "]");
+                return null;
             }
             finally
             {
                 logger.LeaveMethod();
             } 
-            return this._iServiceRepositories.GetAll();
         }
 
         public Service Get(int serviceId)
@@ -198,6 +198,62 @@ namespace Infrastructure.Data.Repositories
             {
                 logger.Error("Error: [" + e.Message + "]");
                 return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public string GetServiceCodeById(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var service = this._iServiceRepositories.Get(_=>_.Id == id);
+                if (service != null)
+                {
+                    logger.Info("Found code: [" + service.ServiceCode + "] for service: [" + id + "]");
+                    return service.ServiceCode;
+                }
+                else
+                {
+                    logger.Info("");
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int GetTotalTimeUseServices(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var service = this._iServiceRepositories.Get(_ => _.Id == id);
+                if (service != null)
+                {
+                    logger.Info("Found cost: [" + service.TimeCost +"] using for service with Id: ["  + id + "] ");
+                    return service.TimeCost;
+                }
+                else
+                {
+                    logger.Info("Can't found any service with Id: [" + id + "]");
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return 0;
             }
             finally
             {

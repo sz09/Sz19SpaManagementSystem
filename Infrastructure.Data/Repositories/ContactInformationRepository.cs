@@ -160,7 +160,7 @@ namespace Infrastructure.Data.Repositories
                 #endregion
 
                 var contactInforGot = this._contactInformationRepositories.Get(_ => _.PersonId == contactInformation.PersonId);
-                string additionalInfo = "";
+                var additionalInfo = "";
                 #region Check and create address
                 var checkAdress = CheckAddressExisting(contactInformation.Address);
                 var checkDistrict = CheckDistrictExisting(contactInformation.Address.District);
@@ -350,6 +350,7 @@ namespace Infrastructure.Data.Repositories
                         transactionScope.Complete();
                     }
                     this._iUnitOfWork.Save();
+                    var a = this._contactInformationRepositories;
                 }
                 #endregion
             RETURN_HERE:

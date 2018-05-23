@@ -1,6 +1,5 @@
 ﻿using SPMS.ObjectModel.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace Core.ObjectServices.Repositories
 {
@@ -150,5 +149,12 @@ namespace Core.ObjectServices.Repositories
         /// <param name="throwOnPopulatedRole"></param>
         /// <returns></returns>
         bool DeleteRole(string roleName, bool throwOnPopulatedRole);
+
+        /// <summary>
+        /// Get highest role of an account by username
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        string GetHighestRole(string userName);
     }
 }
