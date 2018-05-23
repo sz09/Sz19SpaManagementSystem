@@ -9,6 +9,7 @@ using Infrastructure.Logging;
 using Core.ObjectServices.UnitOfWork;
 using System.Transactions;
 using System.Collections.Generic;
+using SMGS.Presentation.Classes;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -662,7 +663,6 @@ namespace Infrastructure.Data.Repositories
                 logger.LeaveMethod();
             }
         }
-        #endregion
 
         #region MD5
         /// <summary>
@@ -708,5 +708,62 @@ namespace Infrastructure.Data.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public string GetHighestRole(string userName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var roleReturn = "";
+                var roles = (from role in this._accountMappingRoleRepositories.Find(_ => (_.Account.UserName == userName)).ToList()
+                             select role.AccountFor).ToList();
+                if (!roles.Any())
+                {
+                    
+                    logger.Info("Can't found any role for user with account: [" + userName + "]");
+                    return null;
+                }
+                else
+                {
+                    if (roles.Any() && roles.Count == 1)
+                    {
+                        roleReturn = roles[0].ForType;
+                    }
+                    else
+                    {
+                        roleReturn = HighestRole(roles).ForType;
+                    }
+                }
+                logger.Info(userName + " has role: [" + roleReturn + "] as highest role");
+                return roleReturn;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        private AccountFor HighestRole(List<AccountFor> accountFors)
+        {
+            int min = int.MaxValue;
+            foreach (var accountFor in accountFors)
+            {
+                foreach (Enums.Account item in Enum.GetValues(typeof(Enums.Account)))
+                {
+                    if ((int)item < min && accountFor.ForType == item.ToString())
+                    {
+                        min = accountFor.Id;
+                    }
+                }
+            }
+
+            return accountFors.FirstOrDefault(_ => _.Id == min);
+        }
+        #endregion
     }
 }

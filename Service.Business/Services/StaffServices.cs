@@ -247,6 +247,24 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
+        public bool UpdateSalaryForStaff(long empId, decimal salary)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iStaffRepository.UpdateSalaryForStaff(empId, salary);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

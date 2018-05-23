@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
 }
 
-<div class="row">
+<div class="row">   
     <div class="col-md-12">
         <div class="card">
             <div class="card-header" data-background-color="green">
@@ -34,7 +34,7 @@
                     @for (int i = 0; i < Model.AllStaff.Count; i++)
                     {
                         <tr onclick="GoToEmp(@Model.AllStaff[i].Id)" class="emp-row-in-list">
-                            <td class="text-primary">@Html.DisplayFor(_ => _.AllStaff[i].FullName)</td>
+                            <td class="text-primary emp-name">@Html.DisplayFor(_ => _.AllStaff[i].FullName)</td>
                             <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.Province.Country.CountryName)</td>
                             <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.Province.ProvinceName)</td>
                             <td>@Html.DisplayFor(_ => _.AllStaff[i].ContactInformation.Address.District.DistrictName)</td>

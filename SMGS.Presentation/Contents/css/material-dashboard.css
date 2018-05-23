@@ -7282,7 +7282,13 @@ input[type=checkbox]{
 }
 /*End Salary*/
 /*Employee*/
-
+#menu-custom > li:first-child{
+    padding-bottom: 10x;
+}
+.emp-name {
+    color: #5FB663;
+    font-weight: bold;
+}
 /*EndEmployee*/
 
 /*Create Bed*/

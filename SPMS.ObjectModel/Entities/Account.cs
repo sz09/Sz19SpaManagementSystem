@@ -12,7 +12,9 @@ namespace SPMS.ObjectModel.Entities
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Account()
         {
+            AccountMappingRoles = new HashSet<AccountMappingRole>();
             Notifications = new HashSet<Notification>();
+            Notifications1 = new HashSet<Notification>();
         }
 
         public long Id { get; set; }
@@ -31,13 +33,17 @@ namespace SPMS.ObjectModel.Entities
         [StringLength(50)]
         public string Password { get; set; }
 
-        public int TypeId { get; set; }
+        public long ForType { get; set; }
 
         public bool IsInUse { get; set; }
 
-        public virtual AccountFor AccountFor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AccountMappingRole> AccountMappingRoles { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications1 { get; set; }
     }
 }

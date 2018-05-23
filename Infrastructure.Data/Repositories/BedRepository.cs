@@ -353,12 +353,10 @@ namespace Infrastructure.Data.Repositories
                 {
                     this._iBedNameRepositories.Add(bedName);
                     transactionScope.Complete();
-                    this._iUnitOfWork.Save();
-                    logger.Info("Insert new bed name for bed with Id: [" + bedName.BedId + "], name value: [" + bedName.Name + "] in language with Id: [" + bedName.LanguageId + "]");
-                    return true;
                 }
-                logger.Info("Can't save bed name");
-                return false;
+                this._iUnitOfWork.Save();
+                logger.Info("Insert new bed name for bed with Id: [" + bedName.BedId + "], name value: [" + bedName.Name + "] in language with Id: [" + bedName.LanguageId + "]");
+                return true;
             }
             catch (Exception e)
             {

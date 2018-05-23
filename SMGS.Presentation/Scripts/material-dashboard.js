@@ -14,6 +14,7 @@
 
  */
 
+
 (function() {
     isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
@@ -268,26 +269,42 @@ $(document).ready(function () {
     let currentURL = window.location.href.toLowerCase();
     $(".nav-left>.in-nav-left>.sidebar>.sidebar-wrapper>.nav>.active").removeClass("active");
     if (currentURL.includes("admin")) {
-        let lengthTemp = (currentURL.substring(0, currentURL.lastIndexOf("admin") + 5).length);
-        if (currentURL.length == lengthTemp + 1)
+        let urlLengthTemp = currentURL.substring(0, currentURL.lastIndexOf("admin") + 5).length;
+        if (currentURL.substring(urlLengthTemp).length <= 1)
             $("#li-for-dashboard").addClass("active");
         else if (currentURL.includes("/employee") || currentURL.includes("/createemployee"))
             $("#li-for-employees").addClass("active");
         else if (currentURL.includes("/typography"))
             $("#li-for-typography").addClass("active");
-        else if (currentURL.includes("/servicesadmin"))
+        else if (currentURL.includes("/servicesadmin") || currentURL.includes("/createservice"))
             $("#li-for-servicesadmin").addClass("active");
         else if (currentURL.includes("/notifications"))
             $("#li-for-notifications").addClass("active");
         else if (currentURL.includes("/salaries"))
             $("#li-for-salary").addClass("active");
+        else if (currentURL.includes("salary"))
+            $("#li-for-salary").addClass("active");
         else if (currentURL.includes("book"))
             $("#li-for-booking").addClass("active");
          else if (currentURL.includes("bed"))
             $("#li-for-bed").addClass("active");
-        
-
     }
+});
+
+// Direction
+$(document).ready(function () {
+    let currentUrl = window.location.href.toLowerCase();
+    if (currentUrl.includes('admin')) {
+        let a = currentURL.indexOf('admin');
+        let urlTemp = currentUrl.substring(0, currentURL.indexOf('admin') + 5);
+        $('li-for-booking').children('a').href = urlTemp + '/bookings';
+        $('li-for-employees').children('a').href = urlTemp + '/employees';
+        $('li-for-salary').children('a').href = urlTemp + '/salaries';
+        $('li-for-servicesadmin').children('a').href = urlTemp + '/servicesadmin';
+        $('li-for-bed').children('a').href = urlTemp + '/beds';
+        $('li-for-notifications').children('a').href = urlTemp + '/notifications';
+    }
+    
 });
 
 // Function to expand notification
@@ -313,7 +330,6 @@ function SignIn() {
         },
         url: './account/checksignin',
         success: function (msg) {
-            alert("success");
             var jsonparsed = JSON.parse(msg);
             if (jsonparsed.check == false) {
                 
@@ -626,8 +642,14 @@ function NextServicePage(totalPages) {
 $('#choose-services').on('click', function () {
 
 });
+
+$('#create-serivce-link-to').on('click', function () {
+    windows.location.href = './'
+
+});
 /* End Services */
 
+/* Salary*/
 $('#salary-page-all-salaries').on('click', function () {
     $('#table-salary-for-emp tr:not(:first)').remove();
     let url = window.location.href;
@@ -655,6 +677,61 @@ $('#salary-page-all-salaries').on('click', function () {
     $('#table-salary-for-emp tr:last').after(stringHtml);
 });
 
+$('#update-salary-for-employee').on('click', function () {
+    let empId = $('#id-emp').val();
+    let salary = $("#Emp_Salary_Salary").val();
+    salary = parseFloat(salary);
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        async: false,
+        data: {
+            empId: empId,
+            salary: salary
+        },
+        url: '/admin/UpdateSalaryForEmployee',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            if (value == false) {
+                let mainAlert = $('#alert-showing-employee-salary').find('#main-alert');
+
+                // Show hide class
+                $('#alert-showing-employee-salary').removeClass('hidden');
+                mainAlert.removeClass('alert-danger');
+                mainAlert.removeClass('alert-default');
+                mainAlert.removeClass('alert-inverse');
+                mainAlert.removeClass('alert-primary');
+                mainAlert.removeClass('alert-warning');
+                mainAlert.addClass('alert-warning');
+
+                // Set up text
+                mainAlert.find('a:first').html("Can't update salary information");
+                mainAlert.find('a:last').html("Please try again");
+            }
+            else {
+
+                let mainAlert = $('#alert-showing-employee-salary').find('#main-alert');
+
+                // Show hide class
+                $('#alert-showing-employee-salary').removeClass('hidden');
+                mainAlert.removeClass('alert-danger');
+                mainAlert.removeClass('alert-default');
+                mainAlert.removeClass('alert-inverse');
+                mainAlert.removeClass('alert-primary');
+                mainAlert.removeClass('alert-warning');
+                mainAlert.addClass('alert-success');
+
+
+                // Set up text
+                mainAlert.find('a:first').html("Success");
+                mainAlert.find('a:last').html("Update salary success for employee");
+            }
+        }
+       
+    });
+});
+/* End Salary*/
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -738,73 +815,86 @@ $('#create-bed-main-action').on('click', function () {
 });
 
 // Handle add name for bed in language
-$('#btn-add-name').on('click', function () {
-    var div = $(this).closest('div .row');
+$(document).on('click', '#btn-add-name', function () {
+    let btn = $(this);
+    let div = $(this).closest('div .row');
     let bedId = $('#bed-created-id').html();
-    let value = $(this);
-    let languageId = div.children()[0];
-    PrepareRowAddNameInLanguage();
-    console.log(languageId);
-    //$.ajax({
-    //    type: 'post',
-    //    //dataType: 'json',
-    //    async: false,
-    //    data: {
-    //        bedId: bedId,
-    //        value: value,
-    //        languageId: languageId
-    //    },
-    //    url: '/admin/PerformAddBedNameInLanguage',
-    //    complete: function (xhr) {
-    //    },
-    //    success: function (value) {
-    //        if (value > 0) $('#bed-created-id').html(value);
-    //        if ($('#div-add-name-in-language').hasClass('hidden'))
-    //            $('#div-add-name-in-language').removeClass('hidden');
-    //    }
-    //});
-});
-
-
-function PrepareRowAddNameInLanguage() {
-
+    let value = div.find('.col-md-7').find('input').val();
+    var languageId = div.find('.col-md-3').find('select').val();
+    //let languageId = language.options[language.selectedIndex].value;
     $.ajax({
         type: 'post',
         //dataType: 'json',
         async: false,
-        url: '/admin/GetAllLanguages',
+        data: {
+            bedId: bedId,
+            value: value,
+            languageId: languageId
+        },
+        url: '/admin/PerformAddBedNameInLanguage',
         complete: function (xhr) {
-            console.log(xhr);
+            
         },
         success: function (value) {
-            console.log(value);
+            if (value === true) {
+                if ($('#div-add-name-in-language').hasClass('hidden'))
+                    $('#div-add-name-in-language').removeClass('hidden');
+                ids.push(languageId);
+                let html = PrepareRowAddNameInLanguage();
+                btn.closest('.row').after(html);
+                btn.closest('div .col-md-2').remove();
+            }
+            else {
+                alert("Bed has name in this language<br/>Please try in other language");
+            }
         }
     });
-
-    let html =  '<div class="row">' + 
-                    '<div class="col-md-3">' + 
-                        '<div class="form-group label-floating">' + 
-                            '<label class="control-label">Language</label>' +
-                            '<select class="dropdown form-control" id="Languages" name="Languages">' +
-                                '<option value="1">English</option>' +
-        '<option value="2">Vietnamese</option>' + 
-
-
-                            '</select>' + 
-                            '<span class="material-input"></span>' +
+});
+let ids = [];
+function PrepareRowAddNameInLanguage() {
+    let options = '';
+    $.ajax({
+        type: 'post',
+        dataType: 'json',
+        async: false,
+        url: '/admin/GetOthersLanguages',
+        data: {
+            ids : ids
+        },
+        complete: function (xhr) {
+            console.log("GetAllLanguages complete");
+        },
+        success: function (rt) {
+            let langs = JSON.parse(rt);
+            $.each(langs, function (i, item) {
+                options += '<option value="' + item.id + '">' + item.value + '</option>';
+            });
+        }
+    });
+    if (options != '') {
+        let html =  '<div class="row">' + 
+                        '<div class="col-md-3">' + 
+                            '<div class="form-group label-floating">' + 
+                                '<label class="control-label">Language</label>' +
+                                '<select class="dropdown form-control" id="Languages" name="Languages">' +
+                                + '"' + options + '"' +
+                                '</select>' + 
+                                '<span class="material-input"></span>' +
+                            '</div>' +
                         '</div>' +
-                    '</div>' +
-                    '<div class="col-md-7">' + 
-                        '<div class="form-group label-floating is-empty">' +
-                            '<label class="control-label">Value</label>' + 
-                            '<input type="text" class="form-control" id="txt-name-for">' + 
-                                '<span class="material-input"></span>' + 
+                        '<div class="col-md-7">' + 
+                            '<div class="form-group label-floating is-empty">' +
+                                '<label class="control-label">Value</label>' + 
+                                '<input type="text" class="form-control" id="txt-name-for">' + 
+                                    '<span class="material-input"></span>' + 
+                            '</div>' + 
                         '</div>' + 
-                    '</div>' + 
-                    '<div class="col-md-2">' + 
-                        '<div class="form-group">' + 
-                            '<input type="button" class="btn btn-primary pull-right" id="btn-add-name" value="Add">' + 
+                        '<div class="col-md-2">' + 
+                            '<div class="form-group">' + 
+                                '<input type="button" class="btn btn-primary pull-right" id="btn-add-name" value="Add">' + 
+                            '</div>' +
                         '</div>' +
-                    '</div>' +
                 '</div>';
+        return html;
+    }
 }

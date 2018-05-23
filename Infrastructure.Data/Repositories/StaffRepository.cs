@@ -593,6 +593,41 @@ namespace Infrastructure.Data.Repositories
                 logger.LeaveMethod();
             }
         }
+
+        public bool UpdateSalaryForStaff(long empId, decimal salary)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var emp = this._staffRepository.Get(empId);
+                if (emp != null)
+                {
+                    emp.Salary = salary;
+                    using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                    {
+                        this._staffRepository.Update(emp);
+                        transactionScope.Complete();
+                    }
+                    this._iUnitOfWork.Save();
+                    logger.Info("Update success employee [" + emp.Id + "] save salary [" + emp.Salary + "]");
+                    return true;
+                }
+                else
+                {
+                    logger.Info("Can't find any employee to update");
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

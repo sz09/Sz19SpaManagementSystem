@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace SMGS.Presentation.ViewModel.VM
 {
     public class VM_Staff
@@ -19,6 +21,7 @@ namespace SMGS.Presentation.ViewModel.VM
                 return this.FirstName.Trim() + " " + this.LastMiddle.Trim(); 
             }
         }
+        [DisplayFormat(DataFormatString = "{0:C0}")]
         public decimal Salary { get; set; }
         public virtual VM_ContactInformation ContactInformation { get; set; }
     }

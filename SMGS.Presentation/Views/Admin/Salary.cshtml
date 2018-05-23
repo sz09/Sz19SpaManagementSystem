@@ -8,10 +8,10 @@
     ViewBag.Title = "Salary" + empName;
     Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
 }
-@if (Model == null) { 
-<div id="alert-create-emp" class="row">
+
+<div id="alert-showing-employee-salary" class="row hidden">
     <div class="col-md-8"></div>
-    <div id="main-alert" class="col-md-4 alert-danger">
+    <div id="main-alert" class="col-md-4 alert alert-danger">
         <div class="alert-inverse">
             <a class="pull-right">Can't show any information</a>
             <br/>
@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-}
+
 <div class="row"><!--Edit salary for person-->
     @Html.HiddenFor(_ => _.Emp_Salary.Id, new { id="id-emp"});
     <div class="col-md-12">
