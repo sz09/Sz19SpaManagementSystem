@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using SPMS.ObjectModel.Entities;
+using System.Linq;
 
 namespace Service.Business.IServices
 {
@@ -52,5 +53,23 @@ namespace Service.Business.IServices
         /// <param name="id"></param>
         /// <returns></returns>
         int GetTotalTimeUseServices(int id);
+        /// <summary>
+        /// Generate code for bed
+        /// </summary>
+        /// <returns></returns>
+        string CreateNewCode();
+        /// <summary>
+        /// Insert new service
+        ///     If success, return Id
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
+        int CreateNewServiceReturnId(SPMS.ObjectModel.Entities.Service service);
+        /// <summary>
+        /// Add name for service name in language
+        /// </summary>
+        /// <param name="serviceName"></param>
+        /// <returns></returns>
+        bool AddNameForService(ServiceName serviceName);
     }
 }

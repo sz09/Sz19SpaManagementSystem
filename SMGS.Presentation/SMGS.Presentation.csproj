@@ -419,6 +419,7 @@
     <Compile Include="ViewModel\VM\VM_ContactType.cs" />
     <Compile Include="ViewModel\VM\VM_Country.cs" />
     <Compile Include="ViewModel\VM\VM_CreateBed.cs" />
+    <Compile Include="ViewModel\VM\VM_CreateService.cs" />
     <Compile Include="ViewModel\VM\VM_Customer.cs" />
     <Compile Include="ViewModel\VM\VM_District.cs" />
     <Compile Include="ViewModel\VM\VM_EAddress.cs" />
@@ -434,6 +435,7 @@
     <Compile Include="ViewModel\VM\VM_SalaryPaying.cs" />
     <Compile Include="ViewModel\VM\VM_Search.cs" />
     <Compile Include="ViewModel\VM\VM_Service.cs" />
+    <Compile Include="ViewModel\VM\VM_ServiceName.cs" />
     <Compile Include="ViewModel\VM\VM_StaffInformation.cs" />
     <Compile Include="ViewModel\VM\VM_ListStaff.cs" />
     <Compile Include="ViewModel\VM\VM_Staff.cs" />
@@ -455,7 +457,7 @@
     <Content Include="Views\Admin\CreateEmployee.cshtml" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Admin\ErrorAdminPage.cshtml" />
-    <Content Include="Views\Admin\ServicesAdmin.cshtml" />
+    <Content Include="Views\Admin\AdminServices.cshtml" />
     <Content Include="Views\Admin\Salary.cshtml" />
     <Content Include="Views\Admin\Salaries.cshtml" />
     <Content Include="Views\Admin\SalaryHistory.cshtml" />

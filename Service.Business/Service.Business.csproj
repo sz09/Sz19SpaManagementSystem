@@ -51,6 +51,7 @@
     <Compile Include="IServices\IReferenceServices.cs" />
     <Compile Include="IServices\ISalaryServices.cs" />
     <Compile Include="IServices\IServiceServices.cs" />
+    <Compile Include="IServices\ICustomerServices.cs" />
     <Compile Include="IServices\IStaffServices.cs" />
     <Compile Include="IServices\IStockServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Services\ReferenceServices.cs" />
     <Compile Include="Services\SalaryServices.cs" />
     <Compile Include="Services\ServiceServices.cs" />
+    <Compile Include="Services\CustomerServices.cs" />
     <Compile Include="Services\StaffServices.cs" />
     <Compile Include="Services\StockServices.cs" />
   </ItemGroup>

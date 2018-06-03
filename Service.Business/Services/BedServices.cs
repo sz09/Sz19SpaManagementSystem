@@ -242,6 +242,24 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
+        public bool CheckBedFree(int bedId, DateTime from, DateTime to)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iBedRepositories.CheckBedFree(bedId, from, to);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

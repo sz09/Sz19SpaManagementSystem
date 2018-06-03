@@ -74,6 +74,7 @@
     <Compile Include="Repositories\NotificationRepository.cs" />
     <Compile Include="Repositories\ReferenceRepository.cs" />
     <Compile Include="Repositories\SalaryRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
     <Compile Include="Repositories\StockRepository.cs" />
     <Compile Include="SPMSContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

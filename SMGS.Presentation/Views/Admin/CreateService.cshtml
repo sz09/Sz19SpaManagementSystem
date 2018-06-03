@@ -1,8 +1,103 @@
-﻿
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_CreateService
 @{
-    ViewBag.Title = "CreateService";
+    ViewBag.Title = "Create Service And Set Up Name";
     Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
 }
+<style>
+    .padding-bottom {
+        margin-bottom: 10px;
+    }
+</style>
 
-<h2>CreateService</h2>
-
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Create Service</h4>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Code</label>
+                            @Html.TextBoxFor(_ => _.ServiceCode, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Active</label>
+                            <div class="col-md-12">
+                                <input type="checkbox" class="checkbox" id="is-in-use" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Period Cost</label>
+                            <div class="col-md-4">
+                                <div class="col-md-5"><input type="number" id="hours-cost" class="form-control" value="0" min="0" max="23"/></div><span>hour(s)</span>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="col-md-5"><input type="number" id="minutes-cost" class="form-control" value="0" min="0" max="59"/></div><span>minute(s)</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cost</label>
+                            <div class="col-md-12">
+                                <div class="col-md-5"><input type="number" id="cost" class="form-control" value="0" min="0" step="1000" /></div><span>VND</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="create-service-main-action" class="btn btn-primary pull-right">Create Service</button>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<a id="service-created-id" class="hidden"></a>
+<div class="row hidden" id="div-add-name-in-language">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">Add name in language</h4>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Language</label>
+                            @{
+                                List<SelectListItem> languages = new List<SelectListItem>();
+                                foreach (var item in Model.Languages)
+                                {
+                                    languages.Add(new SelectListItem
+                                    {
+                                        Text = item.Value,
+                                        Value = item.Id.ToString()
+                                    });
+                                }
+                            }
+                            @Html.DropDownListFor(_ => _.Languages, languages, new { @class = "dropdown form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Value</label>
+                            <input type="text" class="form-control" id="txt-name-for" /> <!--Code auto generate-->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <input type="button" class="btn btn-primary pull-right" id="btn-add-name-service" value="Add" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

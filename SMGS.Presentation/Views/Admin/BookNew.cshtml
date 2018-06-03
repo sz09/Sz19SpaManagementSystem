@@ -3,16 +3,12 @@
     ViewBag.Title = "BookNew";
     Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
 }
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 
@@ -41,6 +37,40 @@
                             @Html.TextBoxFor(_ => _.BedName, new { type = "text", @class = "form-control", disabled = "disabled" })
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Customer</label>
+                            @{
+                                List<SelectListItem> customers = new List<SelectListItem>();
+
+                                customers.Add(new SelectListItem
+                                {
+                                    Text = "Select customers...",
+                                    Value = "0",
+                                    Selected = false
+                                });
+                                foreach (var item in Model.Customers)
+                                {
+                                    customers.Add(new SelectListItem
+                                    {
+                                        Text = item.FullName,
+                                        Value = item.Id.ToString(),
+                                        Selected = (item == Model.Customers[0])
+
+                                    });
+                                }
+
+                                customers.Add(new SelectListItem
+                                {
+                                    Text = "New customer",
+                                    Value = "-1",
+                                    Selected = false
+                                });
+                            }
+                            @Html.DropDownListFor(_ => _.Customers, customers, new { type = "text", @class = "form-control", id="customer-from-booking" })
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-md-3">
@@ -74,7 +104,7 @@
                                     <!-- Modal content-->
                                     <div class="modal-content card">
                                         <div class="modal-header card-header" data-background-color="green">
-                                            <button type="button" class="close" data-dismiss="modal">&amp;&times;</button>
+                                            <button type="button" class="close" data-dismiss="modal">x</button>
                                             <h4 class="modal-title">Choose services</h4>
                                         </div>
                                         <div class="modal-body">
@@ -104,13 +134,13 @@
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Description</label>
-                                @Html.TextAreaFor(_ => _.Description, new { type = "text", @class = "form-control", rows = "5" })
-                            </div>
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Description</label>
+                            @Html.TextAreaFor(_ => _.Description, new { type = "text", @class = "form-control", rows = "5" })
                         </div>
                     </div>
+                </div>
             </div>
             <button type="button" id="create-profile-main-action" class="btn btn-primary pull-right">Book</button>
             <div class="clearfix"></div>

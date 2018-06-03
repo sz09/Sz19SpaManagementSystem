@@ -10,6 +10,7 @@ using Infrastructure.Logging;
 using Core.ObjectServices.UnitOfWork;
 using System.Configuration;
 using System.Linq.Expressions;
+using System.Transactions;
 
 namespace Infrastructure.Data.Repositories
 {
@@ -22,6 +23,7 @@ namespace Infrastructure.Data.Repositories
         private static readonly ILog logger = LogManager.GetLogger(typeof(ServiceRepository));
         private readonly int servicesPerPage;
         private readonly int defaultServicePerpage = 20;
+        private readonly int codeServiceLength = 8;
         #endregion
 
         #region Constructors
@@ -254,6 +256,109 @@ namespace Infrastructure.Data.Repositories
             {
                 logger.Error("Error: [" + e.Message + "]");
                 return 0;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        public string CreateNewCode()
+        {
+            string code = "SER-";
+            int length = code.Length;
+            Random rdm = new Random();
+            do
+            {
+                for (int i = 0; i < codeServiceLength - length; i++)
+                {
+                    code += (char)rdm.Next(65, 90);
+                }
+                // Check if coincident
+            } while (CheckCoincidentCode(code));
+            return code;
+        }
+
+        private bool CheckCoincidentCode(string serviceCode)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var findEmpByExistingCode = this._iServiceNameRepositories.Find(_ => _.Name == serviceCode).Any();
+                if (findEmpByExistingCode)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error: " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int CreateNewServiceReturnId(Service service)
+        {
+            logger.EnterMethod();
+            try
+            {
+                if (service != null)
+                {
+                    using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                    {
+                        this._iServiceRepositories.Add(service);
+                        transactionScope.Complete();
+                    }
+                    this._iUnitOfWork.Save();
+                    logger.Info("Success add new service and save all changes");
+                    return service.Id;
+                }
+                else
+                {
+                    logger.Info("Null service can't not be insert");
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public bool AddNameForService(ServiceName serviceName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var existBedName = this._iServiceNameRepositories.Get(_ => (
+                                                                _.ServiceId == serviceName.ServiceId &&
+                                                                _.LanguageId == serviceName.LanguageId
+                                                                ));
+                if (existBedName != null)
+                {
+                    logger.Info("Exist service with Id: [" + serviceName.ServiceId + "] and LanguageId: [" + serviceName.LanguageId + "]");
+                    return false;
+                }
+                using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    this._iServiceNameRepositories.Add(serviceName);
+                    transactionScope.Complete();
+                }
+                this._iUnitOfWork.Save();
+                logger.Info("Insert new bed name for service with Id: [" + serviceName.ServiceId + "], name value: [" + serviceName.Name + "] in language with Id: [" + serviceName.LanguageId + "]");
+                return true;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
             }
             finally
             {

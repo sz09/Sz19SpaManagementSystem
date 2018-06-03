@@ -26,6 +26,7 @@ namespace SMGS.Presentation.Controllers
         private readonly IContactInformationServices _iContactInformationServices;
         private readonly IServiceServices _iServiceServices;
         private readonly ISalaryServices _iSalaryServices;
+        private readonly ICustomerServices _iCustomerServices;
         private readonly IReferenceServices _iReferenceServices;
         private readonly INotificationServices _iNotificationServices;
         private readonly IBedServices _iBedServices;
@@ -44,7 +45,8 @@ namespace SMGS.Presentation.Controllers
             INotificationServices iNotificationServices,
             IBookingServices iBookingServices,
             IBedServices iBedServices,
-            IStockServices iStockServices)
+            IStockServices iStockServices,
+            ICustomerServices iCustomerServices)
         {
             logger.EnterMethod();
             this._iStaffServices = iStaffServices;
@@ -56,6 +58,7 @@ namespace SMGS.Presentation.Controllers
             this._iBookingServices = iBookingServices;
             this._iBedServices = iBedServices;
             this._iStockServices = iStockServices;
+            this._iCustomerServices = iCustomerServices;
             logger.Info("Success set value to attributes");
 
             logger.LeaveMethod();
@@ -180,7 +183,7 @@ namespace SMGS.Presentation.Controllers
         /// Page fit language.
         ///     If not found langue in settings, return page Error.
         /// </returns>
-        public ActionResult ServicesAdmin(string language = "en", int page = 1)
+        public ActionResult AdminServices(string language = "en", int page = 1)
         {
             logger.EnterMethod();
             try
@@ -217,7 +220,11 @@ namespace SMGS.Presentation.Controllers
 
         public ActionResult CreateService()
         {
-            return View();
+            VM_CreateService vM_CreateService = new VM_CreateService();
+            vM_CreateService.ServiceCode = this._iServiceServices.CreateNewCode();
+            var languges = this._iReferenceServices.GetAllLanguage();
+            vM_CreateService.Languages = ConvertVM.Language_To_VMLanguage(languges);
+            return View(vM_CreateService);
         }
         
 
@@ -615,9 +622,10 @@ namespace SMGS.Presentation.Controllers
         /// Get all bookings 
         /// </summary>
         /// <returns></returns>
-        public ActionResult Bookings()
+        public ActionResult Bookings(string lang = "en")
         {
             logger.EnterMethod();
+            string language = WebConfigurationManager.AppSettings[lang];
             try
             {
                 VM_ListBooking vM_ListBooking = new VM_ListBooking();
@@ -626,7 +634,9 @@ namespace SMGS.Presentation.Controllers
                 foreach (var item in vM_Beds)
                 {
                     item.TimePeriod = ConvertVM.TimePeriod_To_VMTimePeriod(this._iBedServices.GetTimePeriodsForBed(item.Id));
+                    item.Name = this._iBedServices.GetBedName(item.Id, language);
                 }
+                vM_ListBooking.Bookings = ConvertVM.Bills_To_VMBookings(this._iBookingServices.GetAll());
                 vM_ListBooking.Bookings = ConvertVM.Bills_To_VMBookings(this._iBookingServices.GetAll());
                 vM_ListBooking.Beds = vM_Beds;
                 return View(vM_ListBooking);
@@ -670,6 +680,21 @@ namespace SMGS.Presentation.Controllers
 
             return Json(id);
         }
+
+        [WebMethod]
+        public ActionResult PerformCreateService(string code, int hours, int minutes, decimal cost, bool isActive)
+        {
+            VM_Service service = new VM_Service
+            {
+               ServiceCode = code,
+               TimeCost = new VM_Time(hours, minutes),
+               Cost = cost,
+               IsInUse = isActive
+            };
+            var id = this._iServiceServices.CreateNewServiceReturnId(ConvertVM.VMService_To_Service(service));
+            return Json(id);
+        }
+
         [WebMethod]
         public ActionResult PerformAddBedNameInLanguage(int bedId, string value, int languageId)
         {
@@ -681,6 +706,20 @@ namespace SMGS.Presentation.Controllers
             };
             var id = this._iBedServices.AddNameForBed(ConvertVM.VMBedName_To_BedName(bedName));
 
+            return Json(id);
+        }
+
+        [WebMethod]
+        public ActionResult PerformAddServiceNameInLanguage(int serviceId, string value, int languageId)
+        {
+            VM_ServiceName serviceName = new VM_ServiceName
+            {
+                Name = value,
+                LanguageId = languageId,
+                ServiceId = serviceId
+            };
+            var id = this._iServiceServices.AddNameForService(ConvertVM.VMServiceName_To_ServiceName(serviceName));
+        
             return Json(id);
         }
         [WebMethod]
@@ -738,6 +777,7 @@ namespace SMGS.Presentation.Controllers
                     item.Name = this._iServiceServices.GetServiceNameByLanguage(item.Id, language);
                 }
                 newBooking.Services = services;
+                newBooking.Customers = ConvertVM.Customer_To_VMCustomer(this._iCustomerServices.GetAll().ToList());
                 newBooking.BedId = bedId;
                 newBooking.BedName = this._iBedServices.GetBedName(bedId, language);
                 return View(newBooking);
@@ -782,6 +822,14 @@ namespace SMGS.Presentation.Controllers
             minutes = timeCost % 60;
             time = hours + "h " + minutes + "m";
             return Json(time);
+        }
+        
+        [WebMethod]
+        public JsonResult CheckBedFree(int bedId, DateTime from, DateTime to)
+        {
+            var check = false;
+            this._iBedServices.CheckBedFree(bedId, from, to);
+            return Json(check);
         }
 
         public  ActionResult CreateNewBooking(int bedId)

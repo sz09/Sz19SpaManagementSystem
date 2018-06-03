@@ -7294,3 +7294,13 @@ input[type=checkbox]{
 /*Create Bed*/
 
 /*End Create Bed*/
+
+/*Create Service*/
+.col-md-4 > span, .col-md-12 > span {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+input[type=number] {
+}
+/*End Create Service*/

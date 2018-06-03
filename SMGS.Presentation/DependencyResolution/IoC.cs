@@ -87,6 +87,11 @@ namespace SMGS.Presentation.DependencyResolution {
                             x.For<ISalaryRepository>().Use<SalaryRepository>();
                             x.For<ISalaryServices>().Use<SalaryServices>();
 
+                            // Customer
+                            x.For<IRepository<Customer>>().Use<Repository<Customer>>();
+                            x.For<ICustomerRepository>().Use<CustomerRepository>();
+                            x.For<ICustomerServices>().Use<CustomerServices>();
+
                             // Bed
                             x.For<IRepository<Bed>>().Use<Repository<Bed>>();
                             x.For<IRepository<BedName>>().Use<Repository<BedName>>();

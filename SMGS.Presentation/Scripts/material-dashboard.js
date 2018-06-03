@@ -276,7 +276,7 @@ $(document).ready(function () {
             $("#li-for-employees").addClass("active");
         else if (currentURL.includes("/typography"))
             $("#li-for-typography").addClass("active");
-        else if (currentURL.includes("/servicesadmin") || currentURL.includes("/createservice"))
+        else if (currentURL.includes("/adminservices") || currentURL.includes("/createservice"))
             $("#li-for-servicesadmin").addClass("active");
         else if (currentURL.includes("/notifications"))
             $("#li-for-notifications").addClass("active");
@@ -304,7 +304,6 @@ $(document).ready(function () {
         $('li-for-bed').children('a').href = urlTemp + '/beds';
         $('li-for-notifications').children('a').href = urlTemp + '/notifications';
     }
-    
 });
 
 // Function to expand notification
@@ -566,6 +565,10 @@ function GoToBooking(id) {
     window.location.href = "./booking?id=" + id;
 }
 
+function Booking(id) {
+    window.location.href = "./booknew?bedid=" + id;
+}
+
 
 function ShowingSalariesJustMonthChoose(id)
 {
@@ -644,7 +647,7 @@ $('#choose-services').on('click', function () {
 });
 
 $('#create-serivce-link-to').on('click', function () {
-    windows.location.href = './'
+    window.location.href = './createservice'
 
 });
 /* End Services */
@@ -798,7 +801,6 @@ $('#create-bed-main-action').on('click', function () {
     let code = $('#BedCode').val();
     $.ajax({
         type: 'post',
-        //dataType: 'json',
         async: false,
         data: {
             code: code
@@ -814,14 +816,44 @@ $('#create-bed-main-action').on('click', function () {
     });
 });
 
+
+// Handle create new service, if success, showing add name for service in language
+$('#create-service-main-action').on('click', function () {
+    let code = $('#ServiceCode').val();
+    let hours = $("#hours-cost").val();
+    let minutes = $("#minutes-cost").val();
+    let cost = $('#cost').val();
+    let isActive = $('#is-in-use').is(":checked");
+    $.ajax({
+        type: 'post',
+        async: false,
+        data: {
+            code: code,
+            hours: hours,
+            minutes: minutes,
+            cost: cost,
+            isActive: isActive
+        },
+        url: '/admin/PerformCreateService',
+        complete: function (xhr) {
+
+        },
+        success: function (value) {
+            if (value > 0) $('#service-created-id').html(value);
+            if ($('#div-add-name-in-language').hasClass('hidden'))
+                $('#div-add-name-in-language').removeClass('hidden');
+        }
+    });
+});
+
 // Handle add name for bed in language
-$(document).on('click', '#btn-add-name', function () {
+$(document).on('click', '#btn-add-name-bed', function () {
     let btn = $(this);
     let div = $(this).closest('div .row');
     let bedId = $('#bed-created-id').html();
     let value = div.find('.col-md-7').find('input').val();
     var languageId = div.find('.col-md-3').find('select').val();
-    //let languageId = language.options[language.selectedIndex].value;
+
     $.ajax({
         type: 'post',
         //dataType: 'json',
@@ -840,9 +872,10 @@ $(document).on('click', '#btn-add-name', function () {
                 if ($('#div-add-name-in-language').hasClass('hidden'))
                     $('#div-add-name-in-language').removeClass('hidden');
                 ids.push(languageId);
-                let html = PrepareRowAddNameInLanguage();
+                let html = PrepareRowAddNameInLanguage('btn-add-name-bed');
                 btn.closest('.row').after(html);
                 btn.closest('div .col-md-2').remove();
+                btn.closest('div .row').find('select').addBack('disabled');
             }
             else {
                 alert("Bed has name in this language<br/>Please try in other language");
@@ -850,8 +883,47 @@ $(document).on('click', '#btn-add-name', function () {
         }
     });
 });
+
+// Handle add name for bed in language
+$(document).on('click', '#btn-add-name-service', function () {
+    let btn = $(this);
+    let div = $(this).closest('div .row');
+    let serviceId = $('#service-created-id').html();
+    let value = div.find('.col-md-7').find('input').val();
+    var languageId = div.find('.col-md-3').find('select').val();
+
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            serviceId: serviceId,
+            value: value,
+            languageId: languageId
+        },
+        url: '/admin/PerformAddServiceNameInLanguage',
+        complete: function (xhr) {
+            
+        },
+        success: function (value) {
+            if (value === true) {
+                if ($('#div-add-name-in-language').hasClass('hidden'))
+                    $('#div-add-name-in-language').removeClass('hidden');
+                ids.push(languageId);
+                let html = PrepareRowAddNameInLanguage('btn-add-name-service');
+                btn.closest('.row').after(html);
+                btn.closest('div .col-md-2').remove();
+                btn.closest('div .row').find('select').addBack('disabled');
+            }
+            else {
+                alert("Service has name in this language<br/>Please try in other language");
+            }
+        }
+    });
+});
+
 let ids = [];
-function PrepareRowAddNameInLanguage() {
+function PrepareRowAddNameInLanguage(namebtn) {
     let options = '';
     $.ajax({
         type: 'post',
@@ -859,7 +931,7 @@ function PrepareRowAddNameInLanguage() {
         async: false,
         url: '/admin/GetOthersLanguages',
         data: {
-            ids : ids
+            ids: ids
         },
         complete: function (xhr) {
             console.log("GetAllLanguages complete");
@@ -891,10 +963,21 @@ function PrepareRowAddNameInLanguage() {
                         '</div>' + 
                         '<div class="col-md-2">' + 
                             '<div class="form-group">' + 
-                                '<input type="button" class="btn btn-primary pull-right" id="btn-add-name" value="Add">' + 
+                                '<input type="button" class="btn btn-primary pull-right" id="' + namebtn + '" value="Add">' + 
                             '</div>' +
                         '</div>' +
                 '</div>';
         return html;
     }
 }
+
+
+// Booking New
+$('#customer-from-booking').on('change', function () {
+    // New customer from booking
+    if ($(this).val() === '-1') {
+
+    }
+
+});
+// End Booking New 

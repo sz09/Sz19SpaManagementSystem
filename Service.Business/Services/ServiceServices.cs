@@ -4,6 +4,7 @@ using System.Linq;
 using log4net;
 using Infrastructure.Logging;
 using System;
+using SPMS.ObjectModel.Entities;
 
 namespace Service.Business.Services
 {
@@ -142,6 +143,60 @@ namespace Service.Business.Services
             {
                 logger.Error("Error: [" + e.Message + "]");
                 return 0;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public string CreateNewCode()
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.CreateNewCode();
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return string.Empty;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public int CreateNewServiceReturnId(SPMS.ObjectModel.Entities.Service service)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.CreateNewServiceReturnId(service);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public bool AddNameForService(ServiceName serviceName)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.AddNameForService(serviceName);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return false;
             }
             finally
             {

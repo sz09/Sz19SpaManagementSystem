@@ -14040,3 +14040,5 @@
 2018-05-24 02:07:25,557 [133] INFO  SMGS.Presentation.Controllers.AdminController - Success set value to attributes
 2018-05-24 02:07:25,564 [133] DEBUG SMGS.Presentation.Controllers.AdminController - Leave method [.ctor]
 2018-05-24 02:07:38,372 [50] ERROR SMGS.Presentation.App_Start.Customize - Error: [Access to the path 'C:\WINDOWS\Globalization\sz-VN.nlp' is denied.]
+2018-05-24 02:16:53,448 [15] ERROR SMGS.Presentation.App_Start.Customize - Error: [Access to the path 'C:\WINDOWS\Globalization\sz-VN.nlp' is denied.]
+2018-05-24 02:16:55,345 [15] ERROR SMGS.Presentation.App_Start.Customize - Error: [Access to the path 'C:\WINDOWS\Globalization\sz-VN.nlp' is denied.]

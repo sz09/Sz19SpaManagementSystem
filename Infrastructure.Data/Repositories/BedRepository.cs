@@ -267,11 +267,11 @@ namespace Infrastructure.Data.Repositories
         /// <returns>Code for Employee with length is constant variabble codeEmpLength</returns>
         public string CreateNewCode()
         {
-            string code = "";
+            string code = "BED-";
             Random rdm = new Random();
             do
             {
-                for (int i = 0; i < codeBedLength; i++)
+                for (int i = 0; i < codeBedLength - 4; i++)
                 {
                     code += (char)rdm.Next(65, 90);
                 }
@@ -285,8 +285,8 @@ namespace Infrastructure.Data.Repositories
             logger.EnterMethod();
             try
             {
-                var findEmpByExistingCode = this._iBedRepositories.Find(_ => _.BedCode == bedCode).FirstOrDefault();
-                if (findEmpByExistingCode != null)
+                var findEmpByExistingCode = this._iBedRepositories.Find(_ => _.BedCode == bedCode).Any();
+                if (findEmpByExistingCode)
                     return true;
                 return false;
             }
@@ -361,6 +361,31 @@ namespace Infrastructure.Data.Repositories
             catch (Exception e)
             {
                 logger.Error("Error: [" + e.Message + "]");
+                return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public bool CheckBedFree(int bedId, DateTime from, DateTime to)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var existBed = this._iBedRepositories.Find(_ => _.Id == bedId).Any();
+                if (!existBed)
+                    return false;
+                var bFrom = this._iBillRepostories.Find(_ => _.BedId == bedId && _.PeriodFrom <= from && _.PeriodTo >= from);
+                var bTo = this._iBillRepostories.Find(_ => _.BedId == bedId && _.PeriodFrom <= to && _.PeriodTo >= to);
+                if (bFrom.Any() && bTo.Any())
+                    return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error: " + ex.Message);
                 return false;
             }
             finally

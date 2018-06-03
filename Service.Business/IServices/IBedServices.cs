@@ -1,4 +1,5 @@
 ﻿using SPMS.ObjectModel.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,6 @@ namespace Service.Business.IServices
         List<TimePeriod> GetTimePeriodsForBed(int bedId);
         string CreateNewCode();
         bool AddNameForBed(BedName bedName);
-
+        bool CheckBedFree(int bedId, DateTime from, DateTime to);
     }
 }

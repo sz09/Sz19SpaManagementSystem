@@ -629,7 +629,8 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                     Id = vM_Service.Id,
                     Cost = vM_Service.Cost,
                     ServiceCode = vM_Service.ServiceCode.Trim(),
-                    TimeCost = vM_Service.TimeCost.Hour * 60 + vM_Service.TimeCost.minute
+                    TimeCost = vM_Service.TimeCost.Hour * 60 + vM_Service.TimeCost.minute,
+                    IsInUse = vM_Service.IsInUse
                 };
             }
             catch (Exception e)
@@ -1290,6 +1291,16 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                 Value = language.Value
             };
         }
+        internal static VM_ServiceName ServiceName_To_VMServiceName(ServiceName serviceName)
+        {
+            return new VM_ServiceName
+            {
+                Id = serviceName.Id,
+                LanguageId = serviceName.LanguageId,
+                Name = serviceName.Name,
+                ServiceId = serviceName.ServiceId
+            };
+        }
         internal static List<VM_Language> Language_To_VMLanguage(List<Language> languages)
         {
             List<VM_Language> vM_Languages = new List<VM_Language>();
@@ -1303,5 +1314,35 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
             }
             return vM_Languages;
         }
+        internal static List<VM_ServiceName> ServiceName_To_VMServiceName(List<ServiceName> services)
+        {
+            List<VM_ServiceName> vM_ServiceNames = new List<VM_ServiceName>();
+            foreach (var service in services)
+            {
+                vM_ServiceNames.Add(ServiceName_To_VMServiceName(service));
+            }
+            return vM_ServiceNames;
+        }
+
+        internal static ServiceName VMServiceName_To_ServiceName(VM_ServiceName service)
+        {
+            return new ServiceName
+            {
+                Id = service.Id,
+                LanguageId = service.LanguageId,
+                Name = service.Name,
+                ServiceId = service.ServiceId
+            };
+        }
+        internal static List<ServiceName> VMServiceName_To_ServiceName(List<VM_ServiceName> services)
+        {
+            List<ServiceName> vM_ServiceNames = new List<ServiceName>();
+            foreach (var service in services)
+            {
+                vM_ServiceNames.Add(VMServiceName_To_ServiceName(service));
+            }
+            return vM_ServiceNames;
+        }
+
     }
 }
