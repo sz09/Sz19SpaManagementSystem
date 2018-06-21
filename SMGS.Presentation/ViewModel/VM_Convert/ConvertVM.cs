@@ -1259,6 +1259,18 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                 Summary = customer.Summary
             };
         }
+        internal static Customer VMCustomer_To_Customer(VM_Customer vM_Customer)
+        {
+            return new Customer
+            {
+                CustomerCode = vM_Customer.CustomerCode,
+                FirstName = vM_Customer.FirstName,
+                Id = vM_Customer.Id,
+                Image = vM_Customer.Image,
+                LastMiddle = vM_Customer.LastMiddle,
+                Summary = vM_Customer.Summary
+            };
+        }
 
         internal static List<VM_Customer> Customer_To_VMCustomer(List<Customer> customers)
         {
@@ -1342,6 +1354,21 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
                 vM_ServiceNames.Add(VMServiceName_To_ServiceName(service));
             }
             return vM_ServiceNames;
+        }
+
+        internal static Bills VMBook_To_Bill(VM_Book book)
+        {
+            return new Bills()
+            {
+                BedId = book.BedId,
+                PeriodFrom = book.PeriodFrom,
+                PeriodTo = book.PeriodTo,
+                CustomerId = book.CustomerId,
+                IsPaid = false,
+                DetailsBills = new List<DetailsBill>(),
+                StaffId = book.StaffId, 
+                TotalCost = book.TotalCost
+            };
         }
 
     }

@@ -40,11 +40,11 @@ namespace Service.Business.Services
             logger.EnterMethod();
             try
             {
-                var emp = this._iCustomerRepository.Get(customerId);
-                if (emp != null)
+                var cus = this._iCustomerRepository.Get(customerId);
+                if (cus != null)
                 {
-                    logger.Info("Found customer: [" + emp.LastMiddle + " " +  emp.FirstName + "] by Id: [" + customerId.ToString() + "]");
-                    return emp;
+                    logger.Info("Found customer: [" + cus.LastMiddle + " " +  cus.FirstName + "] by Id: [" + customerId.ToString() + "]");
+                    return cus;
                 }
                 else
                 {
@@ -154,14 +154,31 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
-
-
-        public bool InsertEmployee(Customer emp)
+        
+        public long InsertCustomerReturnId(Customer cus)
         {
             logger.EnterMethod();
             try
             {
-                return this._iCustomerRepository.InsertCustomer(emp);
+                return this._iCustomerRepository.InsertCustomerReturnId(cus);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+
+        }
+        public bool InsertCustomer(Customer cus)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iCustomerRepository.InsertCustomer(cus);
             }
             catch (Exception e)
             {
@@ -176,12 +193,12 @@ namespace Service.Business.Services
         }
 
 
-        public bool DeleteEmployee(int empId)
+        public bool DeleteCustomer(int cusId)
         {
             logger.EnterMethod();
             try
             {
-                return this._iCustomerRepository.DeleteCustomer(empId);
+                return this._iCustomerRepository.DeleteCustomer(cusId);
             }
             catch (Exception e)
             {
@@ -212,12 +229,12 @@ namespace Service.Business.Services
             }
         }
 
-        public bool UpdateEmployee(Customer emp)
+        public bool UpdateCustomer(Customer cus)
         {
             logger.EnterMethod();
             try
             {
-                return this._iCustomerRepository.UpdateCustomer(emp);
+                return this._iCustomerRepository.UpdateCustomer(cus);
             }
             catch (Exception e)
             {

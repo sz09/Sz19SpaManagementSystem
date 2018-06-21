@@ -5,13 +5,13 @@ namespace Service.Business.IServices
 {
     /// <summary>
     /// ICustomerServices defines class to implement in class inherited
-    ///     Using interface to resolve issue about Employee
+    ///     Using interface to resolve issue about Customer
     ///         This service passes params into operations in ICustomerRepository and retrive data
     /// </summary>
     public interface ICustomerServices
     {
         /// <summary>
-        /// Get Employee by Id
+        /// Get Customer by Id
         /// </summary>
         /// <param name="customerId">Id of customer</param>
         /// <returns>
@@ -57,7 +57,8 @@ namespace Service.Business.IServices
         /// If insert success, return true
         ///     Otherwise, return false
         /// </returns>
-        bool InsertEmployee(Customer cus);
+        bool InsertCustomer(Customer cus);
+        long InsertCustomerReturnId(Customer cus);
         /// <summary>
         /// Insert customer to database and save all changes
         /// </summary>
@@ -66,7 +67,7 @@ namespace Service.Business.IServices
         /// If insert success, return true
         ///     Otherwise, return false
         /// </returns>
-        bool UpdateEmployee(Customer cus);
+        bool UpdateCustomer(Customer cus);
         /// <summary>
         /// Delete customer
         ///     Save all changes
@@ -76,7 +77,7 @@ namespace Service.Business.IServices
         /// If delete success, return true
         ///     Otherwise, return false
         /// </returns>
-        bool DeleteEmployee(int cusId);
+        bool DeleteCustomer(int cusId);
         /// <summary>
         /// Get last customer in database
         /// </summary>

@@ -262,6 +262,34 @@ namespace Infrastructure.Data.Repositories
                 logger.LeaveMethod();
             }
         }
+
+        public decimal GetTotalCostServices(int id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var service = this._iServiceRepositories.Get(_ => _.Id == id);
+                if (service != null)
+                {
+                    logger.Info("Found cost: [" + service.TimeCost + "] using for service with Id: [" + id + "] ");
+                    return service.Cost;
+                }
+                else
+                {
+                    logger.Info("Can't found any service with Id: [" + id + "]");
+                    return 0;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return 0;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         public string CreateNewCode()
         {
             string code = "SER-";

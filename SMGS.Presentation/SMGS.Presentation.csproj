@@ -387,7 +387,9 @@
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Views\Admin\Dashboard.cshtml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -413,6 +415,7 @@
     <Compile Include="ViewModel\VM\VM_AnEmpSalaries.cs" />
     <Compile Include="ViewModel\VM\VM_Bed.cs" />
     <Compile Include="ViewModel\VM\VM_BedName.cs" />
+    <Compile Include="ViewModel\VM\VM_Book.cs" />
     <Compile Include="ViewModel\VM\VM_Booking.cs" />
     <Compile Include="ViewModel\VM\VM_ContactFor.cs" />
     <Compile Include="ViewModel\VM\VM_ContactInformation.cs" />
@@ -472,6 +475,7 @@
     <Content Include="Views\WebUser\Index.cshtml" />
     <Content Include="Views\Admin\CreateService.cshtml" />
     <Content Include="Views\Admin\Booking.cshtml" />
+    <Content Include="Views\Admin\CreateCustomer.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

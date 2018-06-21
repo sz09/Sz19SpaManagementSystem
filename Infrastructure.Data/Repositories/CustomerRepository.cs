@@ -21,9 +21,9 @@ namespace Infrastructure.Data.Repositories
         private readonly IRepository<Customer> _customerRepository;
         private readonly IUnitOfWork _iUnitOfWork;
         private static readonly ILog logger = LogManager.GetLogger(typeof(CustomerRepository));
-        private const int codeEmpLength = 8; // CustomerCode length is 8
+        private const int codeCusLength = 8; // CustomerCode length is 8
         private readonly int empPerPage;
-        private const int defaultEmpPerPage = 20;
+        private const int defaultCusPerPage = 20;
         #endregion
         #region Constructors
         public CustomerRepository(IRepository<Customer> _customerRepository, IUnitOfWork iUnitOfWork )
@@ -38,7 +38,7 @@ namespace Infrastructure.Data.Repositories
             }
             catch (Exception ex)
             {
-                this.empPerPage = defaultEmpPerPage;
+                this.empPerPage = defaultCusPerPage;
                 logger.Error("Error:[" + ex.Message + "]. Setting default value: [" + this.empPerPage.ToString() + "]");
             }
             logger.LeaveMethod();
@@ -46,6 +46,39 @@ namespace Infrastructure.Data.Repositories
         #endregion
 
         #region Operations
+        /// <summary>
+        /// Insert Customer to Repository and save changes
+        /// </summary>
+        /// <param name="customer">Object customer</param>
+        /// <returns>
+        /// true: If insert Customer success
+        /// Otherwise, false
+        /// </returns>
+        public long InsertCustomerReturnId(Customer cus)
+        {
+            logger.EnterMethod();
+            try
+            {
+                using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
+                {
+                    this._customerRepository.Add(cus);
+                    transactionScope.Complete();
+                }
+                this._iUnitOfWork.Save();
+                logger.Info("Success insert customer with Id: [" + cus.Id + "]  into database and save all changes");
+                return cus.Id;
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Error: " + ex.Message);
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+            
+        }
         /// <summary>
         /// Insert Customer to Repository and save changes
         /// </summary>
@@ -374,24 +407,22 @@ namespace Infrastructure.Data.Repositories
         }
 
         /// <summary>
-        /// Create new Code for Employee
+        /// Create new Code for Customer
         ///     Random capitalization char 
         ///         With constant length of characters
         /// </summary>
-        /// <returns>Code for Employee with length is constant variabble codeEmpLength</returns>
+        /// <returns>Code for Customer with length is constant variabble codeCusLength</returns>
         public string CreateNewCode()
         {
-            string code = "";
-            bool coincidentCode = false;
+            var code = "CUS-";
+            var length = code.Length;
             Random rdm = new Random();
             do{
-                for (int i = 0; i < codeEmpLength; i++)
+                for (int i = 0; i < codeCusLength - length; i++)
                 {
                     code+= (char)rdm.Next(65, 90);
                 }
-                // Check if coincident
-                coincidentCode = CheckCoincidentCode(code);
-            } while (coincidentCode);
+            } while (CheckCoincidentCode(code));
             return code;
         }
 
@@ -410,8 +441,8 @@ namespace Infrastructure.Data.Repositories
             {
                 logger.LeaveMethod();
             }
-            var findEmpByExistingCode = this._customerRepository.Find(_ => _.CustomerCode == empCode).FirstOrDefault();
-            if (findEmpByExistingCode != null)
+            var findCusByExistingCode = this._customerRepository.Find(_ => _.CustomerCode == empCode).FirstOrDefault();
+            if (findCusByExistingCode != null)
                 return true;
             return false;
         }
@@ -455,8 +486,8 @@ namespace Infrastructure.Data.Repositories
             logger.EnterMethod();
             try
             {
-                var countAllEmp = this._customerRepository.Count();
-                if (countAllEmp <= this.empPerPage)
+                var countAllCus = this._customerRepository.Count();
+                if (countAllCus <= this.empPerPage)
                 {
                     logger.Info("All servicesfit a page. Get all services to a page");
                     return this.GetAll();
@@ -464,7 +495,7 @@ namespace Infrastructure.Data.Repositories
                 else
                 {
                     var numberOfPages = CountTotalPages();
-                    logger.Info("Found: [" + countAllEmp.ToString() + "] services fit [" + numberOfPages.ToString() + "] pages");
+                    logger.Info("Found: [" + countAllCus.ToString() + "] services fit [" + numberOfPages.ToString() + "] pages");
                     if (index > numberOfPages)
                     {
                         logger.Error("Can't access page: [" + index.ToString() + "]. Out of range paging");

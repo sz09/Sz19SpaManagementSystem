@@ -175,14 +175,73 @@ namespace SMGS.Presentation.Controllers
             }
         }
 
+
+
         /// <summary>
-        /// Go to Service for admin
+        /// Go to CreateEmployee view
+        ///     Generate employee code automatically
         /// </summary>
-        /// <param name="language">Language pass by user, default is English</param>
-        /// <returns>
-        /// Page fit language.
-        ///     If not found langue in settings, return page Error.
-        /// </returns>
+        /// <returns></returns>
+        public ActionResult CreateCustomer()
+        {
+            logger.EnterMethod();
+            var newCus = new VM_Customer();
+            try
+            {
+                newCus.CustomerCode = this._iCustomerServices.CreateNewCode();
+                return View(newCus);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return View("ErrorAdminPage");
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+        [WebMethod]
+        public ActionResult GetCustomerCode()
+        {
+            var code = this._iCustomerServices.CreateNewCode();
+            return Json(code);
+        }
+        
+        [WebMethod]
+        public ActionResult CreateNewCustomerFromBooking(string code, string firstname, string lastname, string summary)
+        {
+            var vM_Customer = new VM_Customer
+            {
+                CustomerCode = code,
+                FirstName = firstname,
+                LastMiddle = lastname,
+                Summary = summary,
+                Image = "[nullimage]"
+            };
+
+            var id = this._iCustomerServices.InsertCustomerReturnId(ConvertVM.VMCustomer_To_Customer(vM_Customer));
+            if (id > 0)
+            {
+                return Json(new
+                {
+                    id = id,
+                    name = vM_Customer.FullName
+                });
+            }
+            return Json(-1);
+        }
+
+
+
+        /// <summary>
+            /// Go to Service for admin
+            /// </summary>
+            /// <param name="language">Language pass by user, default is English</param>
+            /// <returns>
+            /// Page fit language.
+            ///     If not found langue in settings, return page Error.
+            /// </returns>
         public ActionResult AdminServices(string language = "en", int page = 1)
         {
             logger.EnterMethod();
@@ -651,7 +710,22 @@ namespace SMGS.Presentation.Controllers
                 logger.LeaveMethod();
             }
         }
-
+        
+        [WebMethod]
+        public ActionResult PerformBooking(int bedId, long customerId, long staffId,int yearfrom, int monthfrom, int dayfrom, int hoursfrom, int minutesfrom, int yearto, int monthto, int dayto, int hoursto,int minutesto, decimal cost)
+        {
+            var vM_Book = new VM_Book()
+            {
+                BedId = bedId,
+                CustomerId = customerId,
+                PeriodFrom = new DateTime(yearfrom, monthfrom, dayfrom, hoursfrom, minutesfrom, 0, 0),
+                PeriodTo = new DateTime(yearto, monthto, dayto, hoursto, minutesto, 0, 0),
+                StaffId = staffId,
+                TotalCost = decimal.MaxValue
+            };
+            var check = this._iBookingServices.Booking(ConvertVM.VMBook_To_Bill(vM_Book));
+            return Json(check);
+        }
         public ActionResult Booking(int bedId)
         {
             return View();
@@ -822,6 +896,21 @@ namespace SMGS.Presentation.Controllers
             minutes = timeCost % 60;
             time = hours + "h " + minutes + "m";
             return Json(time);
+        }
+        [WebMethod]
+        public JsonResult GetCostForService(string ids)
+        {
+            var vnd = "";
+            decimal cost = 0;
+            var listIds = ids.Split(',').ToList<string>();
+            foreach (var id in listIds)
+            {
+                int idSer;
+                if (int.TryParse(id, out idSer))
+                    cost += this._iServiceServices.GetTotalCostServices(idSer);
+            }
+            vnd = cost + "VND";
+            return Json(vnd);
         }
         
         [WebMethod]

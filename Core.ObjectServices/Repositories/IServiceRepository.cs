@@ -63,6 +63,7 @@ namespace Core.ObjectServices.Repositories
         /// <param name="id"></param>
         /// <returns></returns>
         int GetTotalTimeUseServices(int id);
+        decimal GetTotalCostServices(int id);
         /// <summary>
         /// Generate code for bed
         /// </summary>

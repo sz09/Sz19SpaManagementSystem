@@ -52,7 +52,13 @@ namespace Service.Business.IServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        int GetTotalTimeUseServices(int id);
+        int GetTotalTimeUseServices(int id); 
+        /// <summary>
+        /// Get time using service by Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        decimal GetTotalCostServices(int id);
         /// <summary>
         /// Generate code for bed
         /// </summary>

@@ -9,6 +9,7 @@ namespace Core.ObjectServices.Repositories
     public interface ICustomerRepository
     {
         bool InsertCustomer(Customer customer);
+        long InsertCustomerReturnId(Customer cus);
         bool UpdateCustomer(Customer customer);
         bool DeleteCustomer(int customerId);
         bool DeleteCustomer(params object[] keyValues);

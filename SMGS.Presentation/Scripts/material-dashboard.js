@@ -288,6 +288,8 @@ $(document).ready(function () {
             $("#li-for-booking").addClass("active");
          else if (currentURL.includes("bed"))
             $("#li-for-bed").addClass("active");
+        else if (currentURL.includes("customer"))
+            $("#li-for-customer").addClass("active");
     }
 });
 
@@ -760,7 +762,8 @@ $("input[name*='Services'][type='checkbox']").on('click', function () {
     else
         idServicesChoosen = idServicesChoosen.replace((id + ','), '');
 });
-
+let hour = 0;
+let minute = 0;
 $('#book-ok-services').on('click', function () {
     // Handle showing serivices
     $.ajax({
@@ -789,8 +792,41 @@ $('#book-ok-services').on('click', function () {
         complete: function (xhr) {
         },
         success: function (value) {
-            if ($('#time-period').val(value) != "" || $('#time-period').val() != null)
+
+            if ($('#time-period').val(value) != "" || $('#time-period').val() != null) {
                 $('#time-period').closest('div').addClass('is-focused');
+
+                hour = value.substring(0, value.indexOf('h')).trim() * 1;
+                minute = value.substring(value.indexOf('h') + 1, value.indexOf('m')).trim() * 1;
+
+                let date = $('#booking-from').val();
+                let year = date.substring(0, 4);
+                let month = date.substring(5, 7);
+                let day = date.substring(8, 10);
+                let hours = date.substring(11, 13) * 1 + (hour * 1);
+                let minutes = date.substring(14, 16) * 1 + (minute * 1);
+
+                let strdate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+
+                $('#booking-to').val(strdate)
+            }
+        }
+    });
+    
+    // Handle showing cost total
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            ids: idServicesChoosen
+        },
+        url: '/admin/GetCostForService',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            if ($('#cost').val(value) != "" || $('#cost').val() != null)
+                $('#cost').closest('div').addClass('is-focused');
         }
     });
 
@@ -971,13 +1007,144 @@ function PrepareRowAddNameInLanguage(namebtn) {
     }
 }
 
+$('#show-modal-show-create-customer').on('click', function () {
+    $.ajax({
+        type: 'post',
+        async: false,
+        url: '/admin/GetCustomerCode',
+        complete: function (xhr) {
 
-// Booking New
-$('#customer-from-booking').on('change', function () {
-    // New customer from booking
-    if ($(this).val() === '-1') {
-
-    }
-
+        },
+        success: function (value) {
+            if (value != "" || value != null) {
+                $('#customer-code').val(value);
+                $('#customer-code').closest('div').addClass('is-focused');
+            }
+        }
+    });
 });
-// End Booking New 
+
+$('#book-ok-create-customer-from-booking').on('click', function () {
+    let code = $('#customer-code').val();
+    let firstname = $('#customer-first-name').val();
+    let lastname = $('#customer-last-middle').val();
+    let summary = $('#customer-summary').val();
+
+    $.ajax({
+        type: 'post',
+        async: false,
+        data: {
+            code: code,
+            firstname: firstname,
+            lastname: lastname,
+            summary: summary
+        },
+        url: '/admin/CreateNewCustomerFromBooking',
+        complete: function (xhr) {
+
+        },
+        success: function (value) {
+            if (value != -1) {
+                $('#customer-from-booking').find('option:last-child').after('<option value="' + value.id + '">' + value.name + '</option>');
+                $('#customer-from-booking').val(value.id);
+            }
+        }
+    });
+});
+
+$(function () {
+    let date = new Date();
+    let month = date.getMonth() + 1; //months from 1-12 
+    month = month / 10 < 1 ? "0" + month : month;
+    let day = date.getDate();
+    day = day / 10 < 1 ? "0" + day : day;
+    let year = date.getFullYear();
+    let hour = date.getHours();
+    let minute = date.getMinutes();
+    minute = minute / 10 < 1 ? "0" + minute : minute;
+    let strdate = year + '-' + month + '-' + day + 'T' + hour + ':' + minute;
+    $('#booking-from').val(strdate);
+    $('#booking-to').val(strdate);
+});
+
+//  value="2017-06-01T08:52"
+
+$('#booking-from').change(function () {
+    let date = $('#booking-from').val();
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+    let hours = date.substring(11, 13) * 1 + (hour * 1);
+    let minutes = date.substring(14, 16) * 1 + (minute * 1);
+
+    let strdate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+    
+    $('#booking-to').val(strdate);
+});
+
+$('#booking-to').change(function () {
+    let date = $('#booking-to').val();
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+    let hours = date.substring(11, 13) * 1 - (hour * 1);
+    let minutes = date.substring(14, 16) * 1 - (minute * 1);
+
+    let strdate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
+
+    $('#booking-from').val(strdate);
+});
+
+$(document).on('click', '#perform-booking-main-action', function () {
+    // Handle booking
+    let bedId = $('#BedId').val();
+    let customerId = $('#customer-from-booking').val();
+    let staffId = 10; // Fake
+
+    let from = $('#booking-from').val();
+    let yearfrom = from.substring(0, 4);
+    let monthfrom = from.substring(5, 7);
+    let dayfrom = from.substring(8, 10);
+    let hoursfrom = from.substring(11, 13);
+    let minutesfrom = from.substring(14, 16);
+    //let timefrom = new Date(yearfrom, monthfrom, dayfrom, hoursfrom, minutesfrom);
+
+    let to = $('#booking-to').val();
+    let yearto = to.substring(0, 4);
+    let monthto = to.substring(5, 7);
+    let dayto = to.substring(8, 10);
+    let hoursto = to.substring(11, 13);
+    let minutesto = to.substring(14, 16);
+    //let timeto = new Date(yearto, monthto, dayto, hoursto, minutesto);
+
+    let cost = $('#cost').val();
+    cost = cost.substring(0, cost.length - 3);
+    debugger;
+    $.ajax({
+        type: 'post',
+        //dataType: 'json',
+        async: false,
+        data: {
+            bedId: bedId,
+            customerId: customerId ,
+            staffId: staffId,
+            yearfrom: yearfrom,
+            monthfrom: monthfrom,
+            dayfrom: dayfrom,
+            hoursfrom: hoursfrom,
+            minutesfrom: minutesfrom,
+            yearto: yearto,
+            monthto: monthto,
+            dayto: dayto,
+            hoursto: hoursto,
+            minutesto: minutesto,
+            cost: cost
+        },
+        url: '/admin/PerformBooking',
+        complete: function (xhr) {
+        },
+        success: function (value) {
+            console.log(value);
+        }
+    });
+});

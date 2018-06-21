@@ -7257,13 +7257,17 @@ input[type=checkbox]{
 .search-page > ul>li:hover {
     cursor: pointer;
 }
+
+.margin-btn-sm{
+    margin-top: 25px;
+}
+
 #employee-show > div > div > div > div > div > table > tbody > tr > td:hover,
 #stock-show > div > div > div > div > div > table > tbody > tr > td:hover,
 #service-show > div > div > div > div > div > table > tbody > tr > td:hover,
 #customer-show > div > div > div > div > div > table > tbody > tr > td:hover,
 #bed-show > div > div > div > div > div > table > tbody > tr > td:hover,
-#address-show > div > div > div > div > div > table > tbody > tr > td:hover
-{
+#address-show > div > div > div > div > div > table > tbody > tr > td:hover {
     cursor: pointer;
     text-decoration: underline;
 }
