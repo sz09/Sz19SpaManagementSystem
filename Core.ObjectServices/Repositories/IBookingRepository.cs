@@ -44,6 +44,14 @@ namespace Core.ObjectServices.Repositories
         /// Get a query for paging bill
         /// </summary>
         /// <param name="index">Page want get</param>
+        /// <returns>
+        /// IQueryable<Bill>, lazy loading
+        /// </returns>
+        Bills GetBill(long id);
+        /// <summary>
+        /// Get a query for paging bill
+        /// </summary>
+        /// <param name="index">Page want get</param>
         /// <param name="isPaid">Check paid for bill, default is un-padid</param>
         /// <returns>
         /// IQueryable<Bill>, lazy loading

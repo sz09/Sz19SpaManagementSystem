@@ -811,7 +811,6 @@ $('#book-ok-services').on('click', function () {
                 if (hours.length == 1)
                     hours = '0' + hours.toString();
                 let minutes = (date.substring(14, 16) * 1 + (minute * 1)).toString();
-                console.log(minutes);
                 if (minutes.length == 1)
                     minutes = '0' + minutes.toString();
                 let strdate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
@@ -1106,6 +1105,8 @@ $(document).on('click', '#perform-booking-main-action', function () {
     // Handle booking
     let bedId = $('#BedId').val();
     let customerId = $('#customer-from-booking').val();
+    let services = $('#choose-services').val();
+    console.log($('#choose-services')); 
     let staffId = 10; // Fake
 
     let from = $('#booking-from').val();
@@ -1126,7 +1127,6 @@ $(document).on('click', '#perform-booking-main-action', function () {
 
     let cost = $('#cost').val();
     cost = cost.substring(0, cost.length - 3);
-    
     $.ajax({
         type: 'post',
         //dataType: 'json',
@@ -1145,7 +1145,8 @@ $(document).on('click', '#perform-booking-main-action', function () {
             dayto: dayto,
             hoursto: hoursto,
             minutesto: minutesto,
-            cost: cost
+            cost: cost,
+            services: services
         },
         url: '/admin/PerformBooking',
         complete: function (xhr) {

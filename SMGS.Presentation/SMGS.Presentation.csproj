@@ -417,6 +417,7 @@
     <Compile Include="ViewModel\VM\VM_AnEmpSalaries.cs" />
     <Compile Include="ViewModel\VM\VM_Bed.cs" />
     <Compile Include="ViewModel\VM\VM_BedName.cs" />
+    <Compile Include="ViewModel\VM\VM_Booked.cs" />
     <Compile Include="ViewModel\VM\VM_Book.cs" />
     <Compile Include="ViewModel\VM\VM_Booking.cs" />
     <Compile Include="ViewModel\VM\VM_BookingByBedInformationRow.cs" />
@@ -481,6 +482,7 @@
     <Content Include="Views\Admin\Booking.cshtml" />
     <Content Include="Views\Admin\CreateCustomer.cshtml" />
     <None Include="Views\Admin\Book.cshtml" />
+    <Content Include="Views\Admin\Booked.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

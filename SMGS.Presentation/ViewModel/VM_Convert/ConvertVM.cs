@@ -1384,6 +1384,17 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
             };
         }
 
+        internal static VM_Booked Bill_To_VMooked(Bills bill)
+        {
+            return new VM_Booked
+            {
+                Id = bill.Id,
+                PeriodFrom = bill.PeriodFrom,
+                PeriodTo = bill.PeriodTo,
+                Time = bill.Time,
+                TotalCost = bill.TotalCost
+            };
+        }
 
         internal static List<VM_BookingByBedInformationRow> Bill_To_VMBookingByBedInformationRow(List<Bills> bills)
         {

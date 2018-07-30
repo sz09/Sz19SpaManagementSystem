@@ -328,6 +328,29 @@ namespace Infrastructure.Data.Repositories
                 logger.LeaveMethod();
             }
         }
+
+        public Bills GetBill(long id)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var booked = this._iBillRepositories.Get(id);
+                if(booked != null)
+                    logger.Info("Found bill with id [" + id + "]");
+                else
+                    logger.Info("Not found bill with id [" + id + "]");
+                return booked;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

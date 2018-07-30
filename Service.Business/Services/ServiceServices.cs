@@ -220,6 +220,24 @@ namespace Service.Business.Services
                 logger.LeaveMethod();
             }
         }
+
+        public int GetServiceIdByCode(string code)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iServiceRepositories.GetServiceIdByCode(code);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
     }
 }

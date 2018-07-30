@@ -393,6 +393,34 @@ namespace Infrastructure.Data.Repositories
                 logger.LeaveMethod();
             }
         }
+
+        public int GetServiceIdByCode(string code)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var service = this._iServiceRepositories.Find(p => p.ServiceCode == code).FirstOrDefault();
+                if (service != null)
+                {
+                    logger.Info("Found service with code: [" + code + "]");
+                    return service.Id;
+                }
+                else
+                {
+                    logger.Info("Not found service with code: [" + code + "]");
+                    return -1;
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return -1;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
         #endregion
 
 

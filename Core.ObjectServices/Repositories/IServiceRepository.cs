@@ -82,5 +82,6 @@ namespace Core.ObjectServices.Repositories
         /// <param name="serviceName"></param>
         /// <returns></returns>
         bool AddNameForService(ServiceName serviceName);
+        int GetServiceIdByCode(string code);
     }
 }

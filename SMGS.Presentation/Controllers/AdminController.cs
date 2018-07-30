@@ -712,7 +712,7 @@ namespace SMGS.Presentation.Controllers
         }
         
         [WebMethod]
-        public ActionResult PerformBooking(int bedId, long customerId, long staffId,int yearfrom, int monthfrom, int dayfrom, int hoursfrom, int minutesfrom, int yearto, int monthto, int dayto, int hoursto,int minutesto, decimal cost)
+        public ActionResult PerformBooking(int bedId, long customerId, long staffId,int yearfrom, int monthfrom, int dayfrom, int hoursfrom, int minutesfrom, int yearto, int monthto, int dayto, int hoursto,int minutesto, decimal cost, string services)
         {
             var vM_Book = new VM_Book()
             {
@@ -724,6 +724,23 @@ namespace SMGS.Presentation.Controllers
                 TotalCost = cost
             };
             var check = this._iBookingServices.Booking(ConvertVM.VMBook_To_Bill(vM_Book));
+            if (check)
+            {
+                // [SER-QVBG][SER-LEOC]
+                List<string> codes = services.
+                                    Replace("[]", ", ").
+                                    Replace('[', ' ').
+                                    Replace(']', ' ').
+                                    Split(',').ToList();
+                List<int> serviceIds = new List<int>();
+                foreach (var code in codes)
+                {
+                    serviceIds.Add(this._iServiceServices.GetServiceIdByCode(code));
+
+                }
+                // Book detail
+                //this._iBookingServices
+            }
             return Json(check);
         }
         public ActionResult Booking(int bedId)
@@ -734,6 +751,16 @@ namespace SMGS.Presentation.Controllers
             vM_BookingByBed.Bookings = ConvertVM.Bill_To_VMBookingByBedInformationRow(bookings);
           
             return View(vM_BookingByBed);
+        }
+
+        public ActionResult Booked(long id)
+        {
+            var booked = this._iBookingServices.GetBill(id);
+            VM_Booked vM_Booked = ConvertVM.Bill_To_VMooked(booked);
+            vM_Booked.BedName = this._iBedServices.GetBedName(booked.BedId);
+            vM_Booked.CusomerName = booked.Customer.LastMiddle + " " + booked.Customer.FirstName;
+            //vM_Booked.Services = this._iServiceServices
+            return View(vM_Booked);
         }
 
         public ActionResult Beds()

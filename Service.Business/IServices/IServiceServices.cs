@@ -77,5 +77,7 @@ namespace Service.Business.IServices
         /// <param name="serviceName"></param>
         /// <returns></returns>
         bool AddNameForService(ServiceName serviceName);
+
+        int GetServiceIdByCode(string code);
     }
 }
