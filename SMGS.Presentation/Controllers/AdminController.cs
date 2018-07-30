@@ -721,14 +721,19 @@ namespace SMGS.Presentation.Controllers
                 PeriodFrom = new DateTime(yearfrom, monthfrom, dayfrom, hoursfrom, minutesfrom, 0, 0),
                 PeriodTo = new DateTime(yearto, monthto, dayto, hoursto, minutesto, 0, 0),
                 StaffId = staffId,
-                TotalCost = decimal.MaxValue
+                TotalCost = cost
             };
             var check = this._iBookingServices.Booking(ConvertVM.VMBook_To_Bill(vM_Book));
             return Json(check);
         }
         public ActionResult Booking(int bedId)
         {
-            return View();
+            var bookings = this._iBookingServices.GetBillBed(bedId, false).ToList();
+            VM_BookingByBed vM_BookingByBed = new VM_BookingByBed();
+            vM_BookingByBed.BedId = bedId;
+            vM_BookingByBed.Bookings = ConvertVM.Bill_To_VMBookingByBedInformationRow(bookings);
+          
+            return View(vM_BookingByBed);
         }
 
         public ActionResult Beds()

@@ -59,5 +59,9 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
         {
             vM_Booking.BedName = name;
         }
+        internal static void VMBookingByBedInformationRow_Add_CustomerName(VM_BookingByBedInformationRow vM_BookingByBedInformationRow, string customerName)
+        {
+            vM_BookingByBedInformationRow.CustomerName = customerName;
+        }
     }
 }

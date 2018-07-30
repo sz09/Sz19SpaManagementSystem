@@ -61,12 +61,13 @@
         /// <summary>
         /// Saves all changes made in this context database.
         /// </summary>
-        public void Save()
+        public bool Save()
         {
             logger.EnterMethod();
             try
             {
                 this._dbContext.SaveChanges();
+                return true;
             }
             catch (DbEntityValidationException e)
             {
@@ -80,10 +81,12 @@
                             ve.PropertyName, ve.ErrorMessage);
                     }
                 }
+                return false;
             }
             catch (Exception e)
             {
                 logger.Error("Error: [" + e.Message + "]");
+                return false;
             }
             finally
             {

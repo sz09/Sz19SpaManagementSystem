@@ -95,6 +95,24 @@ namespace Service.Business.Services
             }
         }
 
+        public IQueryable<Bills> GetBillBed(long bedId, bool isPaid = false)
+        {
+            logger.EnterMethod();
+            try
+            {
+                return this._iBookingRepositories.GetBillBed(bedId, isPaid);
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
         public IQueryable<Bills> GetBillPaging(int index)
         {
             logger.EnterMethod();

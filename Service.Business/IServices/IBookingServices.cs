@@ -39,7 +39,16 @@ namespace Service.Business.IServices
         /// <returns>
         /// IQueryable<Bill>, lazy loading
         /// </returns>
-        IQueryable<Bills> GetBillPaidPaging(int index, bool isPaid = false);
+        IQueryable<Bills> GetBillPaidPaging(int index, bool isPaid = false);        
+        /// <summary>
+        /// Get a query for paging bill
+        /// </summary>
+        /// <param name="index">Page want get</param>
+        /// <param name="isPaid">Check paid for bill, default is un-padid</param>
+        /// <returns>
+        /// IQueryable<Bill>, lazy loading
+        /// </returns>
+        IQueryable<Bills> GetBillBed(long bedId, bool isPaid = false);
         /// <summary>
         /// Create a booking
         ///     Keeping a bed can't use in time period and information of a customer

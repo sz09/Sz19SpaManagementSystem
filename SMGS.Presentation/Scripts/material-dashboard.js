@@ -564,7 +564,7 @@ $(document).on('click', function () {
 // End custom right-click
 
 function GoToBooking(id) {
-    window.location.href = "./booking?id=" + id;
+    window.location.href = "./booking?bedid=" + id;
 }
 
 function Booking(id) {
@@ -801,14 +801,21 @@ $('#book-ok-services').on('click', function () {
 
                 let date = $('#booking-from').val();
                 let year = date.substring(0, 4);
-                let month = date.substring(5, 7);
-                let day = date.substring(8, 10);
-                let hours = date.substring(11, 13) * 1 + (hour * 1);
-                let minutes = date.substring(14, 16) * 1 + (minute * 1);
-
+                let month = (date.substring(5, 7)).toString();
+                if (month.length == 1)
+                    month = '0' + month.toString();
+                let day = (date.substring(8, 10)).toString();
+                if (day.length == 1)
+                    day = '0' + day.toString();
+                let hours = (date.substring(11, 13) * 1 + (hour * 1)).toString();
+                if (hours.length == 1)
+                    hours = '0' + hours.toString();
+                let minutes = (date.substring(14, 16) * 1 + (minute * 1)).toString();
+                console.log(minutes);
+                if (minutes.length == 1)
+                    minutes = '0' + minutes.toString();
                 let strdate = year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
-
-                $('#booking-to').val(strdate)
+                $('#booking-to').val(strdate);
             }
         }
     });
@@ -1119,7 +1126,7 @@ $(document).on('click', '#perform-booking-main-action', function () {
 
     let cost = $('#cost').val();
     cost = cost.substring(0, cost.length - 3);
-    debugger;
+    
     $.ajax({
         type: 'post',
         //dataType: 'json',
@@ -1142,9 +1149,70 @@ $(document).on('click', '#perform-booking-main-action', function () {
         },
         url: '/admin/PerformBooking',
         complete: function (xhr) {
+            $('#alert-booking-new').removeClass('hidden');
+            $('#loading').empty();
         },
         success: function (value) {
-            console.log(value);
+            if (value == true) {
+                $('#main-alert').addClass('alert-success');
+                $('#main-alert').removeClass('alert-warning');
+                $('#main-alert').removeClass('alert-danger');
+                $('#description').html('Success booking');
+                $("#change-url").html('Click here to show infromation');
+                url_book_new = './bookings';
+            }
+            else {
+                $('#main-alert').addClass('alert-warning');
+                $('#main-alert').removeClass('alert-success');
+                $('#main-alert').removeClass('alert-danger');
+                $('#description').html('Fail booking');
+                $("#change-url").html('Check information and try again');
+            }
+        },
+        error: function (value) {
+            $('#alert-booking-new').removeClass('hidden');
+            $('#main-alert').removeClass('alert-warning');
+            $('#main-alert').removeClass('alert-success');
+            $('#main-alert').addClass('alert-danger');
+            $('#loading').empty();
+            $('#description').html('Fail booking');
+            $("#change-url").html('Fill information and try again');
         }
     });
 });
+let url_book_new = '';
+$(document).on('click', '#alert-booking-new', function () {
+    let promise = $.ajax({
+        function: $(this).hide(1000)
+    });
+    promise.done(function () {
+        window.location.href = url_book_new;
+    });
+
+});
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+
+        // Check if the XMLHttpRequest object has a "withCredentials" property.
+        // "withCredentials" only exists on XMLHTTPRequest2 objects.
+        xhr.open(method, url, true);
+
+    } else if (typeof XDomainRequest != "undefined") {
+
+        // Otherwise, check if XDomainRequest.
+        // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+
+    } else {
+        xhr = null;
+
+    }
+    return xhr;
+}
+
+var xhr = createCORSRequest('GET', url);
+if (!xhr) {
+    throw new Error('CORS not supported');
+}

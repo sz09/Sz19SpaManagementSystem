@@ -36,6 +36,8 @@ namespace Infrastructure.Data.Repositories
             logger.EnterMethod();
             try
             {
+                if(bill.BedId <= 0 || bill.CustomerId <= 0)
+                    return false;
                 using (TransactionScope transactionScope = new TransactionScope(TransactionScopeOption.Required))
                 {
                     this._iBillRepositories.Add(bill);
@@ -300,6 +302,26 @@ namespace Infrastructure.Data.Repositories
             {
                 logger.Error("Error: [" + e.Message + "]");
                 return false;
+            }
+            finally
+            {
+                logger.LeaveMethod();
+            }
+        }
+
+        public IQueryable<Bills> GetBillBed(long bedId, bool isPaid = false)
+        {
+            logger.EnterMethod();
+            try
+            {
+                var bookings = this._iBillRepositories.Find(_ => _.BedId == bedId && _.IsPaid == isPaid);
+                logger.Info("Found [" + bookings.Count() +"] bookings for bedId: [" + bedId + "] and isPaid is [" +isPaid + "]");
+                return bookings;
+            }
+            catch (Exception e)
+            {
+                logger.Error("Error: [" + e.Message + "]");
+                return null;
             }
             finally
             {

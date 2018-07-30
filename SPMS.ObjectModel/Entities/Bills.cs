@@ -24,7 +24,7 @@ namespace SPMS.ObjectModel.Entities
         public long StaffId { get; set; }
 
         public bool IsPaid { get; set; }
-
+        [Required]
         public int BedId { get; set; }
 
         public DateTime? PeriodFrom { get; set; }
@@ -33,6 +33,7 @@ namespace SPMS.ObjectModel.Entities
 
         public DateTime? TimePaid { get; set; }
 
+        [Required]
         public long CustomerId { get; set; }
 
         public virtual Bed Bed { get; set; }

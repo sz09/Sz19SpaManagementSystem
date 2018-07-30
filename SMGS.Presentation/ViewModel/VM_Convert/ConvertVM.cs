@@ -1371,5 +1371,28 @@ namespace SMGS.Presentation.ViewModel.VM_Convert
             };
         }
 
+        internal static VM_BookingByBedInformationRow Bill_To_VMBookingByBedInformationRow(Bills bill)
+        {
+            return new VM_BookingByBedInformationRow
+            {
+                Id = bill.Id, 
+                From = bill.PeriodFrom.HasValue ? bill.PeriodFrom.Value : DateTime.MinValue,
+                To = bill.PeriodTo.HasValue ? bill.PeriodTo.Value : DateTime.MinValue,
+                Cost = bill.TotalCost,
+                IsPaid = bill.IsPaid,
+                CustomerName = bill.Customer.LastMiddle + " " + bill.Customer.FirstName
+            };
+        }
+
+
+        internal static List<VM_BookingByBedInformationRow> Bill_To_VMBookingByBedInformationRow(List<Bills> bills)
+        {
+            var rows = new List<VM_BookingByBedInformationRow>();
+            foreach (var bill in bills)
+            {
+                rows.Add(Bill_To_VMBookingByBedInformationRow(bill));
+            }
+            return rows;
+        }
     }
 }

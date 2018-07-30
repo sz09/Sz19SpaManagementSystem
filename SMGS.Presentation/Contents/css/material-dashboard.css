@@ -955,9 +955,67 @@ h2.title {
 .main-panel>.navbar {
     margin-bottom: 0;
 }
+.bed-row,
+.bed-row > .col-md-1,
+.bed-row > .col-md-2,
+.bed-row > .col-md-3,
+.bed-row > .col-md-4,
+.bed-row > .col-md-5,
+.bed-row > .col-md-6,
+.bed-row > .col-md-7,
+.bed-row > .col-md-8,
+.bed-row > .col-md-9,
+.bed-row > .col-md-10,
+.bed-row > .col-md-11,
+.bed-row > .col-md-12,
+.time-row,
+.time-row > .col-md-1,
+.time-row > .col-md-2,
+.time-row > .col-md-3,
+.time-row > .col-md-4,
+.time-row > .col-md-5,
+.time-row > .col-md-6,
+.time-row > .col-md-7,
+.time-row > .col-md-8,
+.time-row > .col-md-9,
+.time-row > .col-md-10,
+.time-row > .col-md-11,
+.time-row > .col-md-12 {
+    min-height: 5px;
+}
 
+    .time-row, .time,
+    .time-row > .col-md-1,
+    .time-row > .col-md-2,
+    .time-row > .col-md-3,
+    .time-row > .col-md-4,
+    .time-row > .col-md-5,
+    .time-row > .col-md-6,
+    .time-row > .col-md-7,
+    .time-row > .col-md-8,
+    .time-row > .col-md-9,
+    .time-row > .col-md-10,
+    .time-row > .col-md-11,
+    .time-row > .col-md-12 {
+        min-height: 25px;
+    }
+    .table-for-time > .row > .bed-row {
+        padding: 0;
+    }
+    .time-row > .row > .col-md-3 {
+        height: 1px;
+        border-right: 1px solid red;
+    }
+    .hour{
+        text-align: center;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+    }
+    .table-for-time {
+        min-width: 2000px;
+    }
 .btn,
-.navbar .navbar-nav>li>a.btn {
+.navbar .navbar-nav > li > a.btn {
     border: none;
     border-radius: 3px;
     position: relative;

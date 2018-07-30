@@ -1,0 +1,206 @@
+﻿@model  SMGS.Presentation.ViewModel.VM.VM_NewBooking
+@{
+    ViewBag.Title = "BookNew";
+    Layout = "~/Views/Shared/_LayoutForAdminPage.cshtml";
+}
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+
+@Html.HiddenFor(_ => _.BedId);
+<div id="alert-booking-new" class="row hidden">
+    <div class="col-md-8"></div>
+    <div id="main-alert" class="col-md-4 alert">
+        <div class="alert-inverse pull-right">
+            <a id="description" class="pull-right"></a> <br />
+            <a id="change-url" class="pull-right"></a>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="modal fade " id="modal-show-create-customer" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content card">
+                    <div class="modal-header card-header" data-background-color="green">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Create customer</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Code</label>
+                                            <input type='text' class="form-control" id="customer-code" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Last &amp; Middle Name</label>
+                                            <input type='text' class="form-control" id="customer-last-middle" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">First Name</label>
+                                            <input type='text' class="form-control" id="customer-first-name" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Summary</label>
+                                                <textarea class="form-control" cols="20" id="customer-summary" name="Description" rows="3" type="text"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="book-ok-create-customer-from-booking" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        <button type="button" id="book-cancel-create-customer-from-booking" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header" data-background-color="green">
+                <h4 class="title">New booking </h4>
+                <p class="category">Book new booking</p>
+            </div>
+            <div class="card-content">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Bed Name</label>
+                            @Html.TextBoxFor(_ => _.BedName, new { type = "text", @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Select Customer</label>
+                            @{
+                                List<SelectListItem> customers = new List<SelectListItem>();
+                                customers.Add(new SelectListItem
+                                {
+                                    Text = "Select customers...",
+                                    Value = "-1",
+                                    Selected = false
+                                });
+                                foreach (var item in Model.Customers)
+                                {
+                                    customers.Add(new SelectListItem
+                                    {
+                                        Text = item.FullName,
+                                        Value = item.Id.ToString(),
+                                        Selected = (item == Model.Customers[0])
+                                    });
+                                }
+                            }
+                            @Html.DropDownListFor(_ => _.Customers, customers, new { type = "text", @class = "form-control", id = "customer-from-booking" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="button" id="show-modal-show-create-customer" class="btn btn-primary btn-sm margin-btn-sm" data-toggle="modal" data-target="#modal-show-create-customer" value="Or New"/>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group is-focused">
+                            <label class="control-label">Period From</label>
+                            <div class='input-group date' id='datetimepickerfrom'>
+                                <input id='booking-from' type='datetime-local' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group is-focused">
+                            <label class="control-label">Period To</label>
+                            <div class='input-group date' id='datetimepickerto'>
+                                <input id='booking-to' type='datetime-local' class="form-control"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Services</label>
+                            <input type="text" id="choose-services" class="form-control" data-toggle="modal" data-target="#modal-choose-services" />
+                            <div class="modal fade " id="modal-choose-services" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content card">
+                                        <div class="modal-header card-header" data-background-color="green">
+                                            <button type="button" class="close" data-dismiss="modal">x</button>
+                                            <h4 class="modal-title">Choose services</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            @for (int i = 0; i < Model.Services.Count; i++)
+                            {
+                                <div class="service-item-popup">
+                                    @Html.HiddenFor(_ => _.Services[i].Id, new { @class = "hidden", disabled = "disabled d-inline" })
+                                    @Html.CheckBoxFor(_ => _.Services[i].Selected, new { @class = "checkbox d-inline ", name = "service-item-choose" })
+                                    @Html.DisplayFor(_ => _.Services[i].Name, new { @class = "form-control d-inline col-md-6" })
+                                </div>
+            }
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" id="book-ok-services" class="btn btn-primary" data-dismiss="modal">OK</button>
+                                            <button type="button" id="book-cancel-services" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Period</label>
+                            <input type="text" class="form-control" id="time-period" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cost</label>
+                            <input type="text" class="form-control" id="cost" disabled />
+                        </div>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Description</label>
+                                @Html.TextAreaFor(_ => _.Description, new { type = "text", @class = "form-control", rows = "5" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
